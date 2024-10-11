@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehedeman <ehedeman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:12:24 by ehedeman          #+#    #+#             */
-/*   Updated: 2023/11/17 11:06:24 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:09:03 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,35 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	else
 		dst[i] = '\0';
 	return (len);
+}
+
+void	ft_strcpy(char *d, char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		d[i] = s[i];
+		i++;
+	}
+	d[i] = '\0';
+}
+
+char	*ft_strncpy(char *s1, char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while (s2[i] != '\0' && i < n)
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }
 
 // int main()

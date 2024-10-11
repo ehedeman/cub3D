@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehedeman <ehedeman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:35:08 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/03/06 13:31:28 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:10:55 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void			ft_strcpy(char *d, char *s);
+char			*ft_strncpy(char *s1, char *s2, int n);
 size_t			ft_strlen(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strcmp(char *s1, char *s2);
 char			*ft_strnstr(const char *haystack, const char *needle, int len);
+char			*ft_strstr(char *haystack, char *needle);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
