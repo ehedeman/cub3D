@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/11 13:28:07 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/11 13:29:41 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,11 +56,11 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJ_PATH)
-	@(cd libft && make clean)
-	@(cd minilibx_linux && make clean)
+	@(cd $(LIBFT_PATH) && make clean)
+	@(cd $(MLX_PATH) && make clean)
 
 fclean: clean
-	@(cd libft && make fclean)
+	@(cd $(LIBFT_PATH) && make fclean)
 	@rm -f $(NAME)
 
 re: fclean all
