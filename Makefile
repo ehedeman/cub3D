@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/11 13:14:38 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/11 13:28:07 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS			=	-Werror -Wall -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
 
 INC 			= 	-I ./includes		\
 					-I ./libft			\
-					-I ./minilibx_linux
+					-I ./mlx_linux
 #sources stuff
 SRC				=	main.c			
 SRC_PATH		=	./sources/
@@ -35,7 +35,7 @@ LIBFT			=	$(LIBFT_PATH)$(LIBFT_NAME)
 
 
 #minilib_x stuff
-MLX_PATH		=	./minilibx_linux/
+MLX_PATH		=	./mlx_linux/
 MLX_NAME		=	libmlx.a
 MLX 			=	$(MLX_PATH)$(MLX_NAME)
 
