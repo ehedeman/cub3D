@@ -12,25 +12,49 @@
 
 #include "../includes/cub3D.h"
 
-int main(int argc, char **argv)
+int	ft_skip_til_map(t_game *game)
 {
-	t_game	game;
-	
-	if (argc != 2)
+	int	i;
+
+	i = 0;
+	while (game->map.content[i])
 	{
-		printf("Wrong number of arguments!");
-		exit(1);
+		while (game->map.content[i] && is_whitespace(game->map.content[i]))	//skip whitespace
+			i++;
+		if (game->map.content[i] && game->map.content[i] != "1")			//if its not wall of map
+		{
+			while (game->map.content[i] && game->map.content[i] != "\n")	//skip until newline
+				i++;
+			if (game->map.content[i])										//skip newline
+				i++;
+		}
 	}
-	if (!(ft_check_extension(argv[1])))
+}
+
+int ft_is_map_char(char c)
+{
+    if (c == "1" || c == "0" || c == "N" || c == "S" || c == "E" || c == "W")
+        return (0);
+    return (1);
+}
+
+int	ft_read_map(int fd, t_game *game)
+{
+	char	*str;
+	char	*temp;
+
+	while (1)
 	{
-		printf("Wrong file extension!");
-		exit(1);
-	}
-	if (!ft_map_parsing(argv[1], &game))
-		exit(1);	//print error message in funciton
-	if (argc == 2 && ft_check_extension(argv[1]))
-	{
-		
+		str = get_next_line(fd);
+		if (!str)
+			break ;
+		temp = game->map.content;
+		game->map.content = ft_strjoin(game->map.content, str);
+		if (!game->map.content)
+			return (1);
+		free(temp);
+		free(str);
 	}
 	return (0);
 }
+//might be leaking idk if i missed a case
