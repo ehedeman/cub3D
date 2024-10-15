@@ -12,11 +12,18 @@
 
 #include "../includes/cub3D.h"
 
-void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
+int ft_is_map_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	return (1);
+}
+
+void	ft_set_map_side_barrier(t_game *game, int *x, int *y) //mode is for indicating whether coordinate = 0 or -1
 {
 	game->map.coords[*y][*x].type = '-';	//to create a barrier around the whole map for checking if its valid
-	game->map.coords[*y][*x].x = -1;
-	game->map.coords[*y][*x].y = -1;
+	game->map.coords[*y][*x].x = *x - 1;
+	game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
 	*x += 1;
 }
 
@@ -26,23 +33,23 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 
 	x = 0;
 	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
-	game->map.coords[y][x].x = -1;
-	game->map.coords[y][x].y = -1;
+	game->map.coords[y][x].x = x - 1;
+	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
 	x++;
-	while (x < game->map.map_length)
+	while (x < game->map.map_length - 1)
 	{
 		game->map.coords[y][x].type = '-';
-		game->map.coords[y][x].x = -1;
-		game->map.coords[y][x].y = -1;
+		game->map.coords[y][x].x = x - 1;
+		game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
 		x++;
 		map++;
 	}
 	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
-	game->map.coords[y][x].x = -1;
-	game->map.coords[y][x].y = -1;
+	game->map.coords[y][x].x = x - 1;
+	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
 	game->map.coords[y][x + 1].type = '\n';
-	game->map.coords[y][x + 1].x = -1;
-	game->map.coords[y][x + 1].y = -1;
+	game->map.coords[y][x + 1].x = x;
+	game->map.coords[y][x + 1].y = (game->map.allocated_rows - 3) - y + 1;
 }
 
 void	ft_find_longest_row(t_game *game, char *map)

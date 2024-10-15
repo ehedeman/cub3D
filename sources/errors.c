@@ -12,31 +12,10 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_map_parsing(char *file_name, t_game *game)
+int	print_error(char *str, t_game *game)
 {
-	int	fd;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		printf("Error\nFailed to open file\n");
-	else if (fd)
-	{
-		if (ft_read_map(fd, game))
-		{
-			printf("something went wrong.\n");
-			return (1);
-		}
-	}
-	// if (ft_check_map_format())
-	// 	printf("something\n");
-	// else if (ft_save_args())
-	// 	printf("something went wrong\n"); //change later
-	if (ft_save_map(game))
-	{
-		printf("something went wrong\n");
-		return (1);
-	}
-	if (ft_map_check(game))
-		return (1);
-	return (0);
+	ft_free_map(game, 1);
+	while (*str)
+		write(2, str++, 1);
+	return (1);
 }

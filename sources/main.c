@@ -27,6 +27,24 @@ void ft_print_map(t_game *game)
 		printf("\n");
 		i++;
 	}
+	i = 0;
+	while (i <= game->map.allocated_rows - 2)
+	{
+		j = 0;
+		while (game->map.coords[i][j].type != '\n')
+		{
+			printf("(%i | %i) ", game->map.coords[i][j].x, game->map.coords[i][j].y);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	printf("\n");
+	printf("Point Zero: C(%i | %i)\n\n", game->map.point_zero->x, game->map.point_zero->y);
+	printf("Top Left: (%i | %i)\n", game->map.top_l->x, game->map.top_l->y);
+	printf("Top Right: (%i | %i)\n", game->map.top_r->x, game->map.top_r->y);
+	printf("Bottom Left: (%i | %i)\n", game->map.bottom_l->x, game->map.bottom_l->y);
+	printf("Bottom Right: (%i | %i)\n", game->map.bottom_r->x, game->map.bottom_r->y);
 }
 
 int main(int argc, char **argv)
@@ -51,7 +69,6 @@ int main(int argc, char **argv)
 	
 	// }
 	ft_print_map(&game);
-	ft_free_map(&game, 0);
-	free(game.map.content);
+	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)
 	return (0);
 }

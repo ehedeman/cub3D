@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/14 15:59:37 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/15 13:59:49 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC				=	main.c					\
 					map_parsing_utils.c		\
 					ft_save_map_utils.c		\
 					ft_save_map.c			\
-					ft_allocate_coords.c
+					ft_allocate_coords.c	\
+					map_check.c				\
+					errors.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 

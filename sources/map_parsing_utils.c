@@ -54,7 +54,9 @@ int	ft_free_map(t_game *game, int mode)
 			free(game->map.coords[i]);
 		i++;
 	}
-	free(game->map.coords);
+	if (game->map.coords)
+		free(game->map.coords);
+	free(game->map.content);
 	return (mode);							//1 for the error_return, 0 for normal free so function can be used elsewhere
 }
 
@@ -70,4 +72,8 @@ void	ft_set_zero(t_game *game)
 {
 	game->map.content = NULL;
 	game->map.coords = NULL;
+	game->map.map_length = 0;
+	game->map.top_l = NULL;
+	game->map.bottom_l = NULL;
+	game->map.point_zero = NULL;
 }

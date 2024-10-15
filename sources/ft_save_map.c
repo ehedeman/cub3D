@@ -12,23 +12,17 @@
 
 #include "../includes/cub3D.h"
 
-static int ft_is_map_char(char c)
-{
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (0);
-	return (1);
-}
-
+// coords[i][j] -> i == y and j == x cuz i keep forgetting that
 static void ft_set_map_coords(t_game *game, int *i, int *x, int *y)
 {
 	while (game->map.content[*i] && game->map.content[*i] != '\n')	//save until \n, then y + 1
 	{
 		if (ft_is_map_char(game->map.content[*i]))					//if not a map_char then save as - (so e.g if its whitespace)
-			game->map.coords[*y][*x].type = '-';					// y and x do not need to be -1 because its still part of the map,,just not accessible
+			game->map.coords[*y][*x].type = '-';					// y and x do not need to be -1 because its still part of the map, just not accessible
 		else
 			game->map.coords[*y][*x].type = game->map.content[*i];
-		game->map.coords[*y][*x].x = *x;							// x and y get set no matter what
-		game->map.coords[*y][*x].y = *y;
+		game->map.coords[*y][*x].x = *x - 1;							// x and y get set no matter what
+		game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
 		*i += 1;
 		*x += 1;
 	}
@@ -70,21 +64,10 @@ static int	ft_skip_til_map(t_game *game)
 // (if there's whitespace after the map it'll, so an empty line after, the program wont
 //	recognize it as the last line and will not save the bottom row of empty space.)
 
-int	ft_save_map(t_game *game, int x, int y)
+static void	ft_set_map_barriers(t_game *game, int i, int y)
 {
-	int	i;
+	int x;
 
-	i = ft_skip_til_map(game);
-	if (!i)
-		return (1);
-	ft_find_longest_row(game, &game->map.content[i]);
-	game->map.coords = ft_allocate_coords(game, i);
-	if (!game->map.coords)
-		return (1);
-	if (ft_allocate_map_rows(game))
-		return (ft_free_map(game, 1));
-	ft_set_map_barrier(game, &game->map.content[i], y);		//sets top barrier
-	y++;
 	while (game->map.content[i])
 	{
 		x = 0;
@@ -99,6 +82,37 @@ int	ft_save_map(t_game *game, int x, int y)
 		if (game->map.content[i])
 			i++;
 	}
+}
+
+//dont touch, this took forever
+static void ft_set_map_values(t_game *game, t_coordinates **coords)
+{
+	game->map.top_l = &coords[1][1];					//1|1 because 0|0 is the negative space around map
+	game->map.top_r = &coords[1][game->map.map_length - 2];
+	game->map.bottom_l = &coords[game->map.allocated_rows - 3][1];
+	game->map.bottom_r = &coords[game->map.allocated_rows - 3][game->map.map_length - 2];
+	game->map.point_zero = game->map.bottom_l;			//0|0 on coordinates
+}
+
+int	ft_save_map(t_game *game)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	i = ft_skip_til_map(game);
+	if (!i)
+		return (1);
+	ft_find_longest_row(game, &game->map.content[i]);
+	game->map.coords = ft_allocate_coords(game, i);		//allocates the coords array
+	if (!game->map.coords)
+		return (ft_free_map(game, 1));
+	if (ft_allocate_map_rows(game))						//allocates the rows for coords array
+		return (ft_free_map(game, 1));
+	ft_set_map_barrier(game, &game->map.content[i], y);		//sets top barrier
+	y++;
+	ft_set_map_barriers(game, i, y);
 	game->map.coords[game->map.allocated_rows - 1] = NULL;
+	ft_set_map_values(game, game->map.coords);
 	return (0);
 }
