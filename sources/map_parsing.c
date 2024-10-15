@@ -12,35 +12,6 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_save_map(t_game *game)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = ft_skip_til_map(game);
-	x = 0;
-	y = 0;
-	while (game->map.content[i])
-	{
-		while (game->map.content[i] && game->map.content[i] != "\n")	//save until \n, then y + 1
-		{
-			if (ft_is_map_char(game->map.content[i]))					//if not a map_char then save as -
-				game->map.coords[y][x].type = "-";
-			else
-				game->map.coords[y][x].type = game->map.content[i];
-			game->map.coords[y][x].x = x;
-			game->map.coords[y][x].y = y;
-			i++;
-			x++;
-		}
-		x = 0;
-		y++;
-		if (game->map.content[i])
-			i++;
-	}
-}
-
 int	ft_map_parsing(char *file_name, t_game *game)
 {
 	int	fd;
@@ -49,14 +20,21 @@ int	ft_map_parsing(char *file_name, t_game *game)
 	if (fd == -1)
 		printf("Error\nFailed to open file\n");
 	else if (fd)
-		game->map.content = ft_read_map(fd, game);
-	if (ft_check_map_format())
-		printf("something\n");
-	else if (ft_save_args())
-		printf("something went wrong\n"); //change later
-	else if (ft_save_map(game))
+	{
+		if (ft_read_map(fd, game))
+		{
+			printf("something went wrong.\n");
+			return (1);
+		}
+	}
+	// if (ft_check_map_format())
+	// 	printf("something\n");
+	// else if (ft_save_args())
+	// 	printf("something went wrong\n"); //change later
+	if (ft_save_map(game, 0, 0))
+	{
 		printf("something went wrong\n");
-	else
-		return (0);
-	return (1);
+		return (1);
+	}
+	return (0);
 }
