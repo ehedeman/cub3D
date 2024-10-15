@@ -20,29 +20,29 @@ void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 	*x += 1;
 }
 
-void	ft_set_map_barrier(t_coordinates **coords, char *map, int y)
+void	ft_set_map_barrier(t_game *game, char *map, int y)
 {
 	int	x;
 
 	x = 0;
-	coords[y][x].type = '-';	//x needs to be two more than the map is wide
-	coords[y][x].x = -1;
-	coords[y][x].y = -1;
+	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
+	game->map.coords[y][x].x = -1;
+	game->map.coords[y][x].y = -1;
 	x++;
-	while (*map && *map != '\n')
+	while (x < game->map.map_length)
 	{
-		coords[y][x].type = '-';
-		coords[y][x].x = -1;
-		coords[y][x].y = -1;
+		game->map.coords[y][x].type = '-';
+		game->map.coords[y][x].x = -1;
+		game->map.coords[y][x].y = -1;
 		x++;
 		map++;
 	}
-	coords[y][x].type = '-';	//x needs to be two more than the map is wide
-	coords[y][x].x = -1;
-	coords[y][x].y = -1;
-	coords[y][x + 1].type = '\n';
-	coords[y][x + 1].x = -1;
-	coords[y][x + 1].y = -1;
+	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
+	game->map.coords[y][x].x = -1;
+	game->map.coords[y][x].y = -1;
+	game->map.coords[y][x + 1].type = '\n';
+	game->map.coords[y][x + 1].x = -1;
+	game->map.coords[y][x + 1].y = -1;
 }
 
 void	ft_find_longest_row(t_game *game, char *map)
@@ -69,5 +69,5 @@ void	ft_find_longest_row(t_game *game, char *map)
 	}
 	if (count < j)
 		count = j;	//in case the last line is the longest of the map
-	game->map.map_length = count;
+	game->map.map_length = count + 2; // plus two because side barriers need to be included
 }

@@ -58,9 +58,9 @@ int	ft_free_map(t_game *game, int mode)
 	return (mode);							//1 for the error_return, 0 for normal free so function can be used elsewhere
 }
 
-int	ft_is_whitespace(char c)
+int	ft_is_whitespace(char c)				//newline not included because newlines are important for subject
 {
-	if (c == '\t' || c == '\n' || c == '\v'
+	if (c == '\t' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
 		return (1);
 	return (0);

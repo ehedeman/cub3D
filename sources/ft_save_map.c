@@ -43,22 +43,24 @@ static int	ft_skip_til_map(t_game *game)
 	j = i;
 	while (game->map.content[i])
 	{
-		while (game->map.content[i] && ft_is_whitespace(game->map.content[i]))	//skip whitespace
+		while (game->map.content[i] && ft_is_whitespace(game->map.content[i]))		//skip whitespace
 			i++;
 		if (game->map.content[i])
 		{
-			while (game->map.content[i] && game->map.content[i] != '\n')	//skip until newline (map is never first)
+			while (game->map.content[i] && game->map.content[i] != '\n')			//skip until newline (map is never first)
 				i++;
+			if (!game->map.content[i])
+				return (0);
 		}
 		else
 			return (0);
 		if (game->map.content[i] && game->map.content[i] == '\n')
 		{
+			i++;																	//skip newline
 			j = i;
-			i++;														//skip newline
 			while (game->map.content[i]	&& ft_is_whitespace(game->map.content[i]))	//skip possible whitespace
 				i++;
-			if (game->map.content[i] && game->map.content[i] == '1')		//if the first symbol after newline is 1
+			if (game->map.content[i] && game->map.content[i] == '1')				//if the first symbol after newline is 1
 				return (j);
 		}
 	}
@@ -75,21 +77,23 @@ int	ft_save_map(t_game *game, int x, int y)
 	i = ft_skip_til_map(game);
 	if (!i)
 		return (1);
+	ft_find_longest_row(game, &game->map.content[i]);
 	game->map.coords = ft_allocate_coords(game, i);
 	if (!game->map.coords)
 		return (1);
-	if (ft_allocate_map_rows(game, i))
+	if (ft_allocate_map_rows(game))
 		return (ft_free_map(game, 1));
-	ft_set_map_barrier(game->map.coords, &game->map.content[i], y);		//sets top barrier
+	ft_set_map_barrier(game, &game->map.content[i], y);		//sets top barrier
 	y++;
 	while (game->map.content[i])
 	{
 		x = 0;
 		if (y + 1 == game->map.allocated_rows - 2)
-			ft_set_map_barrier(game->map.coords, &game->map.content[i], y + 1);
+			ft_set_map_barrier(game, &game->map.content[i], y + 1);
 		ft_set_map_side_barrier(game, &x, &y);
 		ft_set_map_coords(game, &i, &x, &y);
-		ft_set_map_side_barrier(game, &x, &y);
+		while (x < game->map.map_length)
+			ft_set_map_side_barrier(game, &x, &y);
 		game->map.coords[y][x].type = '\n';
 		y++;
 		if (game->map.content[i])

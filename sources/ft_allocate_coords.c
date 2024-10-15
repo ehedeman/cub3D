@@ -49,51 +49,70 @@ t_coordinates	**ft_allocate_coords(t_game *game, int i)
 	return (new);
 }
 
-static int	ft_allocate_barrier(t_game *game, int i, int *j)
-{
-	int	count;
+// static int	ft_allocate_barrier(t_game *game, int i, int *j)
+// {
+// 	int	count;
 
-	count = 0;
-	while (game->map.content[i])
-	{
-		count++;
-		if (game->map.content[i] == '\n')
-		{
-			game->map.coords[*j] = malloc(sizeof(t_coordinates) * (count + 3)); //+3 for newline
-			if (!game->map.coords[*j])
-				return (1);
-			*j += 1;
-			return (0);
-		}
-		i++;
-	}
-	return (0);
-}
+// 	count = 0;
+// 	while (game->map.content[i])
+// 	{
+// 		count++;
+// 		if (game->map.content[i] == '\n')
+// 		{
+// 			game->map.coords[*j] = malloc(sizeof(t_coordinates) * (count + 3)); //+3 for newline
+// 			if (!game->map.coords[*j])
+// 				return (1);
+// 			*j += 1;
+// 			return (0);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-int	ft_allocate_map_rows(t_game *game, int i)
+
+int	ft_allocate_map_rows(t_game *game)
 {
-	int	count;
 	int	j;
 
-	count = 0;
 	j = 0;
-	if (ft_allocate_barrier(game, i, &j))					//first row seperately cuz norm
-		return (1);
-	while (game->map.content[i])							//counts and allocates the length of each row
+	game->map.coords[j] = malloc(sizeof(t_coordinates) * (game->map.map_length + 3));
+	j++;
+	while (j < game->map.allocated_rows - 1)
 	{
-		count++;											//count first so it counts the newline also? -> check when testing -> number is right
-		if (game->map.content[i] == '\n')
-		{
-			game->map.coords[j] = malloc(sizeof(t_coordinates) * (count + 2));	//count + 2 because of left and right barrier
-			if (!game->map.coords[j])
-				return (1);
-			j++;
-		}
-		i++;
+		game->map.coords[j] = malloc(sizeof(t_coordinates) * (game->map.map_length + 3));
+		if (!game->map.coords[j])
+			return (1);
+		j++;
 	}
-	game->map.coords[j] = malloc(sizeof(t_coordinates) * (count + 3));		//third row seperately because no newline there
-	game->map.coords[j + 1] = malloc(sizeof(t_coordinates) * (count + 3));	// + 3 because newline added by me
-	if (!game->map.coords[j] || !game->map.coords[j + 1])
-		return (1);
 	return (0);
 }
+
+
+// int	ft_allocate_map_rows(t_game *game, int i)
+// {
+// 	int	count;
+// 	int	j;
+
+// 	count = 0;
+// 	j = 0;
+// 	if (ft_allocate_barrier(game, i, &j))					//first row seperately cuz norm
+// 		return (1);
+// 	while (game->map.content[i])							//counts and allocates the length of each row
+// 	{
+// 		count++;											//count first so it counts the newline also? -> check when testing -> number is right
+// 		if (game->map.content[i] == '\n')
+// 		{
+// 			game->map.coords[j] = malloc(sizeof(t_coordinates) * (count + 2));	//count + 2 because of left and right barrier
+// 			if (!game->map.coords[j])
+// 				return (1);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	game->map.coords[j] = malloc(sizeof(t_coordinates) * (count + 3));		//third row seperately because no newline there
+// 	game->map.coords[j + 1] = malloc(sizeof(t_coordinates) * (count + 3));	// + 3 because newline added by me
+// 	if (!game->map.coords[j] || !game->map.coords[j + 1])
+// 		return (1);
+// 	return (0);
+// }
