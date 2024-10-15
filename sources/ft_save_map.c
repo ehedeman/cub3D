@@ -17,8 +17,8 @@ static void ft_set_map_coords(t_game *game, int *i, int *x, int *y)
 {
 	while (game->map.content[*i] && game->map.content[*i] != '\n')	//save until \n, then y + 1
 	{
-		if (ft_is_map_char(game->map.content[*i]))					//if not a map_char then save as - (so e.g if its whitespace)
-			game->map.coords[*y][*x].type = '-';					// y and x do not need to be -1 because its still part of the map, just not accessible
+		if (ft_is_map_char(game->map.content[*i]) && ft_is_whitespace(game->map.content[*i]))//if whitespace then save as -
+			game->map.coords[*y][*x].type = '-';
 		else
 			game->map.coords[*y][*x].type = game->map.content[*i];
 		game->map.coords[*y][*x].x = *x - 1;							// x and y get set no matter what
@@ -87,11 +87,25 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 //dont touch, this took forever
 static void ft_set_map_values(t_game *game, t_coordinates **coords)
 {
+	int	i;
+	int	j;
+
+	i = -1;
 	game->map.top_l = &coords[1][1];					//1|1 because 0|0 is the negative space around map
 	game->map.top_r = &coords[1][game->map.map_length - 2];
 	game->map.bottom_l = &coords[game->map.allocated_rows - 3][1];
 	game->map.bottom_r = &coords[game->map.allocated_rows - 3][game->map.map_length - 2];
 	game->map.point_zero = game->map.bottom_l;			//0|0 on coordinates
+	while (i++ < game->map.allocated_rows - 2)
+	{
+		j = -1;
+		while (j++ < game->map.map_length)
+		{
+			if (coords[i][j].type == 'N' || coords[i][j].type == 'S'
+				|| coords[i][j].type == 'W' || coords[i][j].type == 'E')
+				game->map.player_pos = &coords[i][j];
+		}
+	}
 }
 
 int	ft_save_map(t_game *game)

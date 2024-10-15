@@ -76,4 +76,5 @@ void	ft_set_zero(t_game *game)
 	game->map.top_l = NULL;
 	game->map.bottom_l = NULL;
 	game->map.point_zero = NULL;
+	game->map.player_pos = NULL;
 }

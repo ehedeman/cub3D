@@ -69,7 +69,7 @@ int	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 
 	i = 0;
 	player = 0;
-	while (i < game->map.allocated_rows - 1)
+	while (i < game->map.allocated_rows - 2)
 	{
 		j = -1;
 		while (j++ < game->map.map_length)
@@ -86,12 +86,32 @@ int	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 		return (print_error("Error\nMap: missing player location.\n", game));
 	return (0);
 }
+int	ft_check_wrong_symbols(t_game *game, t_coordinates **coords)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (i++ < game->map.allocated_rows - 2)
+	{
+		j = -1;
+		while (j++ < game->map.map_length)
+		{
+			if (ft_is_map_char(coords[i][j].type) && coords[i][j].type != '-'
+				&& coords[i][j].type != '\n')
+				return (print_error("Error\nMap: unknown symbol.\n", game));
+		}
+	}
+	return (0);
+}
 
 int	ft_map_check(t_game *game)
 {
 	if (ft_check_map_walls(game, game->map.coords))
 		return (print_error("Error\nWall error\n", game));
 	else if (ft_check_player_symbol(game, game->map.coords))
+		return (1);
+	else if (ft_check_wrong_symbols(game, game->map.coords))
 		return (1);
 	return (0);
 }
