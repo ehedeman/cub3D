@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/16 13:05:30 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/16 13:10:18 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ INC 			= 	-I ./includes			\
 					-I ./mlx_linux
 #sources stuff
 SRC				=	main.c					\
+					main_utils.c			\
 					freeing_stuff.c			\
 					map_parsing.c			\
 					map_parsing_utils.c		\

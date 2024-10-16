@@ -82,9 +82,9 @@ int	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 		i++;
 	}
 	if (player > 1)
-		return (print_error("Error\nMap: multiple player locations.\n", game));
+		print_error("Error\nMap: multiple player locations.\n", game, 1);
 	else if (player < 1)
-		return (print_error("Error\nMap: missing player location.\n", game));
+		print_error("Error\nMap: missing player location.\n", game, 1);
 	return (0);
 }
 
@@ -101,7 +101,7 @@ int	ft_check_wrong_symbols(t_game *game, t_coordinates **coords)
 		{
 			if (ft_is_map_char(coords[i][j].type) && coords[i][j].type != '-'
 				&& coords[i][j].type != '\n')
-				return (print_error("Error\nMap: unknown symbol.\n", game));
+				print_error("Error\nMap: unknown symbol.\n", game, 1);
 		}
 	}
 	return (0);
@@ -110,7 +110,7 @@ int	ft_check_wrong_symbols(t_game *game, t_coordinates **coords)
 int	ft_map_check(t_game *game)
 {
 	if (ft_check_map_walls(game, game->map.coords))
-		return (print_error("Error\nWall error\n", game));
+		print_error("Error\nWall error\n", game, 1);
 	else if (ft_check_player_symbol(game, game->map.coords))
 		return (1);
 	else if (ft_check_wrong_symbols(game, game->map.coords))

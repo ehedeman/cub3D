@@ -20,6 +20,7 @@ int close_window(t_game *game)
 
 int	ft_init_game(t_game *game)
 {
+	int	height = 200, width = 800;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		print_error("Error\nGame allocation failed.\n", game, 1);
@@ -31,5 +32,12 @@ int	ft_init_game(t_game *game)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
+	
+	game->test = mlx_xpm_file_to_image(game->mlx, TEST_XPM,
+			&width, &height);										//as the name suggests, for testing
+	if (!game->test)
+		print_error("Error\nImage allocation failed.\n", game, 1);
+	mlx_put_image_to_window(game->mlx, game->mlx_window, \
+			game->test, 1500, 1000);
 	return (0);
 }

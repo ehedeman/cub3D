@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 12:49:22 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:19:07 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct s_game
 	t_player	player;
 	void		*mlx;
 	void		*mlx_window;
-	int			win_width;
-	int			win_height;
+	int			win_width;	//set to 3000 by default at the moment
+	int			win_height;	//set to 2000
+	void		*test;
 	int			game_end;
 }				t_game;

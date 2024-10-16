@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:05:18 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:11:34 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int				ft_map_parsing(char *file_name, t_game *game);
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);
 int				ft_is_whitespace(char c);
+
+//main_utils.c
 void			ft_set_zero(t_game *game);
 
 //ft_save_map_utils.c
@@ -45,7 +47,7 @@ int				ft_check_player_symbol(t_game *game, \
 		t_coordinates **coords);
 
 //errors.c
-int				print_error(char *str, t_game *game, int mode);
+void			print_error(char *str, t_game *game, int mode);
 
 //key_handling.c
 int				key_handler(int key, t_game *game);

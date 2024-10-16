@@ -12,41 +12,28 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_read_map(int fd, t_game *game, int bytes)
+void	ft_set_zero(t_game *game)
 {
-	char	*str;
-	char	*temp;
-
-	str = malloc(sizeof(char) * (40 + 1));
-	if (!str)
-		return (1);
-	while (bytes)
-	{
-		bytes = read(fd, str, 40);
-		if (bytes == -1)
-		{
-			free(str);
-			return (1);
-		}
-		str[bytes] = '\0';
-		temp = game->map.content;
-		game->map.content = ft_strjoin(game->map.content, str);
-		if (!game->map.content)
-			return (1);
-		if (temp)
-			free(temp);
-	}
-	free(str);
-	return (0);
+	game->map.content = NULL;
+	game->map.coords = NULL;
+	game->map.map_length = 0;
+	game->map.top_l = NULL;
+	game->map.top_r = NULL;
+	game->map.bottom_l = NULL;
+	game->map.bottom_r = NULL;
+	game->map.point_zero = NULL;
+	game->map.player_start = NULL;
+	game->walls.north = NULL;
+	game->walls.south = NULL;
+	game->walls.east = NULL;
+	game->walls.west = NULL;
+	game->player.current = NULL;
+	game->player.next = NULL;
+	game->player.mlx = NULL;
+	game->player.current_orientation = '\0';
+	game->mlx = NULL;
+	game->mlx_window = NULL;
+	game->win_height = 2000;
+	game->win_width = 3000;
+	game->game_end = 0;
 }
-//might be leaking idk if i missed a case
-
-
-int	ft_is_whitespace(char c)				//newline not included because newlines are important for subject
-{
-	if (c == '\t' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
-

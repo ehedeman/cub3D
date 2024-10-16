@@ -23,6 +23,7 @@
 # define SOUTH_TEXTURE "../textures/south.xpm"
 # define WEST_TEXTURE "../textures/west.xpm"
 # define EAST_TEXTURE "../textures/east.xpm"
+# define TEST_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/Player_character_R.xpm"
 # define XK_ESCAPE 65307
 //wall textures so we dont have to have them for testing?
 //not sure if it works like that lol
