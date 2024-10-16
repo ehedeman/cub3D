@@ -37,11 +37,12 @@ static int	ft_check_coords(t_game *game, t_coordinates **coords, int i, int j)
 		return (1);
 	return (0);
 }
+
 //check if map is surrounded by walls
 int	ft_check_map_walls(t_game *game, t_coordinates **coords)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < game->map.allocated_rows - 1)
@@ -64,8 +65,8 @@ int	ft_check_map_walls(t_game *game, t_coordinates **coords)
 int	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 {
 	int	i;
-	int j;
-	int player;
+	int	j;
+	int	player;
 
 	i = 0;
 	player = 0;
@@ -86,6 +87,7 @@ int	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 		return (print_error("Error\nMap: missing player location.\n", game));
 	return (0);
 }
+
 int	ft_check_wrong_symbols(t_game *game, t_coordinates **coords)
 {
 	int	i;

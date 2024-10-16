@@ -12,10 +12,11 @@
 
 #include "../includes/cub3D.h"
 
-int	print_error(char *str, t_game *game)
+int	print_error(char *str, t_game *game, int mode)
 {
 	ft_free_map(game, 1);
+	ft_free_game(game);
 	while (*str)
 		write(2, str++, 1);
-	return (1);
+	exit(mode);
 }

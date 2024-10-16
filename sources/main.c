@@ -62,13 +62,14 @@ int main(int argc, char **argv)
 	// 	printf("Wrong file extension!");
 	// 	exit(1);
 	// }
-	if (ft_map_parsing(argv[1], &game))
-		exit(1);	//print error message in funciton
+	ft_map_parsing(argv[1], &game); //doesnt need if and exit because the error print fucntion exits
 	// if (argc == 2 && ft_check_extension(argv[1]))
 	// {
-	
-	// }
-	ft_print_map(&game);
+	ft_print_map(&game);	//just for testing purposes
+	ft_init_game(&game);
+	mlx_loop(game.mlx);
 	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)
 	return (0);
 }
+//put the game struct init after the map because the player
+//and wall structs need the map coordinates

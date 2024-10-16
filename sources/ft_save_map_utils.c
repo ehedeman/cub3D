@@ -12,7 +12,7 @@
 
 #include "../includes/cub3D.h"
 
-int ft_is_map_char(char c)
+int	ft_is_map_char(char c)
 {
 	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (0);
@@ -77,4 +77,20 @@ void	ft_find_longest_row(t_game *game, char *map)
 	if (count < j)
 		count = j;	//in case the last line is the longest of the map
 	game->map.map_length = count + 2; // plus two because side barriers need to be included
+}
+
+// coords[i][j] -> i == y and j == x cuz i keep forgetting that
+void	ft_set_map_coords(t_game *game, int *i, int *x, int *y)
+{
+	while (game->map.content[*i] && game->map.content[*i] != '\n')	//save until \n, then y + 1
+	{
+		if (ft_is_map_char(game->map.content[*i]) && ft_is_whitespace(game->map.content[*i])) //if whitespace then save as -
+			game->map.coords[*y][*x].type = '-';
+		else
+			game->map.coords[*y][*x].type = game->map.content[*i];
+		game->map.coords[*y][*x].x = *x - 1;							// x and y get set no matter what
+		game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
+		*i += 1;
+		*x += 1;
+	}
 }

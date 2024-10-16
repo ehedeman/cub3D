@@ -12,31 +12,24 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_map_parsing(char *file_name, t_game *game)
+int close_window(t_game *game)
 {
-	int	fd;
+	print_error("Window closed\n", game, 0);
+	return (0);
+}
 
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		printf("Error\nFailed to open file\n");
-	else if (fd)
-	{
-		if (ft_read_map(fd, game, 1))
-		{
-			printf("something went wrong.\n");
-			return (1);
-		}
-	}
-	// if (ft_check_map_format())
-	// 	printf("something\n");
-	// else if (ft_save_args())
-	// 	printf("something went wrong\n"); //change later
-	if (ft_save_map(game))
-	{
-		printf("something went wrong\n");
-		return (1);
-	}
-	if (ft_map_check(game))
-		return (1);
+int	ft_init_game(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		print_error("Error\nGame allocation failed.\n", game, 1);
+	game->mlx_window = mlx_new_window(game->mlx, game->win_width, \
+		game->win_height, "cub3D");
+	if (!game->mlx_window)
+		print_error("Error\nGame allocation failed.\n", game, 1);
+	if (mlx_hook(game->mlx_window, 2, 1L << 0, key_handler, game) == 0)
+		print_error("Error\nGame allocation failed\n", game, 1);
+	if (mlx_hook(game->mlx_window, 17, 1L << 0, close_window, game) == 0)
+		print_error("Error\nGame allocation failed\n", game, 1);
 	return (0);
 }

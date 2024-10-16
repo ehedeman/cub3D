@@ -12,20 +12,21 @@
 
 #include "../includes/cub3D.h"
 
-// coords[i][j] -> i == y and j == x cuz i keep forgetting that
-static void ft_set_map_coords(t_game *game, int *i, int *x, int *y)
+//this was just taken outof ft_skip_til_map because of norm
+static int	ft_skip_til_map_start(t_game *game, int *i)
 {
-	while (game->map.content[*i] && game->map.content[*i] != '\n')	//save until \n, then y + 1
-	{
-		if (ft_is_map_char(game->map.content[*i]) && ft_is_whitespace(game->map.content[*i]))//if whitespace then save as -
-			game->map.coords[*y][*x].type = '-';
-		else
-			game->map.coords[*y][*x].type = game->map.content[*i];
-		game->map.coords[*y][*x].x = *x - 1;							// x and y get set no matter what
-		game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
+	while (game->map.content[*i] && ft_is_whitespace(game->map.content[*i]))		//skip whitespace
 		*i += 1;
-		*x += 1;
+	if (game->map.content[*i])
+	{
+		while (game->map.content[*i] && game->map.content[*i] != '\n')			//skip until newline (map is never first)
+			*i += 1;
+		if (!game->map.content[*i])
+			return (0);
 	}
+	else
+		return (0);
+	return (1);
 }
 
 static int	ft_skip_til_map(t_game *game)
@@ -37,16 +38,7 @@ static int	ft_skip_til_map(t_game *game)
 	j = i;
 	while (game->map.content[i])
 	{
-		while (game->map.content[i] && ft_is_whitespace(game->map.content[i]))		//skip whitespace
-			i++;
-		if (game->map.content[i])
-		{
-			while (game->map.content[i] && game->map.content[i] != '\n')			//skip until newline (map is never first)
-				i++;
-			if (!game->map.content[i])
-				return (0);
-		}
-		else
+		if (!ft_skip_til_map_start(game, &i))
 			return (0);
 		if (game->map.content[i] && game->map.content[i] == '\n')
 		{
@@ -60,13 +52,14 @@ static int	ft_skip_til_map(t_game *game)
 	}
 	return (j);
 }
+
 // works under the assumption that the map is the last part with no more new lines etc
 // (if there's whitespace after the map it'll, so an empty line after, the program wont
 //	recognize it as the last line and will not save the bottom row of empty space.)
 
 static void	ft_set_map_barriers(t_game *game, int i, int y)
 {
-	int x;
+	int	x;
 
 	while (game->map.content[i])
 	{
@@ -85,7 +78,7 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 }
 
 //dont touch, this took forever
-static void ft_set_map_values(t_game *game, t_coordinates **coords)
+static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 {
 	int	i;
 	int	j;
@@ -103,7 +96,7 @@ static void ft_set_map_values(t_game *game, t_coordinates **coords)
 		{
 			if (coords[i][j].type == 'N' || coords[i][j].type == 'S'
 				|| coords[i][j].type == 'W' || coords[i][j].type == 'E')
-				game->map.player_pos = &coords[i][j];
+				game->map.player_start = &coords[i][j];
 		}
 	}
 }

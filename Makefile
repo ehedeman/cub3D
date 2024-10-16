@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/15 13:59:49 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/16 13:05:30 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,16 @@ INC 			= 	-I ./includes			\
 					-I ./mlx_linux
 #sources stuff
 SRC				=	main.c					\
+					freeing_stuff.c			\
 					map_parsing.c			\
 					map_parsing_utils.c		\
 					ft_save_map_utils.c		\
 					ft_save_map.c			\
 					ft_allocate_coords.c	\
 					map_check.c				\
-					errors.c
+					errors.c				\
+					key_handling.c			\
+					ft_init_game.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 

@@ -37,8 +37,9 @@ static void	ft_count_rows(t_game *game, int *i, int *count)
 
 t_coordinates	**ft_allocate_coords(t_game *game, int i)
 {
-	t_coordinates **new;
-	int	count;
+	t_coordinates	**new;
+	int				count;
+
 	count = 0;												//always one more needed at the start and end
 	ft_count_rows(game, &i, &count);
 	new = malloc(sizeof(t_coordinates *) * (count + 3));	//+2 for the bottom and top row barrier +1 for NULL at end

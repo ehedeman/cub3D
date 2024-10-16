@@ -12,16 +12,14 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_read_map(int fd, t_game *game)
+int	ft_read_map(int fd, t_game *game, int bytes)
 {
 	char	*str;
-	int		bytes;
 	char	*temp;
 
 	str = malloc(sizeof(char) * (40 + 1));
 	if (!str)
 		return (1);
-	bytes = 1;
 	while (bytes)
 	{
 		bytes = read(fd, str, 40);
@@ -43,22 +41,6 @@ int	ft_read_map(int fd, t_game *game)
 }
 //might be leaking idk if i missed a case
 
-int	ft_free_map(t_game *game, int mode)
-{
-	int	i;
-
-	i = 0;
-	while (i <= game->map.allocated_rows - 1)
-	{
-		if (game->map.coords[i])		//should work because its set to NULL unless allocated
-			free(game->map.coords[i]);
-		i++;
-	}
-	if (game->map.coords)
-		free(game->map.coords);
-	free(game->map.content);
-	return (mode);							//1 for the error_return, 0 for normal free so function can be used elsewhere
-}
 
 int	ft_is_whitespace(char c)				//newline not included because newlines are important for subject
 {
@@ -74,7 +56,22 @@ void	ft_set_zero(t_game *game)
 	game->map.coords = NULL;
 	game->map.map_length = 0;
 	game->map.top_l = NULL;
+	game->map.top_r = NULL;
 	game->map.bottom_l = NULL;
+	game->map.bottom_r = NULL;
 	game->map.point_zero = NULL;
-	game->map.player_pos = NULL;
+	game->map.player_start = NULL;
+	game->walls.north = NULL;
+	game->walls.south = NULL;
+	game->walls.east = NULL;
+	game->walls.west = NULL;
+	game->player.current = NULL;
+	game->player.next = NULL;
+	game->player.mlx = NULL;
+	game->player.current_orientation = '\0';
+	game->mlx = NULL;
+	game->mlx_window = NULL;
+	game->win_height = 3000;
+	game->win_width = 2000;
+	game->game_end = 0;
 }
