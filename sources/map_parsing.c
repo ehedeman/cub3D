@@ -18,24 +18,17 @@ int	ft_map_parsing(char *file_name, t_game *game)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		printf("Error\nFailed to open file\n");
+		print_error("Error\nFailed to open file\n", game, 1);
 	else if (fd)
 	{
 		if (ft_read_map(fd, game, 1))
-		{
-			printf("something went wrong.\n");
-			return (1);
-		}
+			print_error("something went wrong.\n", game, 1);
 	}
 	// if (ft_check_map_format())
 	// 	printf("something\n");
 	// else if (ft_save_args())
 	// 	printf("something went wrong\n"); //change later
-	if (ft_save_map(game))
-	{
-		printf("something went wrong\n");
-		return (1);
-	}
+	ft_save_map(game);
 	ft_map_check(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:19:07 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:58:45 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,20 @@ typedef struct s_map
 	t_coordinates	**coords;	//array of coordinates
 }			t_map;
 
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*mlx_window;
+	void		*test;
+	int			win_width;	//set to 3000 by default at the moment
+	int			win_height;	//set to 2000
+}				t_mlx;
+
 typedef struct s_game
 {
 	t_map		map;
 	t_wall		walls;
+	t_mlx		mlx;
 	t_player	player;
-	void		*mlx;
-	void		*mlx_window;
-	int			win_width;	//set to 3000 by default at the moment
-	int			win_height;	//set to 2000
-	void		*test;
 	int			game_end;
 }				t_game;

@@ -112,13 +112,13 @@ int	ft_save_map(t_game *game)
 	y = 0;
 	i = ft_skip_til_map(game);
 	if (!i)
-		return (1);
+		print_error("Error\nProcessing the map.\n", game, 1);
 	ft_find_longest_row(game, &game->map.content[i]);
 	game->map.coords = ft_allocate_coords(game, i);		//allocates the coords array
 	if (!game->map.coords)
-		return (ft_free_map(game, 1));
+		print_error("Error\nAllocating memory for the map.\n", game, 1);
 	if (ft_allocate_map_rows(game))						//allocates the rows for coords array
-		return (ft_free_map(game, 1));
+		print_error("Error\nAllocating memory for the map.\n", game, 1);
 	ft_set_map_barrier(game, &game->map.content[i], y);		//sets top barrier
 	y++;
 	ft_set_map_barriers(game, i, y);

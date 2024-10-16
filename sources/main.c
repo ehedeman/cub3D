@@ -51,12 +51,9 @@ int main(int argc, char **argv)
 {
 	t_game	game;
 	
-	if (argc != 2)
-	{
-		printf("Wrong number of arguments!");
-		exit(1);
-	}
 	ft_set_zero(&game);
+	if (argc != 2)
+		print_error("Error\nWrong number of arguments!\n", &game, 1);
 	// if (!(ft_check_extension(argv[1])))
 	// {
 	// 	printf("Wrong file extension!");
@@ -67,7 +64,7 @@ int main(int argc, char **argv)
 	// {
 	ft_print_map(&game);	//just for testing purposes
 	ft_init_game(&game);
-	mlx_loop(game.mlx);
+	mlx_loop(game.mlx.mlx);
 	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)//not sure if this is even nessecary tbh
 	return (0);
 }

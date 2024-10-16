@@ -38,5 +38,7 @@ int	ft_free_game(t_game *game)
 	// if (game->mlx_window)
 	// 	free(game->mlx_window);	//if window is closed thru ESC or x then this aint nessecary
 								//for some reason. have to look into mlx_loop and stuff again i guess
+	if (game->mlx.mlx)
+		free(game->mlx.mlx);
 	return (0);
 }
