@@ -19,11 +19,13 @@
 # include "structs.h"
 # include "functions.h"
 
+//there's no such textures at the moment ofc
 # define NORTH_TEXTURE "../textures/north.xpm"
 # define SOUTH_TEXTURE "../textures/south.xpm"
 # define WEST_TEXTURE "../textures/west.xpm"
 # define EAST_TEXTURE "../textures/east.xpm"
-# define TEST_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/Player_character_R.xpm"
+# define TEST_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/test.xpm"
+# define WALL_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/wall.xpm"
 # define XK_ESCAPE 65307
 //wall textures so we dont have to have them for testing?
 //not sure if it works like that lol
