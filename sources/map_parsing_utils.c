@@ -42,7 +42,7 @@ int	ft_read_map(int fd, t_game *game, int bytes)
 //might be leaking idk if i missed a case
 
 
-int	ft_is_whitespace(char c)				//newline not included because newlines are important for subject
+int	ft_is_whitespace(char c)//newline not included because newlines are important for subject
 {
 	if (c == '\t' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')

@@ -19,7 +19,7 @@ int	ft_is_map_char(char c)
 	return (1);
 }
 
-void	ft_set_map_side_barrier(t_game *game, int *x, int *y) //mode is for indicating whether coordinate = 0 or -1
+void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 {
 	game->map.coords[*y][*x].type = '-';	//to create a barrier around the whole map for checking if its valid
 	game->map.coords[*y][*x].x = *x - 1;
@@ -32,7 +32,7 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 	int	x;
 
 	x = 0;
-	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
+	game->map.coords[y][x].type = '-';
 	game->map.coords[y][x].x = x - 1;
 	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
 	x++;

@@ -45,7 +45,7 @@ t_coordinates	**ft_allocate_coords(t_game *game, int i)
 	new = malloc(sizeof(t_coordinates *) * (count + 3));	//+2 for the bottom and top row barrier +1 for NULL at end
 	if (!new)
 		return (NULL);
-	game->map.allocated_rows = count + 3;					//last is NULL
+	game->map.allocated_rows = count + 3;					//last is NULL | could actually just set it to count + 2 to avoid accessing the null row
 	ft_set_null(new, game);
 	return (new);
 }

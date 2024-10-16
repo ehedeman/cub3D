@@ -12,6 +12,7 @@
 
 #include "../includes/cub3D.h"
 
+//everything set to zero or some other value for freeing purposes and stuff
 void	ft_set_zero(t_game *game)
 {
 	game->map.content = NULL;

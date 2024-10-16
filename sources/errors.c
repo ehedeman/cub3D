@@ -17,6 +17,6 @@ void	print_error(char *str, t_game *game, int mode)
 	ft_free_map(game, 1);
 	ft_free_game(game);
 	while (*str)
-		write(2, str++, 1);
+		write(mode, str++, 1);
 	exit(mode);
 }

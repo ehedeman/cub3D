@@ -19,7 +19,7 @@ static int	ft_skip_til_map_start(t_game *game, int *i)
 		*i += 1;
 	if (game->map.content[*i])
 	{
-		while (game->map.content[*i] && game->map.content[*i] != '\n')			//skip until newline (map is never first)
+		while (game->map.content[*i] && game->map.content[*i] != '\n')			//skip until newline (map is never first as far as i'm concernerd)
 			*i += 1;
 		if (!game->map.content[*i])
 			return (0);
@@ -46,16 +46,19 @@ static int	ft_skip_til_map(t_game *game)
 			j = i;
 			while (game->map.content[i]	&& ft_is_whitespace(game->map.content[i]))	//skip possible whitespace
 				i++;
-			if (game->map.content[i] && game->map.content[i] == '1')				//if the first symbol after newline is 1
+			if (game->map.content[i] && game->map.content[i] == '1')				//if the first symbol after newline is 1 then it should be the map
 				return (j);
 		}
 	}
 	return (j);
 }
 
-// works under the assumption that the map is the last part with no more new lines etc
-// (if there's whitespace after the map it'll, so an empty line after, the program wont
-//	recognize it as the last line and will not save the bottom row of empty space.)
+/*
+works under the assumption that the map is the last part with no more new lines etc.
+
+-> if there's whitespace after the map the program wont recognize it as the last line
+and will not save the bottom row of empty space.
+*/
 
 static void	ft_set_map_barriers(t_game *game, int i, int y)
 {
@@ -123,3 +126,15 @@ int	ft_save_map(t_game *game)
 	ft_set_map_values(game, game->map.coords);
 	return (0);
 }
+
+/*
+the map is saved in a rectanuglar format with a barrier of negative space around it basically.
+that negative space has coordinates as well because thats easier. the coordinates start from
+-1 in the bottom left corner and go up to whatever in the top right corner.
+the 'type' variable is set as whatever the symbol is on the map, except for whitespace, thats
+saved as '-'
+variables bottom_l etc are for naviating the map more easily so you dont have to think about where
+the barrier starts and stuff
+
+the negative space thats inbetween walls and stuff is part of the map 
+*/

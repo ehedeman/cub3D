@@ -36,7 +36,6 @@ int	ft_map_parsing(char *file_name, t_game *game)
 		printf("something went wrong\n");
 		return (1);
 	}
-	if (ft_map_check(game))
-		return (1);
+	ft_map_check(game);
 	return (0);
 }

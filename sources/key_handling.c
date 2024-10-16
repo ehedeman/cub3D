@@ -12,6 +12,7 @@
 
 #include "../includes/cub3D.h"
 
+//stolen from my so_long
 int	key_handler(int key, t_game *game)
 {
 	if (key == XK_ESCAPE)

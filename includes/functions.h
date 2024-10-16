@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:11:34 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:42:21 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ t_coordinates	**ft_allocate_coords(t_game *game, int i);
 int				ft_allocate_map_rows(t_game *game);
 
 //map_check.c
-int				ft_map_check(t_game *game);
-int				ft_check_map_walls(t_game *game, t_coordinates **coords);
-int				ft_check_player_symbol(t_game *game, \
-		t_coordinates **coords);
+void			ft_map_check(t_game *game);
 
 //errors.c
 void			print_error(char *str, t_game *game, int mode);

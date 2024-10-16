@@ -68,8 +68,6 @@ int main(int argc, char **argv)
 	ft_print_map(&game);	//just for testing purposes
 	ft_init_game(&game);
 	mlx_loop(game.mlx);
-	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)
+	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)//not sure if this is even nessecary tbh
 	return (0);
 }
-//put the game struct init after the map because the player
-//and wall structs need the map coordinates
