@@ -6,13 +6,13 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/17 14:57:40 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:02:12 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include "structs.h"
-//for map parsing
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
+# include "structs.h"
 
 //freeing_stuff.c
 int				ft_free_map(t_game *game, int mode);
@@ -54,3 +54,17 @@ int				key_handler(int key, t_game *game);
 
 //ft_init_game.c
 int				ft_init_game(t_game *game);
+
+//movement.c
+int				ft_check_for_walls(int direction, t_coordinates **coords, \
+			t_player *player);
+void			ft_change_current_location(t_player *player, int direction, \
+			t_coordinates **coords);
+void			ft_change_current_orientation(int key, t_player *player);
+
+//check_directions.c
+int				ft_check_direction(int key, t_player *player);
+
+//game_utils.c
+int	print_message(int mode, char *str);
+#endif
