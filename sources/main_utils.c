@@ -12,23 +12,29 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_map_parsing(char *file_name, t_game *game)
+//everything set to zero or some other value for freeing purposes and stuff
+void	ft_set_zero(t_game *game)
 {
-	int	fd;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		print_error("Error\nFailed to open file\n", game, 1);
-	else if (fd)
-	{
-		if (ft_read_map(fd, game, 1))
-			print_error("something went wrong.\n", game, 1);
-	}
-	// if (ft_check_map_format())
-	// 	printf("something\n");
-	// else if (ft_save_args())
-	// 	printf("something went wrong\n"); //change later
-	ft_save_map(game);
-	ft_map_check(game);
-	return (0);
+	game->map.content = NULL;
+	game->map.coords = NULL;
+	game->map.map_length = 0;
+	game->map.top_l = NULL;
+	game->map.top_r = NULL;
+	game->map.bottom_l = NULL;
+	game->map.bottom_r = NULL;
+	game->map.point_zero = NULL;
+	game->map.player_start = NULL;
+	game->walls.north = NULL;
+	game->walls.south = NULL;
+	game->walls.east = NULL;
+	game->walls.west = NULL;
+	game->player.current = NULL;
+	game->player.next = NULL;
+	game->player.mlx = NULL;
+	game->player.current_orientation = '\0';
+	game->mlx.mlx = NULL;
+	game->mlx.mlx_window = NULL;
+	game->mlx.win_height = 2000;
+	game->mlx.win_width = 3000;
+	game->game_end = 0;
 }

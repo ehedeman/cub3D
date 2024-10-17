@@ -12,23 +12,22 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_map_parsing(char *file_name, t_game *game)
+//stolen from my so_long
+int	key_handler(int key, t_game *game)
 {
-	int	fd;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-		print_error("Error\nFailed to open file\n", game, 1);
-	else if (fd)
-	{
-		if (ft_read_map(fd, game, 1))
-			print_error("something went wrong.\n", game, 1);
-	}
-	// if (ft_check_map_format())
-	// 	printf("something\n");
-	// else if (ft_save_args())
-	// 	printf("something went wrong\n"); //change later
-	ft_save_map(game);
-	ft_map_check(game);
+	if (key == XK_ESCAPE)
+		print_error("Thanks for playing\n", game, 0);
+	// if (game->game_end == 0)
+	// {
+	// 	printf("Key pressed: %i\n\n", key);
+	// 	if ((key == 119 || key == 65362) && check_for_objects(game, 1) == 0)
+	// 		move_player(game, 2, 0, 0);
+	// 	if ((key == 115 || key == 65364) && check_for_objects(game, 2) == 0)
+	// 		move_player(game, 1, 0, 0);
+	// 	if ((key == 97 || key == 65361) && check_for_objects(game, 3) == 0)
+	// 		move_player(game, 0, 2, 1);
+	// 	if ((key == 100 || key == 65363) && check_for_objects(game, 4) == 0)
+	// 		move_player(game, 0, 1, 2);
+	// }
 	return (0);
 }
