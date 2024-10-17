@@ -12,6 +12,18 @@
 
 #include "../includes/cub3D.h"
 
+static int	ft_check_extension(const char *argv);
+
+void ft_print_params(t_game *game)
+{
+	printf(GREEN"\nNorth Wall: %s\n", game->walls.north);
+	printf("South Wall: %s\n", game->walls.south);
+	printf("East Wall: %s\n", game->walls.east);
+	printf("West Wall: %s\n", game->walls.west);
+	printf("Floor Color: %i %i %i\n", game->walls.floor.r, game->walls.floor.g, game->walls.floor.b);
+	printf("Ceiling Color: %i %i %i\n"RESET"\n", game->walls.ceiling.r, game->walls.ceiling.g, game->walls.ceiling.b);
+}
+
 void	print_all(t_game *game)
 {
 	int j, i = 0;
