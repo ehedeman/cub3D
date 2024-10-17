@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:42:21 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:57:40 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
 //map_parsing.c
 int				ft_map_parsing(char *file_name, t_game *game);
+
+//ft_save_args.c
+bool	        ft_save_args(t_game *game);
 
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);

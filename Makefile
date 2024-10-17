@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/16 13:10:18 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/17 15:11:48 by svalchuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC				=	main.c					\
 					freeing_stuff.c			\
 					map_parsing.c			\
 					map_parsing_utils.c		\
+					ft_save_args.c			\
 					ft_save_map_utils.c		\
 					ft_save_map.c			\
 					ft_allocate_coords.c	\

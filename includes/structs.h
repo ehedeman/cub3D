@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:58:45 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:49:02 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,21 @@ typedef struct s_player
 }				t_player;
 //t_coordinates dont need to be freed anywhere but in map.coords
 
+typedef struct	s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_rgb;
+
 typedef struct s_wall
 {
 	char	*north;		//path to north wall texture
 	char	*south;
 	char	*east;		//if u wanna handle it differently thats cool
 	char	*west;		//was just a thought of what the struct could look like
+	t_rgb	floor;
+	t_rgb	ceiling;
 }				t_wall;
 
 typedef struct s_map

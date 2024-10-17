@@ -26,8 +26,8 @@ int	ft_map_parsing(char *file_name, t_game *game)
 	}
 	// if (ft_check_map_format())
 	// 	printf("something\n");
-	// else if (ft_save_args())
-	// 	printf("something went wrong\n"); //change later
+	if (!ft_save_args(game))
+		printf("something went wrong\n"); //change later
 	ft_save_map(game);
 	ft_map_check(game);
 	return (0);

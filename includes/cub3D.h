@@ -14,10 +14,12 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <stdbool.h>
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
 # include "structs.h"
 # include "functions.h"
+# include "formatting.h"
 
 //there's no such textures at the moment ofc
 # define NORTH_TEXTURE "../textures/north.xpm"
