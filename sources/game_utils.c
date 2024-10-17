@@ -12,30 +12,9 @@
 
 #include "../includes/cub3D.h"
 
-int	ft_free_map(t_game *game, int mode)
+int	print_message(int mode, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (i <= game->map.allocated_rows - 1)
-	{
-		if (game->map.coords[i])		//should work because its set to NULL unless allocated
-			free(game->map.coords[i]);
-		i++;
-	}
-	if (game->map.coords)
-		free(game->map.coords);
-	free(game->map.content);
-	game->map.coords = NULL;
-	game->map.content = NULL;	//so it cant be freed again
-	return (mode);							//1 for the error_return, 0 for normal free so function can be used elsewhere
-}
-
-int	ft_free_game(t_game *game)
-{
-	if (game->player.mlx)
-		free(game->player.mlx);
-	if (game->mlx.mlx)
-		free(game->mlx.mlx);
-	return (0);
+	while (*str)
+		write(mode, str++, 1);
+	return (mode);
 }

@@ -25,9 +25,19 @@
 # define WEST_TEXTURE "../textures/west.xpm"
 # define EAST_TEXTURE "../textures/east.xpm"
 # define TEST_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/test.xpm"
+# define TEST_HEIGHT 138
+# define TEST_WIDTH 152
 # define WALL_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/wall.xpm"
+# define WALL_HEIGHT 512
+# define WALL_WIDTH 512
 # define XK_ESCAPE 65307
-//wall textures so we dont have to have them for testing?
-//not sure if it works like that lol
+# define A_KEY 97
+# define D_KEY 100
+# define W_KEY 119
+# define S_KEY 115
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
+// # define UP_ARROW 65362
+// # define DOWN_ARROW 65364
 
 #endif

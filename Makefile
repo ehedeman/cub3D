@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/16 13:10:18 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/17 14:21:58 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ SRC				=	main.c					\
 					map_check.c				\
 					errors.c				\
 					key_handling.c			\
-					ft_init_game.c
+					ft_init_game.c			\
+					movement.c				\
+					check_directions.c		\
+					game_utils.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 

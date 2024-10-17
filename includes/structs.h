@@ -6,16 +6,52 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/16 13:58:45 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:26:16 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
+typedef enum e_direction
+{
+	LEFT = 0,
+	RIGHT = 1,
+	FOREWARD = 2,
+	BACKWARD = 3,
+}			t_direction;
+
+typedef enum e_orientation
+{
+	NO = 0,
+	EA = 1,
+	SO = 2,
+	WE = 3,
+}			t_orientation;
+
+/*
+
+01234567
+1
+2
+3
+-> in array
+
+3
+2
+1
+01234567
+-> in a coordinate system
+
+which is why i have two seperate variables cuz i was tired of calculating shit
+*/
 
 typedef struct s_coordinates
 {
-	int	x;
+	int	x;				//just for printing
+	int x_array;		//for changing locations etc
 	int	y;
+	int	y_array;
 	int	type;
 }			t_coordinates;
 
@@ -23,8 +59,9 @@ typedef struct s_player
 {
 	t_coordinates	*current;
 	t_coordinates	*next;
-	char			current_orientation;	//N,S,W,E, might not need it
-	void			*mlx;	//add more if we 
+	char			start_orientation;	//N,S,W,E, might not need it
+	int				current_orientation;
+	void			*mlx;
 }				t_player;
 //t_coordinates dont need to be freed anywhere but in map.coords
 
@@ -67,3 +104,5 @@ typedef struct s_game
 	t_player	player;
 	int			game_end;
 }				t_game;
+
+#endif

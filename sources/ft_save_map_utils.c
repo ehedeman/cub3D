@@ -23,6 +23,8 @@ void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 {
 	game->map.coords[*y][*x].type = '-';	//to create a barrier around the whole map for checking if its valid
 	game->map.coords[*y][*x].x = *x - 1;
+	game->map.coords[*y][*x].x_array = *x;
+	game->map.coords[*y][*x].y_array = *y;
 	game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
 	*x += 1;
 }
@@ -34,22 +36,25 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 	x = 0;
 	game->map.coords[y][x].type = '-';
 	game->map.coords[y][x].x = x - 1;
+	game->map.coords[y][x].x_array = x;
 	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
+	game->map.coords[y][x].y_array = y;
 	x++;
 	while (x < game->map.map_length - 1)
 	{
-		game->map.coords[y][x].type = '-';
-		game->map.coords[y][x].x = x - 1;
-		game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
-		x++;
+		ft_set_map_side_barrier(game, &x, &y);
 		map++;
 	}
 	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
 	game->map.coords[y][x].x = x - 1;
+	game->map.coords[y][x].x_array = x;
 	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
+	game->map.coords[y][x].y_array = y;
 	game->map.coords[y][x + 1].type = '\n';
 	game->map.coords[y][x + 1].x = x;
+	game->map.coords[y][x + 1].x_array = x + 1;
 	game->map.coords[y][x + 1].y = (game->map.allocated_rows - 3) - y + 1;
+	game->map.coords[y][x + 1].y_array = y;
 }
 
 void	ft_find_longest_row(t_game *game, char *map)
@@ -88,8 +93,10 @@ void	ft_set_map_coords(t_game *game, int *i, int *x, int *y)
 			game->map.coords[*y][*x].type = '-';
 		else
 			game->map.coords[*y][*x].type = game->map.content[*i];
-		game->map.coords[*y][*x].x = *x - 1;							// x and y get set no matter what
+		game->map.coords[*y][*x].x = *x - 1;
+		game->map.coords[*y][*x].x_array = *x;							// x and y get set no matter what
 		game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
+		game->map.coords[*y][*x].y_array = *y;
 		*i += 1;
 		*x += 1;
 	}

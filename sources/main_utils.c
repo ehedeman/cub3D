@@ -34,7 +34,7 @@ void	ft_set_zero(t_game *game)
 	game->player.current_orientation = '\0';
 	game->mlx.mlx = NULL;
 	game->mlx.mlx_window = NULL;
-	game->mlx.win_height = 2000;
-	game->mlx.win_width = 3000;
+	game->mlx.win_height = 1000;
+	game->mlx.win_width = 2000;
 	game->game_end = 0;
 }
