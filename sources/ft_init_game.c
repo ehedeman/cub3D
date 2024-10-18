@@ -73,6 +73,14 @@ int	ft_init_game(t_game *game)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
+	int height = WALL_HEIGHT;
+	int width = WALL_WIDTH;
+	game->mlx.test = mlx_xpm_file_to_image(game->mlx.mlx, WALL_XPM,
+			&width, &height);
+	if (!game->mlx.test)
+		print_error("Error\nImage allocation failed.\n", game, 1);
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
+			game->mlx.test, 200, 200);
 	return (0);
 }
 

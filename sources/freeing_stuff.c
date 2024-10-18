@@ -35,6 +35,10 @@ int	ft_free_map(t_game *game, int mode)
 
 int	ft_free_game(t_game *game)
 {
+	if (game->mlx.test)
+		mlx_destroy_image(game->mlx.mlx, game->mlx.test);
+	if (game->mlx.mlx_window)
+		mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_window);
 	if (game->player.mlx)
 		free(game->player.mlx);
 	if (game->mlx.mlx)

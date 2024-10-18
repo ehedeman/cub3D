@@ -6,14 +6,14 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/18 11:05:48 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/10/18 13:16:12 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	cub3D
 
 CC				=	cc 
-CFLAGS			=	-Werror -Wall -Wextra -g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS			=	-Werror -Wall -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
 
 INC 			= 	-I ./includes			\
 					-I ./libft				\
@@ -81,10 +81,10 @@ fclean: clean
 
 re: fclean all
 
-leaks:
+leaks: re
 	valgrind --leak-check=full \
          --show-leak-kinds=all \
-         --track-origins=yes ./$(NAME) map.cub
+         --track-origins=yes ./$(NAME) _valid_maps/map.cub
 
 norm:
 	@norminette $(SRCS) ./includes/

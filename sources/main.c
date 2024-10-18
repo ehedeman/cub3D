@@ -99,7 +99,7 @@ void ft_print_map(t_game *game)
 
 // dont know if freeing the map at the end is nessecary, maybe if the game doesnt end via
 // ESC or the x on the window but else idk because it exits because it gets there (i think)
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 	

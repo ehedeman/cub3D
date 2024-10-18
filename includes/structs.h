@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/18 12:04:53 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:06:29 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ typedef struct s_rgb
 	int	b;
 }				t_rgb;
 
+// north = path to north wall texture etc
 typedef struct s_wall
 {
-	char	*north;		//path to north wall texture
+	char	*north;
 	char	*south;
-	char	*east;		//if u wanna handle it differently thats cool
-	char	*west;		//was just a thought of what the struct could look like
+	char	*east;
+	char	*west;
 	t_rgb	floor;
 	t_rgb	ceiling;
 }				t_wall;
