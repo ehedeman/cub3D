@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/17 17:02:12 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:58:11 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int				ft_free_game(t_game *game);
 int				ft_map_parsing(char *file_name, t_game *game);
 
 //ft_save_args.c
-bool	        ft_save_args(t_game *game);
+bool			ft_save_args(t_game *game);
+
+//ft_save_args_utils.c
+bool			ft_check_args(t_game *game);
 
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);
@@ -66,5 +69,6 @@ void			ft_change_current_orientation(int key, t_player *player);
 int				ft_check_direction(int key, t_player *player);
 
 //game_utils.c
-int	print_message(int mode, char *str);
+int				print_message(int mode, char *str);
+
 #endif

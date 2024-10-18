@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/17 17:02:44 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:00:13 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ typedef struct s_wall
 typedef struct s_map
 {
 	char			*content;	//content of the map file
-	int				allocated_rows;
+	int				allocated_rows;	//amount of rows in the coords array (incl negative space and NULL row at end)
 	int				map_length;	//length of longest row
 	t_coordinates	*top_l;
 	t_coordinates	*top_r;
 	t_coordinates	*bottom_l;
 	t_coordinates	*bottom_r;
-	t_coordinates	*point_zero;	// = top_l makes most sense due to the way the info is read
+	t_coordinates	*point_zero;	//bottom_l so it works like a normal coordinate system
 	t_coordinates	*player_start;
 	t_coordinates	**coords;	//array of coordinates
 }			t_map;

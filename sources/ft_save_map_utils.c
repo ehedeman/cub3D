@@ -19,9 +19,10 @@ int	ft_is_map_char(char c)
 	return (1);
 }
 
+//to create a barrier around the whole map for checking if its valid
 void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 {
-	game->map.coords[*y][*x].type = '-';	//to create a barrier around the whole map for checking if its valid
+	game->map.coords[*y][*x].type = '-';
 	game->map.coords[*y][*x].x = *x - 1;
 	game->map.coords[*y][*x].x_array = *x;
 	game->map.coords[*y][*x].y_array = *y;
@@ -29,6 +30,7 @@ void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 	*x += 1;
 }
 
+//x needs to be two more than the map is wide because of side barrier
 void	ft_set_map_barrier(t_game *game, char *map, int y)
 {
 	int	x;
@@ -45,7 +47,7 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 		ft_set_map_side_barrier(game, &x, &y);
 		map++;
 	}
-	game->map.coords[y][x].type = '-';	//x needs to be two more than the map is wide
+	game->map.coords[y][x].type = '-';
 	game->map.coords[y][x].x = x - 1;
 	game->map.coords[y][x].x_array = x;
 	game->map.coords[y][x].y = (game->map.allocated_rows - 3) - y;
@@ -57,6 +59,10 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 	game->map.coords[y][x + 1].y_array = y;
 }
 
+// count < j condition at end in case the last line is the longest of the map.
+// no plus one for newlie at count = j in the middle because newline is at
+// end anyways.
+// count plus two at end because side barriers need to be included.
 void	ft_find_longest_row(t_game *game, char *map)
 {
 	int	i;
@@ -71,7 +77,7 @@ void	ft_find_longest_row(t_game *game, char *map)
 		if (map[i] == '\n')
 		{
 			if (count < j)
-				count = j; //no plus one for newlie because newline is at end anyways
+				count = j;
 			j = 0;
 			i++;
 			continue ;
@@ -80,21 +86,23 @@ void	ft_find_longest_row(t_game *game, char *map)
 		i++;
 	}
 	if (count < j)
-		count = j;	//in case the last line is the longest of the map
-	game->map.map_length = count + 2; // plus two because side barriers need to be included
+		count = j;
+	game->map.map_length = count + 2;
 }
 
 // coords[i][j] -> i == y and j == x cuz i keep forgetting that
+// if whitespace then save as "-" -> also has x and y set
 void	ft_set_map_coords(t_game *game, int *i, int *x, int *y)
 {
-	while (game->map.content[*i] && game->map.content[*i] != '\n')	//save until \n, then y + 1
+	while (game->map.content[*i] && game->map.content[*i] != '\n')
 	{
-		if (ft_is_map_char(game->map.content[*i]) && ft_is_whitespace(game->map.content[*i])) //if whitespace then save as -
+		if (ft_is_map_char(game->map.content[*i]) \
+			&& ft_is_whitespace(game->map.content[*i]))
 			game->map.coords[*y][*x].type = '-';
 		else
 			game->map.coords[*y][*x].type = game->map.content[*i];
 		game->map.coords[*y][*x].x = *x - 1;
-		game->map.coords[*y][*x].x_array = *x;							// x and y get set no matter what
+		game->map.coords[*y][*x].x_array = *x;
 		game->map.coords[*y][*x].y = (game->map.allocated_rows - 3) - *y;
 		game->map.coords[*y][*x].y_array = *y;
 		*i += 1;

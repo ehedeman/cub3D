@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c		                                        :+:      :+:    :+:   */
+/*   ft_save_args_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ****** <******@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 12:33:17 by ******           #+#    #+#              */
-/*   Updated: 2024/10/11 13:09:41 by ******           ###   ########.fr       */
+/*   Created: 2024/10/17 14:49:30 by svalchuk          #+#    #+#             */
+/*   Updated: 2024/10/18 11:08:10 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	print_message(int mode, char *str)
+bool	ft_check_args(t_game *game)
 {
-	while (*str)
-		write(mode, str++, 1);
-	return (mode);
+	if (!game->walls.north || !game->walls.south || !game->walls.east
+		|| !game->walls.west)
+		return (true);
+	return (false);
 }

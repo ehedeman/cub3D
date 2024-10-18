@@ -19,7 +19,7 @@ int	ft_free_map(t_game *game, int mode)
 	i = 0;
 	while (i <= game->map.allocated_rows - 1)
 	{
-		if (game->map.coords[i])		//should work because its set to NULL unless allocated
+		if (game->map.coords[i])
 			free(game->map.coords[i]);
 		i++;
 	}
@@ -27,9 +27,11 @@ int	ft_free_map(t_game *game, int mode)
 		free(game->map.coords);
 	free(game->map.content);
 	game->map.coords = NULL;
-	game->map.content = NULL;	//so it cant be freed again
-	return (mode);							//1 for the error_return, 0 for normal free so function can be used elsewhere
+	game->map.content = NULL;
+	return (mode);
 }
+// mode = 1 for the error_return, 0 for normal free so
+// function can be used elsewhere
 
 int	ft_free_game(t_game *game)
 {

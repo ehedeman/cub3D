@@ -12,6 +12,7 @@
 
 #include "../includes/cub3D.h"
 
+//might be leaking idk if i missed a case
 int	ft_read_map(int fd, t_game *game, int bytes)
 {
 	char	*str;
@@ -39,14 +40,12 @@ int	ft_read_map(int fd, t_game *game, int bytes)
 	free(str);
 	return (0);
 }
-//might be leaking idk if i missed a case
 
-
-int	ft_is_whitespace(char c)//newline not included because newlines are important for subject
+//newline not included because newlines are important for subject
+int	ft_is_whitespace(char c)
 {
 	if (c == '\t' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
 		return (1);
 	return (0);
 }
-

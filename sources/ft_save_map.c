@@ -12,14 +12,16 @@
 
 #include "../includes/cub3D.h"
 
-//this was just taken outof ft_skip_til_map because of norm
+// this was just taken outof ft_skip_til_map because of norm
+// first skip whitespace, then skip until newline
+// (map is never first as far as i'm concernerd)
 static int	ft_skip_til_map_start(t_game *game, int *i)
 {
-	while (game->map.content[*i] && ft_is_whitespace(game->map.content[*i]))		//skip whitespace
+	while (game->map.content[*i] && ft_is_whitespace(game->map.content[*i]))
 		*i += 1;
 	if (game->map.content[*i])
 	{
-		while (game->map.content[*i] && game->map.content[*i] != '\n')			//skip until newline (map is never first as far as i'm concernerd)
+		while (game->map.content[*i] && game->map.content[*i] != '\n')
 			*i += 1;
 		if (!game->map.content[*i])
 			return (0);
@@ -29,6 +31,9 @@ static int	ft_skip_til_map_start(t_game *game, int *i)
 	return (1);
 }
 
+// first i++ is to skip newline
+// then skip possible whitespace
+// if the first symbol after newline is 1 then it should be the map
 static int	ft_skip_til_map(t_game *game)
 {
 	int	i;
@@ -42,11 +47,12 @@ static int	ft_skip_til_map(t_game *game)
 			return (0);
 		if (game->map.content[i] && game->map.content[i] == '\n')
 		{
-			i++;																	//skip newline
+			i++;
 			j = i;
-			while (game->map.content[i]	&& ft_is_whitespace(game->map.content[i]))	//skip possible whitespace
+			while (game->map.content[i] \
+				&& ft_is_whitespace(game->map.content[i]))
 				i++;
-			if (game->map.content[i] && game->map.content[i] == '1')				//if the first symbol after newline is 1 then it should be the map
+			if (game->map.content[i] && game->map.content[i] == '1')
 				return (j);
 		}
 	}
@@ -54,10 +60,11 @@ static int	ft_skip_til_map(t_game *game)
 }
 
 /*
-works under the assumption that the map is the last part with no more new lines etc.
+	works under the assumption that the map is the last part with no 
+	more new lines etc.
 
--> if there's whitespace after the map the program wont recognize it as the last line
-and will not save the bottom row of empty space.
+->	if there's whitespace after the map the program wont recognize
+	it as the last line and will not save the bottom row of empty space.
 */
 
 static void	ft_set_map_barriers(t_game *game, int i, int y)
@@ -80,18 +87,21 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 	}
 }
 
-//dont touch, this took forever
+// dont touch, this took forever
+// 1|1 because 0|0 is the negative space around map
+// point_zero = 0|0 on coordinates, thoght it might be useful to have
 static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	game->map.top_l = &coords[1][1];					//1|1 because 0|0 is the negative space around map
+	game->map.top_l = &coords[1][1];
 	game->map.top_r = &coords[1][game->map.map_length - 2];
 	game->map.bottom_l = &coords[game->map.allocated_rows - 3][1];
-	game->map.bottom_r = &coords[game->map.allocated_rows - 3][game->map.map_length - 2];
-	game->map.point_zero = game->map.bottom_l;			//0|0 on coordinates
+	game->map.bottom_r = \
+		&coords[game->map.allocated_rows - 3][game->map.map_length - 2];
+	game->map.point_zero = game->map.bottom_l;
 	while (i++ < game->map.allocated_rows - 2)
 	{
 		j = -1;
@@ -104,6 +114,11 @@ static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 	}
 }
 
+// ft_allocate_coords allocates the coords array in general
+// ft_allocate_map_rows allocates the rows for coords array
+// ->seperate so its easier to free when allocation failed
+// ft_set_map_barrier allocates top barrier
+// ft_set_map_barriers allocates the rest (ik not confusing at all, nah)
 int	ft_save_map(t_game *game)
 {
 	int	i;
@@ -114,12 +129,12 @@ int	ft_save_map(t_game *game)
 	if (!i)
 		print_error("Error\nProcessing the map.\n", game, 1);
 	ft_find_longest_row(game, &game->map.content[i]);
-	game->map.coords = ft_allocate_coords(game, i);		//allocates the coords array
+	game->map.coords = ft_allocate_coords(game, i);
 	if (!game->map.coords)
 		print_error("Error\nAllocating memory for the map.\n", game, 1);
-	if (ft_allocate_map_rows(game))						//allocates the rows for coords array
+	if (ft_allocate_map_rows(game))
 		print_error("Error\nAllocating memory for the map.\n", game, 1);
-	ft_set_map_barrier(game, &game->map.content[i], y);		//sets top barrier
+	ft_set_map_barrier(game, &game->map.content[i], y);
 	y++;
 	ft_set_map_barriers(game, i, y);
 	game->map.coords[game->map.allocated_rows - 1] = NULL;
@@ -128,13 +143,14 @@ int	ft_save_map(t_game *game)
 }
 
 /*
-the map is saved in a rectanuglar format with a barrier of negative space around it basically.
-that negative space has coordinates as well because thats easier. the coordinates start from
--1 in the bottom left corner and go up to whatever in the top right corner.
-the 'type' variable is set as whatever the symbol is on the map, except for whitespace, thats
-saved as '-'
-variables bottom_l etc are for naviating the map more easily so you dont have to think about where
-the barrier starts and stuff
+	the map is saved in a rectanuglar format with a barrier of negative 
+	space around it basically. that negative space has coordinates as well 
+	because thats easier. the coordinates start from -1 in the bottom left
+	corner and go up to whatever in the top right corner.
+	the 'type' variable is set as whatever the symbol is on the map, except
+	for whitespace, thats saved as '-'.
+	variables bottom_l etc are for naviating the map more easily so you dont
+	have to think about where the barrier starts and stuff
 
-the negative space thats inbetween walls and stuff is part of the map 
+	the negative space thats inbetween walls and stuff is part of the map 
 */

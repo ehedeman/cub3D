@@ -12,7 +12,7 @@
 
 #include "../includes/cub3D.h"
 
-int close_window(t_game *game)
+int	close_window(t_game *game)
 {
 	print_error("Window closed\n", game, 0);
 	return (0);
@@ -49,8 +49,10 @@ void	ft_set_player_location(t_game *game)
 				game->player.current = &game->map.coords[i][j];
 				game->player.start_orientation = game->player.current->type;
 				ft_set_current_orientation(&game->player);
-				printf("Player Location: (%i|%i), %c, %i\n", game->player.current->x, \
-					game->player.current->y, game->player.start_orientation, game->player.current_orientation);
+				printf("Player Location: (%i|%i), %c, %i\n", \
+					game->player.current->x, game->player.current->y, \
+						game->player.start_orientation, \
+							game->player.current_orientation);
 				return ;
 			}
 		}
@@ -59,8 +61,6 @@ void	ft_set_player_location(t_game *game)
 
 int	ft_init_game(t_game *game)
 {
-	int	height = WALL_HEIGHT, width = WALL_WIDTH;
-
 	ft_set_player_location(game);
 	game->mlx.mlx = mlx_init();
 	if (!game->mlx.mlx)
@@ -73,12 +73,18 @@ int	ft_init_game(t_game *game)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
-	
-	game->mlx.test = mlx_xpm_file_to_image(game->mlx.mlx, WALL_XPM,
-			&width, &height);										//as the name suggests, for testing
-	if (!game->mlx.test)
-		print_error("Error\nImage allocation failed.\n", game, 1);
-	// mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
-	// 		game->mlx.test, 1200, 800);
 	return (0);
 }
+
+	// for testing of images and shit
+	// int	height;
+	// int	width;
+
+	// height = WALL_HEIGHT;
+	// width = WALL_WIDTH;
+	// game->mlx.test = mlx_xpm_file_to_image(game->mlx.mlx, WALL_XPM,
+	// 		&width, &height);
+	// if (!game->mlx.test)
+	// 	print_error("Error\nImage allocation failed.\n", game, 1);
+	// mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
+	// 		game->mlx.test, 1200, 800);

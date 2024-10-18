@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_save_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:49:30 by svalchuk          #+#    #+#             */
-/*   Updated: 2024/10/17 17:00:18 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:31:27 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@ static void	ft_assign_param(t_game *game, int *i, int flag);
 static void	ft_assign_texture(t_game *game, const char *param, const char *i);
 static void	ft_assign_color(t_game *game, const char *param, const char *i);
 static void	ft_parse_rgb(const char *str, int *r, int *g, int *b);
-
-bool ft_check_args(t_game *game)
-{
-	if (!game->walls.north || !game->walls.south || !game->walls.east
-		|| !game->walls.west)
-		return (true);
-	return (false);
-}
 
 bool	ft_save_args(t_game *game)
 {

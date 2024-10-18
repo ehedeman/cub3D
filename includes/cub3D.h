@@ -26,10 +26,12 @@
 # define SOUTH_TEXTURE "../textures/south.xpm"
 # define WEST_TEXTURE "../textures/west.xpm"
 # define EAST_TEXTURE "../textures/east.xpm"
-# define TEST_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/test.xpm"
+# define TEST_XPM \
+	"/home/ehedeman/Documents/_current_projects/cub3d/textures/test.xpm"
 # define TEST_HEIGHT 138
 # define TEST_WIDTH 152
-# define WALL_XPM "/home/ehedeman/Documents/_current_projects/cub3d/textures/wall.xpm"
+# define WALL_XPM \
+	"/home/ehedeman/Documents/_current_projects/cub3d/textures/wall.xpm"
 # define WALL_HEIGHT 512
 # define WALL_WIDTH 512
 # define XK_ESCAPE 65307

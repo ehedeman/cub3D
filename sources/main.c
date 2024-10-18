@@ -14,7 +14,7 @@
 
 static int	ft_check_extension(const char *argv);
 
-void ft_print_params(t_game *game)
+void	ft_print_params(t_game *game)
 {
 	printf(GREEN"\nNorth Wall: %s\n", game->walls.north);
 	printf("South Wall: %s\n", game->walls.south);
@@ -24,7 +24,7 @@ void ft_print_params(t_game *game)
 	printf("Ceiling Color: %i %i %i\n"RESET"\n", game->walls.ceiling.r, game->walls.ceiling.g, game->walls.ceiling.b);
 }
 
-void	print_all(t_game *game)
+void	ft_print_all(t_game *game)
 {
 	int j, i = 0;
 	while (i <= game->map.allocated_rows - 2)
@@ -46,7 +46,7 @@ void	print_all(t_game *game)
 		i++;
 	}
 }
-void	print_playable_field(t_game *game)
+void	ft_print_playable_field(t_game *game)
 {
 	int j, i = 0;
 	while (i <= game->map.allocated_rows - 2)
@@ -70,6 +70,7 @@ void	print_playable_field(t_game *game)
 	}
 }
 
+//just for testing purposes
 void ft_print_map(t_game *game)
 {
 	int i = 0;
@@ -85,7 +86,7 @@ void ft_print_map(t_game *game)
 		printf("\n");
 		i++;
 	}
-	print_playable_field(game);
+	ft_print_playable_field(game);
 	i = 0;
 	printf("\n");
 	printf("Point Zero: C(%i | %i)\n\n", game->map.point_zero->x, game->map.point_zero->y);
@@ -96,6 +97,8 @@ void ft_print_map(t_game *game)
 	ft_print_params(game);
 }
 
+// dont know if freeing the map at the end is nessecary, maybe if the game doesnt end via
+// ESC or the x on the window but else idk because it exits because it gets there (i think)
 int main(int argc, char **argv)
 {
 	t_game	game;
@@ -108,13 +111,13 @@ int main(int argc, char **argv)
 		printf("Wrong file extension!\n");
 		exit(1);
 	}
-	ft_map_parsing(argv[1], &game); //doesnt need if and exit because the error print fucntion exits
+	ft_map_parsing(argv[1], &game);
 	// if (argc == 2 && ft_check_extension(argv[1]))
 	// {
-	ft_print_map(&game);	//just for testing purposes
+	ft_print_map(&game);
 	ft_init_game(&game);
 	mlx_loop(game.mlx.mlx);
-	ft_free_map(&game, 0);	//0 is the return value to save lines (you can put the function into return statement that way)//not sure if this is even nessecary tbh
+	ft_free_map(&game, 0);
 	return (0);
 }
 

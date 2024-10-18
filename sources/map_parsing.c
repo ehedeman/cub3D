@@ -12,6 +12,8 @@
 
 #include "../includes/cub3D.h"
 
+	// if (ft_check_map_format())
+	// 	printf("something\n");
 int	ft_map_parsing(char *file_name, t_game *game)
 {
 	int	fd;
@@ -22,12 +24,10 @@ int	ft_map_parsing(char *file_name, t_game *game)
 	else if (fd)
 	{
 		if (ft_read_map(fd, game, 1))
-			print_error("something went wrong.\n", game, 1);
+			print_error("Error\nFailed to read file.\n", game, 1);
 	}
-	// if (ft_check_map_format())
-	// 	printf("something\n");
 	if (!ft_save_args(game))
-		printf("something went wrong\n"); //change later
+		print_error("Error\nInvalid map args.\n", game, 1);
 	ft_save_map(game);
 	ft_map_check(game);
 	return (0);
