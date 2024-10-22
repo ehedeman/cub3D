@@ -21,27 +21,24 @@
 # include "functions.h"
 # include "formatting.h"
 
-//there's no such textures at the moment ofc
-# define NORTH_TEXTURE "../textures/north.xpm"
-# define SOUTH_TEXTURE "../textures/south.xpm"
-# define WEST_TEXTURE "../textures/west.xpm"
-# define EAST_TEXTURE "../textures/east.xpm"
-# define TEST_XPM \
-	"/home/ehedeman/Documents/_current_projects/cub3d/textures/test.xpm"
+# define TEXTURE_NORTH	"../textures/north.xpm"
+# define TEXTURE_SOUTH	"../textures/south.xpm"
+# define TEXTURE_WEST	"../textures/west.xpm"
+# define TEXTURE_EAST	"../textures/east.xpm"
+
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+
+# define TEST_XPM "../textures/test.xpm"
 # define TEST_HEIGHT 138
 # define TEST_WIDTH 152
-# define WALL_XPM \
-	"/home/ehedeman/Documents/_current_projects/cub3d/textures/wall.xpm"
+# define WALL_XPM "../textures/wall.xpm"
 # define WALL_HEIGHT 512
 # define WALL_WIDTH 512
-# define XK_ESCAPE 65307
-# define A_KEY 97
-# define D_KEY 100
-# define W_KEY 119
-# define S_KEY 115
-# define LEFT_ARROW 65361
-# define RIGHT_ARROW 65363
-// # define UP_ARROW 65362
-// # define DOWN_ARROW 65364
 
 #endif

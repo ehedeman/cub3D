@@ -15,6 +15,7 @@
 int	close_window(t_game *game)
 {
 	print_error("Window closed\n", game, 0);
+	exit(0);
 	return (0);
 }
 
@@ -69,7 +70,11 @@ int	ft_init_game(t_game *game)
 		game->mlx.win_height, "cub3D");
 	if (!game->mlx.mlx_window)
 		print_error("Error\nGame allocation failed.\n", game, 1);
-	if (mlx_hook(game->mlx.mlx_window, 2, 1L << 0, key_handler, game) == 0)
+	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
+		print_error("Error\nGame allocation failed\n", game, 1);
+	if (mlx_key_hook(game->mlx.mlx_window, key_handler, game) == 0)
+		print_error("Error\nGame allocation failed\n", game, 1);
+	/* if (mlx_hook(game->mlx.mlx_window, 2, 1L << 0, key_handler, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
@@ -80,7 +85,7 @@ int	ft_init_game(t_game *game)
 	if (!game->mlx.test)
 		print_error("Error\nImage allocation failed.\n", game, 1);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
-			game->mlx.test, 200, 200);
+			game->mlx.test, 200, 200); */
 	return (0);
 }
 
