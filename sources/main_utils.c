@@ -32,9 +32,5 @@ void	ft_set_zero(t_game *game)
 	game->player.next = NULL;
 	game->player.mlx = NULL;
 	game->player.current_orientation = '\0';
-	game->mlx.mlx = NULL;
-	game->mlx.mlx_window = NULL;
-	game->mlx.win_height = 1000;
-	game->mlx.win_width = 2000;
 	game->game_end = 0;
 }

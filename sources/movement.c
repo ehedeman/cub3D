@@ -65,13 +65,13 @@ void	ft_change_current_location(t_player *player, int direction, \
 
 void	ft_change_current_orientation(int key, t_player *player)
 {
-	if (key == RIGHT_ARROW && player->current_orientation == 3)
+	if (key == KEY_RIGHT && player->current_orientation == 3)
 		player->current_orientation = 0;
-	else if (key == LEFT_ARROW && player->current_orientation == 0)
+	else if (key == KEY_LEFT && player->current_orientation == 0)
 		player->current_orientation = 3;
-	else if (key == RIGHT_ARROW && player->current_orientation != 3)
+	else if (key == KEY_RIGHT && player->current_orientation != 3)
 		player->current_orientation++;
-	else if (key == LEFT_ARROW && player->current_orientation != 0)
+	else if (key == KEY_LEFT && player->current_orientation != 0)
 		player->current_orientation--;
 	printf("Current orientation: %i\n", player->current_orientation);
 }

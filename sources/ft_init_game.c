@@ -60,7 +60,41 @@ void	ft_set_player_location(t_game *game)
 	}
 }
 
+void ft_init_window(t_game *game);
+
 int	ft_init_game(t_game *game)
+{
+	ft_set_player_location(game);
+	ft_init_window(game);	 
+	mlx_hook(game->mlx.mlx_window, EVENT_DESTROY, MASK_KEY_PRESS, close_window, game);
+	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_PRESS, MASK_KEY_PRESS, key_press, game);
+	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_RELEASE, MASK_KEY_RELEASE, key_release, game);
+	// mlx_loop_hook(game->mlx.mlx, draw_loop, game);
+	mlx_loop(game->mlx.mlx);
+	return (0);
+}
+
+void ft_init_window(t_game *game)
+{
+	game->mlx.mlx = mlx_init();
+	if (!game->mlx.mlx)
+		print_error("Error\nGame allocation failed.\n", game, 1);
+	game->mlx.mlx_window = mlx_new_window(game->mlx.mlx, SCREEN_W, SCREEN_H, "cub3D");
+	if (!game->mlx.mlx_window)
+		print_error("Error\nGame allocation failed.\n", game, 1);
+	game->mlx.img = mlx_new_image(game->mlx.mlx, SCREEN_W, SCREEN_H);
+	if (!game->mlx.img)
+		print_error("Error\nGame allocation failed.\n", game, 1);
+}
+
+void draw_loop(t_game *game)
+{
+	(void)game;
+}
+
+
+
+/* int	ft_init_game(t_game *game)
 {
 	ft_set_player_location(game);
 	game->mlx.mlx = mlx_init();
@@ -74,7 +108,7 @@ int	ft_init_game(t_game *game)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_key_hook(game->mlx.mlx_window, key_handler, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
-	/* if (mlx_hook(game->mlx.mlx_window, 2, 1L << 0, key_handler, game) == 0)
+	if (mlx_hook(game->mlx.mlx_window, 2, 1L << 0, key_handler, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
@@ -85,9 +119,9 @@ int	ft_init_game(t_game *game)
 	if (!game->mlx.test)
 		print_error("Error\nImage allocation failed.\n", game, 1);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
-			game->mlx.test, 200, 200); */
+			game->mlx.test, 200, 200); 
 	return (0);
-}
+} */
 
 	// for testing of images and shit
 	// int	height;

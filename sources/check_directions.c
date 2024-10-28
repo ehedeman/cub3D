@@ -14,25 +14,25 @@
 
 int	ft_check_direction(int key, t_player *player)
 {
-	if ((key == W_KEY && player->current_orientation == WE) \
-		|| (key == A_KEY && player->current_orientation == NO) \
-		|| (key == S_KEY && player->current_orientation == EA) \
-		|| (key == D_KEY && player->current_orientation == SO))
+	if ((key == KEY_W && player->current_orientation == WE) \
+		|| (key == KEY_A && player->current_orientation == NO) \
+		|| (key == KEY_S && player->current_orientation == EA) \
+		|| (key == KEY_D && player->current_orientation == SO))
 		return (LEFT);
-	if ((key == S_KEY && player->current_orientation == WE) \
-		|| (key == D_KEY && player->current_orientation == NO) \
-		|| (key == W_KEY && player->current_orientation == EA) \
-		|| (key == A_KEY && player->current_orientation == SO))
+	if ((key == KEY_S && player->current_orientation == WE) \
+		|| (key == KEY_D && player->current_orientation == NO) \
+		|| (key == KEY_W && player->current_orientation == EA) \
+		|| (key == KEY_A && player->current_orientation == SO))
 		return (RIGHT);
-	if ((key == D_KEY && player->current_orientation == WE) \
-		|| (key == W_KEY && player->current_orientation == NO) \
-		|| (key == A_KEY && player->current_orientation == EA) \
-		|| (key == S_KEY && player->current_orientation == SO))
+	if ((key == KEY_D && player->current_orientation == WE) \
+		|| (key == KEY_W && player->current_orientation == NO) \
+		|| (key == KEY_A && player->current_orientation == EA) \
+		|| (key == KEY_S && player->current_orientation == SO))
 		return (BACKWARD);
-	if ((key == A_KEY && player->current_orientation == WE) \
-		|| (key == S_KEY && player->current_orientation == NO) \
-		|| (key == D_KEY && player->current_orientation == EA) \
-		|| (key == W_KEY && player->current_orientation == SO))
+	if ((key == KEY_A && player->current_orientation == WE) \
+		|| (key == KEY_S && player->current_orientation == NO) \
+		|| (key == KEY_D && player->current_orientation == EA) \
+		|| (key == KEY_W && player->current_orientation == SO))
 		return (FOREWARD);
 	return (0);
 }

@@ -116,7 +116,7 @@ int	main(int argc, char **argv)
 	// {
 	ft_print_map(&game);
 	ft_init_game(&game);
-	mlx_loop(game.mlx.mlx);
+	// mlx_loop(game.mlx.mlx);
 	ft_free_map(&game, 0);
 	return (0);
 }

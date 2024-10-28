@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/18 12:06:29 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/10/28 16:10:03 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,12 @@ typedef struct s_map
 	t_coordinates	**coords;
 }			t_map;
 
-// win_width set to 3000 by default at the moment
-// win_height set to 2000
 typedef struct s_mlx
 {
 	void		*mlx;
 	void		*mlx_window;
-	void		*test;
-	int			win_width;
-	int			win_height;
+	void		*img;
+	void		*addr;
 }				t_mlx;
 
 typedef struct s_game
