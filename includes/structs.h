@@ -6,7 +6,7 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/28 16:10:03 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:18:30 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_rgb
 }				t_rgb;
 
 // north = path to north wall texture etc
-typedef struct s_wall
+typedef struct s_textures
 {
 	char	*north;
 	char	*south;
@@ -84,7 +84,7 @@ typedef struct s_wall
 	char	*west;
 	t_rgb	floor;
 	t_rgb	ceiling;
-}				t_wall;
+}				t_textures;
 
 // content = contents of the map file
 // allocated_rows = amount of rows in the coords array
@@ -111,14 +111,14 @@ typedef struct s_mlx
 	void		*mlx;
 	void		*mlx_window;
 	void		*img;
-	void		*addr;
+	char		*addr;
 }				t_mlx;
 
 typedef struct s_game
 {
-	t_map		map;
-	t_wall		walls;
 	t_mlx		mlx;
+	t_textures	walls;
+	t_map		map;
 	t_player	player;
 	int			game_end;
 }				t_game;

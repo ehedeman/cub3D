@@ -6,7 +6,7 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:00:59 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/17 16:05:27 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:13:49 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,22 @@ char	*ft_strdup(const char *s1)
 	return (orig_b);
 }
 
-char *ft_strndup(const char *s, size_t n)
+char	*ft_strndup(const char *s, size_t n)
 {
-    char *dup;
-    size_t i;
+	char	*dup;
+	size_t	i;
 
-    dup = (char *)malloc(n + 1);
-    if (!dup)
-        return (NULL);
-    i = 0;
-    while (i < n && s[i])
-    {
-        dup[i] = s[i];
-        i++;
-    }
-    dup[i] = '\0';
-    return (dup);
+	dup = (char *)malloc(n + 1);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < n && s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
 
 //int	main(int argc, char **argv)

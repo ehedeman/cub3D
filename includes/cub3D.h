@@ -13,8 +13,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
 # include <stdbool.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
 # include "structs.h"
@@ -36,6 +38,8 @@
 
 # define MASK_KEY_PRESS 1L<<0
 # define MASK_KEY_RELEASE 1L<<1
+
+# define PI 3.14159265359
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
