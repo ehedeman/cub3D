@@ -66,9 +66,9 @@ int	ft_init_game(t_game *game)
 {
 	ft_set_player_location(game);
 	ft_init_window(game);	 
-	mlx_hook(game->mlx.mlx_window, EVENT_DESTROY, MASK_KEY_PRESS, close_window, game);
-	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_PRESS, MASK_KEY_PRESS, key_press, game);
-	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_RELEASE, MASK_KEY_RELEASE, key_release, game);
+	mlx_hook(game->mlx.mlx_window, EVENT_DESTROY, 1L<<0, close_window, game);
+	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_PRESS, 1L<<0, key_press, game);
+	// mlx_hook(game->mlx.mlx_window, EVENT_KEY_RELEASE, 1L<<1, key_release, game);
 	// mlx_loop_hook(game->mlx.mlx, draw_loop, game);
 	mlx_loop(game->mlx.mlx);
 	return (0);

@@ -1,5 +1,6 @@
-cub3D
-a.out
-*.a
+.vscode
+cub3d_bonus
+cub3d
 *.o
-mlx-test
+*/*.o
+mlx

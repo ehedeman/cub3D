@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include "../mlx_linux/mlx.h"
-# include "../libft/libft.h"
+# include "mlx/mlx.h"
+# include "libft/libft.h"
 # include "structs.h"
 # include "functions.h"
 # include "formatting.h"
