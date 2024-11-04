@@ -23,8 +23,10 @@
 # include "functions.h"
 # include "formatting.h"
 
-# define SCREEN_W 1920
-# define SCREEN_H 1080
+# define DEBUG 1
+
+# define SCREEN_W 1280
+# define SCREEN_H 720
 
 # define TEXTURE_RES    64
 # define TEXTURE_NORTH	"../textures/north.xpm"

@@ -39,8 +39,6 @@ int	ft_free_game(t_game *game)
 		mlx_destroy_image(game->mlx.mlx, game->mlx.img);
 	if (game->mlx.mlx_window)
 		mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_window);
-	if (game->player.mlx)
-		free(game->player.mlx);
 	if (game->mlx.mlx)
 		free(game->mlx.mlx);
 	return (0);

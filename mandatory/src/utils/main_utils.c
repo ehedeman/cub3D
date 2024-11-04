@@ -30,7 +30,6 @@ void	ft_set_zero(t_game *game)
 	game->walls.west = NULL;
 	game->player.current = NULL;
 	game->player.next = NULL;
-	game->player.mlx = NULL;
 	game->player.current_orientation = '\0';
 	game->game_end = 0;
 }

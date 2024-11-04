@@ -6,7 +6,7 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/30 15:18:30 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:49:33 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,20 @@ typedef struct s_player
 	t_coordinates	*next;
 	char			start_orientation;
 	int				current_orientation;
-	void			*mlx;
+
+	float x;
+    float y;
+    float angle;
+
+    bool key_up;
+    bool key_down;
+    bool key_left;
+    bool key_right;
+
+    bool left_rotate;
+    bool right_rotate;
 }				t_player;
+
 
 typedef struct s_rgb
 {
@@ -111,7 +123,10 @@ typedef struct s_mlx
 	void		*mlx;
 	void		*mlx_window;
 	void		*img;
-	char		*addr;
+	char		*data;
+	int 		bpp;
+	int 		ll;
+	int 		endian;
 }				t_mlx;
 
 typedef struct s_game
@@ -121,6 +136,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	int			game_end;
+	char		**test_map;
 }				t_game;
 
 #endif

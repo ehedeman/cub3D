@@ -6,7 +6,7 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/28 16:16:06 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:12:16 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			print_error(char *str, t_game *game, int mode);
 int				key_handler(int key, t_game *game);
 
 //ft_init_game.c
-int				ft_init_game(t_game *game);
+int				ft_game(t_game *game);
 
 //movement.c
 int				ft_check_for_walls(int direction, t_coordinates **coords, \
@@ -70,5 +70,11 @@ int				ft_check_direction(int key, t_player *player);
 
 //game_utils.c
 int				print_message(int mode, char *str);
+
+//DEBUG
+void	ft_print_params(t_game *game);
+void	ft_print_all(t_game *game);
+void	ft_print_playable_field(t_game *game);
+void ft_print_map(t_game *game);
 
 #endif
