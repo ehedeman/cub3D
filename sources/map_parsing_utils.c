@@ -34,8 +34,8 @@ int	ft_read_map(int fd, t_game *game, int bytes)
 		game->map.content = ft_strjoin(game->map.content, str);
 		if (!game->map.content)
 			return (1);
-		if (temp)
-			free(temp);
+		// if (temp)
+		// 	free(temp);
 	}
 	free(str);
 	return (0);

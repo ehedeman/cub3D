@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/11/04 15:57:12 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/11/04 16:16:39 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC				=	main.c					\
 					movement.c				\
 					check_directions.c		\
 					game_utils.c			\
-					ft_convert_map.c
+					ft_convert_map.c		\
+					player.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 

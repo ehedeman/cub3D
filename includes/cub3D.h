@@ -20,6 +20,7 @@
 # include "structs.h"
 # include "functions.h"
 # include "formatting.h"
+# include "game.h"
 
 //there's no such textures at the moment ofc
 # define NORTH_TEXTURE "../textures/north.xpm"

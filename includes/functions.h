@@ -6,13 +6,18 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 15:57:46 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:24:31 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 # include "structs.h"
+
+void init_player(t_player *player, t_map *map);
+int key_release(int keycode, t_player *player);
+int key_press(int keycode, t_player *player);
+void move_player(t_player *player);
 
 void	ft_convert_map(t_game *game, t_map *map, int i, int j);
 //freeing_stuff.c

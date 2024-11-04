@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 15:59:17 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:15:08 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,17 @@ typedef struct s_coordinates
 // start->orientation = N, S, W, E, might not need it
 typedef struct s_player
 {
-	t_coordinates	*current;
-	t_coordinates	*next;
-	char			start_orientation;
-	int				current_orientation;
+	float			x;
+	float			y;
+	float angle;
+
+	bool key_up;
+	bool key_down;
+	bool key_left;
+	bool key_right;
+
+	bool left_rotate;
+	bool right_rotate;
 }				t_player;
 
 typedef struct s_rgb
@@ -121,6 +128,13 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_player	player;
 	int			game_end;
+	void *win;
+	void *img;
+
+	char *data;
+	int bpp;
+	int size_line;
+	int endian;
 }				t_game;
 
 #endif

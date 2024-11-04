@@ -44,18 +44,18 @@ void	init_walls(t_wall *walls)
 	walls->west = NULL;
 }
 
-void	init_player(t_player *player)
-{
-	player->current = NULL;
-	player->next = NULL;
-	player->current_orientation = '\0';
-}
+// void	init_player(t_player *player)
+// {
+// 	player->current = NULL;
+// 	player->next = NULL;
+// 	player->current_orientation = '\0';
+// }
 
 void	init(t_game *game)
 {
 	init_mlx(&game->mlx);
 	init_map(&game->map);
 	init_walls(&game->walls);
-	init_player(&game->player);
+//	init_player(&game->player);
 	game->game_end = 0;
 }
