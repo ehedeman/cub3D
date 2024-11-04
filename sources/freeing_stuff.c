@@ -16,18 +16,17 @@ int	ft_free_map(t_game *game, int mode)
 {
 	int	i;
 
-	i = 0;
-	while (i <= game->map.allocated_rows - 1)
+	i = -1;
+	while (i++ < game->map.length)
 	{
-		if (game->map.coords[i])
-			free(game->map.coords[i]);
-		i++;
+		if (game->map.coordinates[i])
+			free(game->map.coordinates[i]);
 	}
-	if (game->map.coords)
-		free(game->map.coords);
+	if (game->map.coordinates)
+		free(game->map.coordinates);
 	free(game->map.content);
-	game->map.coords = NULL;
 	game->map.content = NULL;
+	game->map.coordinates = NULL;
 	return (mode);
 }
 // mode = 1 for the error_return, 0 for normal free so
@@ -35,12 +34,8 @@ int	ft_free_map(t_game *game, int mode)
 
 int	ft_free_game(t_game *game)
 {
-	if (game->mlx.test)
-		mlx_destroy_image(game->mlx.mlx, game->mlx.test);
 	if (game->mlx.mlx_window)
 		mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_window);
-	if (game->player.mlx)
-		free(game->player.mlx);
 	if (game->mlx.mlx)
 		free(game->mlx.mlx);
 	return (0);

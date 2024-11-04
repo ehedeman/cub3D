@@ -30,38 +30,38 @@ void	ft_set_current_orientation(t_player *player)
 		player->current_orientation = WE;
 }
 
-void	ft_set_player_location(t_game *game)
+void	ft_set_player_location(t_game *game, t_map *map)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	while (i++ < game->map.allocated_rows - 1)
+	int i = 0;
+	int j = 0;
+	while (i < map->length - 2)
 	{
-		j = -1;
-		while (j++ < game->map.map_length)
+		j = 0;
+		while (j < map->width)
 		{
-			if (game->map.coords[i][j].type == 'N' \
-				|| game->map.coords[i][j].type == 'S' \
-					|| game->map.coords[i][j].type == 'W' \
-						|| game->map.coords[i][j].type == 'E')
+			if (map->coordinates[i][j].type == 'N' \
+				|| map->coordinates[i][j].type == 'S' \
+					|| map->coordinates[i][j].type == 'W' \
+						|| map->coordinates[i][j].type == 'E')
 			{
-				game->player.current = &game->map.coords[i][j];
+				game->player.current = &map->coordinates[i][j];
 				game->player.start_orientation = game->player.current->type;
 				ft_set_current_orientation(&game->player);
-				printf("Player Location: (%i|%i), %c, %i\n", \
+				printf("Player Location: (%f|%f), %c, %i\n", \
 					game->player.current->x, game->player.current->y, \
 						game->player.start_orientation, \
 							game->player.current_orientation);
 				return ;
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
 int	ft_init_game(t_game *game)
 {
-	ft_set_player_location(game);
+	ft_set_player_location(game, &game->map);
 	game->mlx.mlx = mlx_init();
 	if (!game->mlx.mlx)
 		print_error("Error\nGame allocation failed.\n", game, 1);
@@ -73,26 +73,5 @@ int	ft_init_game(t_game *game)
 		print_error("Error\nGame allocation failed\n", game, 1);
 	if (mlx_hook(game->mlx.mlx_window, 17, 1L << 0, close_window, game) == 0)
 		print_error("Error\nGame allocation failed\n", game, 1);
-	int height = WALL_HEIGHT;
-	int width = WALL_WIDTH;
-	game->mlx.test = mlx_xpm_file_to_image(game->mlx.mlx, WALL_XPM,
-			&width, &height);
-	if (!game->mlx.test)
-		print_error("Error\nImage allocation failed.\n", game, 1);
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
-			game->mlx.test, 200, 200);
 	return (0);
 }
-
-	// for testing of images and shit
-	// int	height;
-	// int	width;
-
-	// height = WALL_HEIGHT;
-	// width = WALL_WIDTH;
-	// game->mlx.test = mlx_xpm_file_to_image(game->mlx.mlx, WALL_XPM,
-	// 		&width, &height);
-	// if (!game->mlx.test)
-	// 	print_error("Error\nImage allocation failed.\n", game, 1);
-	// mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_window, \
-	// 		game->mlx.test, 1200, 800);

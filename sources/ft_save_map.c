@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:10:12 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/18 12:10:14 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:59:17 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 	while (game->map.content[i])
 	{
 		x = 0;
-		if (y + 1 == game->map.allocated_rows - 2)
+		if (y + 1 == game->map.length - 2)
 			ft_set_map_barrier(game, &game->map.content[i], y + 1);
 		ft_set_map_side_barrier(game, &x, &y);
 		ft_set_map_coords(game, &i, &x, &y);
-		while (x < game->map.map_length)
+		while (x < game->map.width)
 			ft_set_map_side_barrier(game, &x, &y);
 		game->map.coords[y][x].type = '\n';
 		y++;
@@ -97,15 +97,15 @@ static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 
 	i = -1;
 	game->map.top_l = &coords[1][1];
-	game->map.top_r = &coords[1][game->map.map_length - 2];
-	game->map.bottom_l = &coords[game->map.allocated_rows - 3][1];
+	game->map.top_r = &coords[1][game->map.width - 2];
+	game->map.bottom_l = &coords[game->map.length - 3][1];
 	game->map.bottom_r = \
-		&coords[game->map.allocated_rows - 3][game->map.map_length - 2];
+		&coords[game->map.length - 3][game->map.width - 2];
 	game->map.point_zero = game->map.bottom_l;
-	while (i++ < game->map.allocated_rows - 2)
+	while (i++ < game->map.length - 2)
 	{
 		j = -1;
-		while (j++ < game->map.map_length)
+		while (j++ < game->map.width)
 		{
 			if (coords[i][j].type == 'N' || coords[i][j].type == 'S'
 				|| coords[i][j].type == 'W' || coords[i][j].type == 'E')
@@ -137,7 +137,7 @@ int	ft_save_map(t_game *game)
 	ft_set_map_barrier(game, &game->map.content[i], y);
 	y++;
 	ft_set_map_barriers(game, i, y);
-	game->map.coords[game->map.allocated_rows - 1] = NULL;
+	game->map.coords[game->map.length - 1] = NULL;
 	ft_set_map_values(game, game->map.coords);
 	return (0);
 }

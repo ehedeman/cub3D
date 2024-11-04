@@ -13,28 +13,49 @@
 #include "../includes/cub3D.h"
 
 //everything set to zero or some other value for freeing purposes and stuff
-void	ft_set_zero(t_game *game)
+
+void	init_mlx(t_mlx *mlx)
 {
-	game->map.content = NULL;
-	game->map.coords = NULL;
-	game->map.map_length = 0;
-	game->map.top_l = NULL;
-	game->map.top_r = NULL;
-	game->map.bottom_l = NULL;
-	game->map.bottom_r = NULL;
-	game->map.point_zero = NULL;
-	game->map.player_start = NULL;
-	game->walls.north = NULL;
-	game->walls.south = NULL;
-	game->walls.east = NULL;
-	game->walls.west = NULL;
-	game->player.current = NULL;
-	game->player.next = NULL;
-	game->player.mlx = NULL;
-	game->player.current_orientation = '\0';
-	game->mlx.mlx = NULL;
-	game->mlx.mlx_window = NULL;
-	game->mlx.win_height = 1000;
-	game->mlx.win_width = 2000;
+	mlx->mlx = NULL;
+	mlx->mlx_window = NULL;
+	mlx->win_height = 1000;
+	mlx->win_width = 2000;
+}
+
+void	init_map(t_map *map)
+{
+	map->content = NULL;
+	map->coords = NULL;
+	map->coordinates = NULL;
+	map->width = 0;
+	map->length = 0;
+	map->top_l = NULL;
+	map->top_r = NULL;
+	map->bottom_l = NULL;
+	map->bottom_r = NULL;
+	map->point_zero = NULL;
+	map->player_start = NULL;
+}
+void	init_walls(t_wall *walls)
+{
+	walls->north = NULL;
+	walls->south = NULL;
+	walls->east = NULL;
+	walls->west = NULL;
+}
+
+void	init_player(t_player *player)
+{
+	player->current = NULL;
+	player->next = NULL;
+	player->current_orientation = '\0';
+}
+
+void	init(t_game *game)
+{
+	init_mlx(&game->mlx);
+	init_map(&game->map);
+	init_walls(&game->walls);
+	init_player(&game->player);
 	game->game_end = 0;
 }

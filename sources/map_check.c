@@ -20,7 +20,7 @@ static void	ft_check_coords(t_game *game, t_coordinates **coords, int i, int j)
 			&& coords[i - 1][j].type != '\n')
 			print_error("Error\nWall error\n", game, 1);
 	}
-	if (i < game->map.allocated_rows - 2)
+	if (i < game->map.length - 2)
 	{
 		if (coords[i + 1][j].type != '-' && coords[i + 1][j].type != '1'\
 			&& coords[i + 1][j].type != '\n')
@@ -44,10 +44,10 @@ static void	ft_check_map_walls(t_game *game, t_coordinates **coords)
 	int	j;
 
 	i = 0;
-	while (i < game->map.allocated_rows - 1)
+	while (i < game->map.length - 1)
 	{
 		j = 0;
-		while (j < game->map.map_length)
+		while (j < game->map.width)
 		{
 			if (coords[i][j].type == '-')
 				ft_check_coords(game, coords, i, j);
@@ -65,10 +65,10 @@ static void	ft_check_player_symbol(t_game *game, t_coordinates **coords)
 
 	i = 0;
 	player = 0;
-	while (i < game->map.allocated_rows - 2)
+	while (i < game->map.length - 2)
 	{
 		j = -1;
-		while (j++ < game->map.map_length)
+		while (j++ < game->map.width)
 		{
 			if (coords[i][j].type == 'N' || coords[i][j].type == 'S'
 				|| coords[i][j].type == 'E' || coords[i][j].type == 'W')
@@ -88,10 +88,10 @@ static void	ft_check_wrong_symbols(t_game *game, t_coordinates **coords)
 	int	j;
 
 	i = -1;
-	while (i++ < game->map.allocated_rows - 2)
+	while (i++ < game->map.length - 2)
 	{
 		j = -1;
-		while (j++ < game->map.map_length)
+		while (j++ < game->map.width)
 		{
 			if (ft_is_map_char(coords[i][j].type) && coords[i][j].type != '-'
 				&& coords[i][j].type != '\n')

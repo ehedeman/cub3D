@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:33:17 by ******            #+#    #+#             */
-/*   Updated: 2024/10/18 11:55:53 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:59:17 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_set_null(t_coordinates **new, t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < game->map.allocated_rows)
+	while (i < game->map.length)
 	{
 		new[i] = NULL;
 		i++;
@@ -52,7 +52,7 @@ t_coordinates	**ft_allocate_coords(t_game *game, int i)
 	new = malloc(sizeof(t_coordinates *) * (count + 3));
 	if (!new)
 		return (NULL);
-	game->map.allocated_rows = count + 3;
+	game->map.length = count + 3;
 	ft_set_null(new, game);
 	return (new);
 }
@@ -63,12 +63,12 @@ int	ft_allocate_map_rows(t_game *game)
 
 	j = 0;
 	game->map.coords[j] = malloc(sizeof(t_coordinates) * \
-		(game->map.map_length + 2));
+		(game->map.width + 2));
 	j++;
-	while (j < game->map.allocated_rows - 1)
+	while (j < game->map.length - 1)
 	{
 		game->map.coords[j] = malloc(sizeof(t_coordinates) * \
-			(game->map.map_length + 3));
+			(game->map.width + 3));
 		if (!game->map.coords[j])
 			return (1);
 		j++;

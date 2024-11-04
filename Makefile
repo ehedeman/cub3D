@@ -6,21 +6,21 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/10/18 13:16:12 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/11/04 15:57:12 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	cub3D
 
 CC				=	cc 
-CFLAGS			=	-Werror -Wall -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS			=	-Werror -Wall -Wextra -g -fsanitize=address -fno-omit-frame-pointer
 
 INC 			= 	-I ./includes			\
 					-I ./libft				\
 					-I ./mlx_linux
 #sources stuff
 SRC				=	main.c					\
-					main_utils.c			\
+					init.c					\
 					freeing_stuff.c			\
 					map_parsing.c			\
 					map_parsing_utils.c		\
@@ -35,7 +35,8 @@ SRC				=	main.c					\
 					ft_init_game.c			\
 					movement.c				\
 					check_directions.c		\
-					game_utils.c
+					game_utils.c			\
+					ft_convert_map.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 

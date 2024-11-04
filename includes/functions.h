@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/10/18 11:58:11 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:57:46 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FUNCTIONS_H
 # include "structs.h"
 
+void	ft_convert_map(t_game *game, t_map *map, int i, int j);
 //freeing_stuff.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
@@ -30,8 +31,8 @@ bool			ft_check_args(t_game *game);
 int				ft_read_map(int fd, t_game *game, int bytes);
 int				ft_is_whitespace(char c);
 
-//main_utils.c
-void			ft_set_zero(t_game *game);
+//init.c
+void			init(t_game *game);
 
 //ft_save_map_utils.c
 void			ft_set_map_side_barrier(t_game *game, int *x, int *y);
@@ -59,11 +60,11 @@ int				key_handler(int key, t_game *game);
 int				ft_init_game(t_game *game);
 
 //movement.c
-int				ft_check_for_walls(int direction, t_coordinates **coords, \
-			t_player *player);
-void			ft_change_current_location(t_player *player, int direction, \
-			t_coordinates **coords);
-void			ft_change_current_orientation(int key, t_player *player);
+// int				ft_check_for_walls(int direction, t_coordinates **coords, \
+// 			t_player *player);
+// void			ft_change_current_location(t_player *player, int direction, \
+// 			t_coordinates **coords);
+// void			ft_change_current_orientation(int key, t_player *player);
 
 //check_directions.c
 int				ft_check_direction(int key, t_player *player);
