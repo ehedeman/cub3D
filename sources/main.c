@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:08:05 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:31:08 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:42:25 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,6 @@ int main(int argc, char **argv)
 	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
 	// draw loop
 	mlx_loop_hook(game.mlx.mlx, draw_loop, &game);
-
 	mlx_loop(game.mlx.mlx);
 	ft_free_map(&game, 0);
 	ft_free_game(&game);

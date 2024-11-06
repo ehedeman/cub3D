@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:30:29 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:45:07 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,12 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 		x = player->x - sin_angle * speed;
 		y = player->y + cos_angle * speed;
 	}
-	x /= BLOCK;
-	y /= BLOCK;
-	printf("New Coordinates should be (y | x): %i | %i\n", y, x);
-	if (x < map->width && y < map->length)
-		printf("Which is well within bounds.\nBounds being length: %i and height: %i\n", map->length, map->width);
-	else
-		printf("Which is outside the map.\n");
-	if (map->coordinates[y][x] == '1')
+	if (map->coordinates[y / BLOCK][x / BLOCK] == '1')
 		return (1);
 	else
 		return (0);
 }
-//x < map->width && y < map->length && 
-//|| map->coordinates[y / BLOCK][x / BLOCK] == '-')
+
 void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
 	int	speed;
@@ -195,7 +187,6 @@ void move_player(t_player *player, t_map *map)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
-	map++;
 	move_player_up_down(player, sin_angle, cos_angle, map);
 	move_player_left_right(player, sin_angle, cos_angle, map);
 }
