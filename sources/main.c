@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:08:05 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 16:24:59 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:25:33 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,38 +71,39 @@ float fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
 }
 
 // touch function 
-bool touch(float px, float py, t_game *game)
+bool touch(float px, float py, char **map)
 {
 	int x = px / BLOCK;
 	int y = py / BLOCK;
-	if(game->map.coordinates[y][x].type == '1')
+	if(map[y][x] == '1')
 		return true;
 	return false;
 }
 
 // initialisation functions
-// char **get_map(void)
-// {
-// 	char **map = malloc(sizeof(char *) * 11);
-// 	map[0] = "111111111111111";
-// 	map[1] = "100000000000001";
-// 	map[2] = "100000000000001";
-// 	map[3] = "100000100000001";
-// 	map[4] = "100000000000001";
-// 	map[5] = "100000010000001";
-// 	map[6] = "100001000000001";
-// 	map[7] = "100000000000001";
-// 	map[8] = "100000000000001";
-// 	map[9] = "111111111111111";
-// 	map[10] = NULL;
-// 	return (map);
-// }
+char **get_map(void)
+{
+	char **map = malloc(sizeof(char *) * 11);
+	map[0] = "111111111111111";
+	map[1] = "100000000000001";
+	map[2] = "100000000000001";
+	map[3] = "100000100000001";
+	map[4] = "100000000000001";
+	map[5] = "100000010000001";
+	map[6] = "100001000000001";
+	map[7] = "100000000000001";
+	map[8] = "100000000000001";
+	map[9] = "111111111111111";
+	map[10] = NULL;
+	return (map);
+}
 
 void init_game(t_game *game)
 {
 	ft_map_parsing(game->map.content, game);
-	ft_convert_map(game, &game->map, -1, -1);
+	ft_convert_map(game, &game->map, 0);
 	init_player(&game->player, &game->map);
+	game->map_array = get_map();
 	game->mlx.mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx.mlx, WIDTH, HEIGHT, "Game");
 	game->img = mlx_new_image(game->mlx.mlx, WIDTH, HEIGHT);
@@ -118,7 +119,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float ray_x = player->x;
 	float ray_y = player->y;
 
-	while(!touch(ray_x, ray_y, game))
+	while(!touch(ray_x, ray_y, game->map_array))
 	{
 		if(DEBUG)
 			put_pixel(ray_x, ray_y, 0xFF0000, game);
@@ -142,7 +143,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 int draw_loop(t_game *game)
 {
 	t_player *player = &game->player;
-	move_player(player);
+	move_player(player, &game->map);
 	clear_image(game);
 	if(DEBUG)
 	{
@@ -173,6 +174,25 @@ static int	ft_check_extension(const char *argv)
 	return (0);
 }
 
+void ft_print_map(t_map *map)
+{
+	int	i = 0;
+	int	j = 0;
+
+	while (i < map->length)
+	{
+		j = 0;
+		while (map->coordinates[i][j].type)
+		{
+			printf("%c", map->coordinates[i][j].type);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	printf("%p\n", map->coordinates[i]);
+}
+
 int main(int argc, char **argv)
 {
 	t_game game;
@@ -186,17 +206,18 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	game.map.content = argv[1];
-	//ft_print_map(&game);
 	// ft_init_game(&game);
 //------------------------------------------------------//
 	init_game(&game);
+	ft_print_map(&game.map);
 	// hooks
-	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
+	mlx_hook(game.win, 2, 1L<<0, key_press, &game);
 	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
 	// draw loop
 	mlx_loop_hook(game.mlx.mlx, draw_loop, &game);
 
 	mlx_loop(game.mlx.mlx);
 	ft_free_map(&game, 0);
+	ft_free_game(&game);
 	return 0;
 }
