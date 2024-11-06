@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:45:07 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:20:56 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,7 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 	}
 	if (map->coordinates[y / BLOCK][x / BLOCK] == '1')
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:08:05 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:42:25 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:23:57 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		}
 	}
 }
+int	close_window(t_game *game)
+{
+	print_error("Window closed\n", game, 0);
+	return (0);
+}
 
 int draw_loop(t_game *game)
 {
@@ -188,8 +193,6 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	game.map.content = argv[1];
-	// ft_init_game(&game);
-//------------------------------------------------------//
 	init_game(&game);
 	ft_print_map(&game.map);
 	// hooks

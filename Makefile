@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/11/04 16:16:39 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/11/06 15:24:43 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,6 @@ SRC				=	main.c					\
 					ft_allocate_coords.c	\
 					map_check.c				\
 					errors.c				\
-					key_handling.c			\
-					ft_init_game.c			\
-					movement.c				\
-					check_directions.c		\
 					game_utils.c			\
 					ft_convert_map.c		\
 					player.c
