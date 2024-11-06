@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:55 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:30:29 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void init_player(t_player *player, t_map *map)
 	// player->start.y = 1;
 	player->x = (WIDTH / map->width) * player->start.x;
 	player->y = (HEIGHT / map->length) * player->start.y;// is ok
-	printf("%f | %f\n", player->y, player->x);
+	printf("Current player Coordinates in float (y | x): %f | %f\n", player->y, player->x);
 	player->angle = PI / 2;
 
 	player->key_up = false;
@@ -120,7 +120,11 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 	}
 	x /= BLOCK;
 	y /= BLOCK;
-	printf("%i | %i\n", y, x);
+	printf("New Coordinates should be (y | x): %i | %i\n", y, x);
+	if (x < map->width && y < map->length)
+		printf("Which is well within bounds.\nBounds being length: %i and height: %i\n", map->length, map->width);
+	else
+		printf("Which is outside the map.\n");
 	if (map->coordinates[y][x] == '1')
 		return (1);
 	else
