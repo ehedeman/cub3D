@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:41:29 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 14:27:53 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:17:12 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	ft_convert_map(t_game *game, t_map *map, int i)
 
 	y = 0;
 	printf("Old map width and height (y | x): %i, %i\n", map->length, map->width);
-	map->coordinates = malloc(sizeof(t_coordinates *) * map->length - 2);
+	map->coordinates = malloc(sizeof(char *) * map->length - 2);
 	if (!map->coordinates)
 		print_error("Error: Failed to allocate cooordinates array.\n", game, 1);
 	while (i++ < map->length - 3)
 	{
-		map->coordinates[y] = malloc(sizeof(t_coordinates) * map->width - 2);
+		map->coordinates[y] = malloc(sizeof(char) * map->width - 1);
 		if (!map->coordinates[y])
 			print_error("Error: Failed to allocate cooordinates array.\n", game, 1);
 		 ft_set_vars(map, y, i);
