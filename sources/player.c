@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 13:28:10 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:19:55 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 void	ft_set_player_location(t_map *map, t_player *player)
 {
 	int i = 0;
-	int j = 0;
+	int j;
 	while (i < map->length)
 	{
 		j = 0;
 		while (j < map->width)
 		{
-			if (map->coordinates[i][j].type == 'N' \
-				|| map->coordinates[i][j].type == 'S' \
-					|| map->coordinates[i][j].type == 'W' \
-						|| map->coordinates[i][j].type == 'E')
+			if (map->coordinates[i][j] == 'N' \
+				|| map->coordinates[i][j] == 'S' \
+					|| map->coordinates[i][j] == 'W' \
+						|| map->coordinates[i][j] == 'E')
 			{
-				player->start.x = map->coordinates[i][j].x;
-				player->start.y = map->coordinates[i][j].y;
-				player->start.type = map->coordinates[i][j].type;
+				player->start.x = j;
+				player->start.y = i;
+				player->start.type = map->coordinates[i][j];
 				return ;
 			}
 			j++;
@@ -40,8 +40,11 @@ void	ft_set_player_location(t_map *map, t_player *player)
 void init_player(t_player *player, t_map *map)
 {
 	ft_set_player_location(map, player);
+	// player->start.x = 1;
+	// player->start.y = 1;
 	player->x = (WIDTH / map->width) * player->start.x;
-	player->y = (HEIGHT / map->length) * player->start.y;
+	player->y = (HEIGHT / map->length) * player->start.y;// is ok
+	printf("%f | %f\n", player->y, player->x);
 	player->angle = PI / 2;
 
 	player->key_up = false;
@@ -115,16 +118,16 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 		x = player->x - sin_angle * speed;
 		y = player->y + cos_angle * speed;
 	}
-	printf("(%i | %i)\n", x, y);
-	map++;
-	// if (x < map->width && y < map->length && (map->coordinates[y][x].type == '1' || map->coordinates[y][x].type == '-'))
-	// 	return (0);
-	// else if (x > map->width || y > map->length)
-	// 	return (0);
-	// else
+	x /= BLOCK;
+	y /= BLOCK;
+	printf("%i | %i\n", y, x);
+	if (map->coordinates[y][x] == '1')
+		return (1);
+	else
 		return (0);
 }
-
+//x < map->width && y < map->length && 
+//|| map->coordinates[y / BLOCK][x / BLOCK] == '-')
 void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
 	int	speed;

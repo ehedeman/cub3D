@@ -17,11 +17,14 @@ int	ft_free_map(t_game *game, int mode)
 	int	i;
 
 	i = 0;
-	while (i < game->map.length)
+	if (game->map.coordinates)
 	{
-		if (game->map.coordinates[i])
-			free(game->map.coordinates[i]);
-		i++;
+		while (game->map.coordinates[i])
+		{
+			if (game->map.coordinates[i])
+				free(game->map.coordinates[i]);
+			i++;
+		}
 	}
 	if (game->map.coordinates)
 		free(game->map.coordinates);

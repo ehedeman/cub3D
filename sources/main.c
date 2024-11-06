@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:08:05 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 13:25:33 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:14:47 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 
 void draw_map(t_game *game)
 {
-	t_coordinates **map = game->map.coordinates;
+	char **map = game->map.coordinates;
 	int color = 0x0000FF;
 	for(int y = 0; map[y]; y++)
 		for(int x = 0; x < game->map.width; x++)
-			if(map[y][x].type == '1')
+			if(map[y][x] == '1')
 				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
 }
 
@@ -80,30 +80,12 @@ bool touch(float px, float py, char **map)
 	return false;
 }
 
-// initialisation functions
-char **get_map(void)
-{
-	char **map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100000000000001";
-	map[2] = "100000000000001";
-	map[3] = "100000100000001";
-	map[4] = "100000000000001";
-	map[5] = "100000010000001";
-	map[6] = "100001000000001";
-	map[7] = "100000000000001";
-	map[8] = "100000000000001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
-}
-
 void init_game(t_game *game)
 {
 	ft_map_parsing(game->map.content, game);
 	ft_convert_map(game, &game->map, 0);
 	init_player(&game->player, &game->map);
-	game->map_array = get_map();
+//	game->map_array = get_map();
 	game->mlx.mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx.mlx, WIDTH, HEIGHT, "Game");
 	game->img = mlx_new_image(game->mlx.mlx, WIDTH, HEIGHT);
@@ -119,7 +101,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float ray_x = player->x;
 	float ray_y = player->y;
 
-	while(!touch(ray_x, ray_y, game->map_array))
+	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
 		if(DEBUG)
 			put_pixel(ray_x, ray_y, 0xFF0000, game);
@@ -179,12 +161,12 @@ void ft_print_map(t_map *map)
 	int	i = 0;
 	int	j = 0;
 
-	while (i < map->length)
+	while (map->coordinates[i])
 	{
 		j = 0;
-		while (map->coordinates[i][j].type)
+		while (map->coordinates[i][j])
 		{
-			printf("%c", map->coordinates[i][j].type);
+			printf("%c", map->coordinates[i][j]);
 			j++;
 		}
 		printf("\n");
