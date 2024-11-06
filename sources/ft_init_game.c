@@ -34,7 +34,7 @@ int	close_window(t_game *game)
 // {
 // 	int i = 0;
 // 	int j = 0;
-// 	while (i < map->length - 2)
+// 	while (i < map->length)
 // 	{
 // 		j = 0;
 // 		while (j < map->width)
