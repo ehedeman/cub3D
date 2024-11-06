@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:41:29 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 15:59:17 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:27:53 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ static void	ft_set_vars(t_map *map, int y, int i)
 	x = 0;
 	while (j++ < map->width - 2)
 	{
-		map->coordinates[y][x].x = x;
-		map->coordinates[y][x].y = y;
-		map->coordinates[y][x].type = map->coords[i][j].type;
+		map->coordinates[y][x] = map->coords[i][j].type;
+		// map->coordinates[y][x].x = x;
+		// map->coordinates[y][x].y = y;
+		// map->coordinates[y][x].type = map->coords[i][j].type;
 		x++;
 	}
-	map->coordinates[y][x].x = x + 1;
-	map->coordinates[y][x].y = y + 1;
-	map->coordinates[y][x].type = '\n';
+	// map->coordinates[y][x].x = x + 1;
+	// map->coordinates[y][x].y = y + 1;
+	map->coordinates[y][x] = '\0';
 }
 
 static	void ft_free_coords(t_map *map)
@@ -47,26 +48,26 @@ static	void ft_free_coords(t_map *map)
 	map->coords = NULL;
 }
 
-void	ft_convert_map(t_game *game, t_map *map, int i, int j)
+void	ft_convert_map(t_game *game, t_map *map, int i)
 {
-	int	x;
 	int	y;
 
 	y = 0;
+	printf("Old map width and height (y | x): %i, %i\n", map->length, map->width);
 	map->coordinates = malloc(sizeof(t_coordinates *) * map->length - 2);
 	if (!map->coordinates)
 		print_error("Error: Failed to allocate cooordinates array.\n", game, 1);
-	while (i++ < map->length - 2)
+	while (i++ < map->length - 3)
 	{
-		x = 0;
-		j = -1;
-		map->coordinates[y] = malloc(sizeof(t_coordinates) * map->width + 1);
+		map->coordinates[y] = malloc(sizeof(t_coordinates) * map->width - 2);
 		if (!map->coordinates[y])
 			print_error("Error: Failed to allocate cooordinates array.\n", game, 1);
-		ft_set_vars(map, y, i);
+		 ft_set_vars(map, y, i);
 		y++;
 	}
+	map->coordinates[y] = NULL;
 	ft_free_coords(map);
 	map->width = map->width - 1;	//length including the '\n' at the end
 	map->length = map->length - 2; //allocated rows minus the top and bottom row from coords
+	printf("New Map Width and height (y | x): %i, %i\n", map->length, map->width);
 }

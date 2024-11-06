@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 16:24:31 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:16:23 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 void init_player(t_player *player, t_map *map);
 int key_release(int keycode, t_player *player);
-int key_press(int keycode, t_player *player);
-void move_player(t_player *player);
+int key_press(int keycode, t_game *game);
+void move_player(t_player *player, t_map *map);
 
-void	ft_convert_map(t_game *game, t_map *map, int i, int j);
+void	ft_convert_map(t_game *game, t_map *map, int i);
 //freeing_stuff.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);

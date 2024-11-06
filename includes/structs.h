@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 16:15:08 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:37:21 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct s_player
 {
 	float			x;
 	float			y;
-	float angle;
+	float 			angle;
 
+	t_coordinates	start;
 	bool key_up;
 	bool key_down;
 	bool key_left;
@@ -100,7 +101,7 @@ typedef struct s_map
 {
 	char			*content;
 	t_coordinates	**coords;		//for checking of map
-	t_coordinates	**coordinates;	//for actual game
+	char	**coordinates;	//for actual game
 	int				length;
 	int				width;
 	t_coordinates	*top_l;
@@ -135,6 +136,7 @@ typedef struct s_game
 	int bpp;
 	int size_line;
 	int endian;
+	char	**map_array;
 }				t_game;
 
 #endif
