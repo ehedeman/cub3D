@@ -1,7 +1,9 @@
 .vscode
 cub3d_bonus
 cub3d
+cub3D
 *.a
 *.o
 */*.o
 mlx
+mlx_linux/

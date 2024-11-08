@@ -16,13 +16,14 @@
 int	ft_read_map(int fd, t_game *game, int bytes)
 {
 	char	*str;
-	char	*temp;
 
-	str = malloc(sizeof(char) * (40 + 1));
-	if (!str)
-		return (1);
+	game->map.content = ft_calloc(1, 1);
+	str = NULL;
 	while (bytes)
 	{
+		str = malloc(sizeof(char) * (40 + 1));
+		if (!str)
+			return (1);
 		bytes = read(fd, str, 40);
 		if (bytes == -1)
 		{
@@ -30,14 +31,10 @@ int	ft_read_map(int fd, t_game *game, int bytes)
 			return (1);
 		}
 		str[bytes] = '\0';
-		temp = game->map.content;
-		game->map.content = ft_strjoin(game->map.content, str);
+		game->map.content = ft_strjoin_get(game->map.content, str);
 		if (!game->map.content)
 			return (1);
-		if (temp)
-			free(temp);
 	}
-	free(str);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/04 13:49:33 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:37:21 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,34 +51,27 @@ which is why i have two seperate variables cuz i was tired of calculating shit
 // t_coordinates dont need to be freed anywhere but in map.coords
 typedef struct s_coordinates
 {
-	int	x;
-	int	x_array;
-	int	y;
-	int	y_array;
-	int	type;
+	float	x;
+	float	y;
+	int		type;
 }			t_coordinates;
 
 // start->orientation = N, S, W, E, might not need it
 typedef struct s_player
 {
-	t_coordinates	*current;
-	t_coordinates	*next;
-	char			start_orientation;
-	int				current_orientation;
+	float			x;
+	float			y;
+	float 			angle;
 
-	float x;
-    float y;
-    float angle;
+	t_coordinates	start;
+	bool key_up;
+	bool key_down;
+	bool key_left;
+	bool key_right;
 
-    bool key_up;
-    bool key_down;
-    bool key_left;
-    bool key_right;
-
-    bool left_rotate;
-    bool right_rotate;
+	bool left_rotate;
+	bool right_rotate;
 }				t_player;
-
 
 typedef struct s_rgb
 {
@@ -88,7 +81,7 @@ typedef struct s_rgb
 }				t_rgb;
 
 // north = path to north wall texture etc
-typedef struct s_textures
+typedef struct s_wall
 {
 	char	*north;
 	char	*south;
@@ -96,47 +89,54 @@ typedef struct s_textures
 	char	*west;
 	t_rgb	floor;
 	t_rgb	ceiling;
-}				t_textures;
+}				t_wall;
 
 // content = contents of the map file
-// allocated_rows = amount of rows in the coords array
+// length = amount of rows in the coords array
 // -> (incl negative space and NULL row at end)
-// map_length = length of longest row
+// width = length of longest row
 // point_zero = bottom_l so it works like a normal coordinate system
 // coords = array of coordinates
 typedef struct s_map
 {
 	char			*content;
-	int				allocated_rows;
-	int				map_length;
+	t_coordinates	**coords;		//for checking of map
+	char	**coordinates;	//for actual game
+	int				length;
+	int				width;
 	t_coordinates	*top_l;
 	t_coordinates	*top_r;
 	t_coordinates	*bottom_l;
 	t_coordinates	*bottom_r;
 	t_coordinates	*point_zero;
 	t_coordinates	*player_start;
-	t_coordinates	**coords;
 }			t_map;
 
+// win_width set to 3000 by default at the moment
+// win_height set to 2000
 typedef struct s_mlx
 {
 	void		*mlx;
 	void		*mlx_window;
-	void		*img;
-	char		*data;
-	int 		bpp;
-	int 		ll;
-	int 		endian;
+	int			win_width;
+	int			win_height;
 }				t_mlx;
 
 typedef struct s_game
 {
-	t_mlx		mlx;
-	t_textures	walls;
 	t_map		map;
+	t_wall		walls;
+	t_mlx		mlx;
 	t_player	player;
 	int			game_end;
-	char		**test_map;
+	void *win;
+	void *img;
+
+	char *data;
+	int bpp;
+	int size_line;
+	int endian;
+	char	**map_array;
 }				t_game;
 
 #endif
