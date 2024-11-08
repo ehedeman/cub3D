@@ -6,7 +6,7 @@
 /*   By: svalchuk <svalchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/07 16:23:56 by svalchuk         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:27:31 by svalchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 	int	x;
 	int	y;
 
+	x = 0;
+	y = 0;
 	speed = 2;
 	if (player->key_up)
 	{

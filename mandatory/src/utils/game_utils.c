@@ -14,7 +14,8 @@
 
 int	print_message(int mode, char *str)
 {
-	while (*str)
-		write(mode, str++, 1);
+	printf("%s\n", str);
+	// while (*str)
+	// 	write(mode, str++, 1);
 	return (mode);
 }
