@@ -129,7 +129,7 @@ void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_m
 {
 	int	speed;
 
-	speed = 3;
+	speed = 2;
 	if (player->key_up)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
@@ -152,7 +152,7 @@ void	move_player_left_right(t_player *player, float sin_angle, float cos_angle, 
 {
 	int	speed;
 
-	speed = 3;
+	speed = 2;
 	if (player->key_left)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
