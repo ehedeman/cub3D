@@ -23,6 +23,15 @@ void move_player(t_player *player, t_map *map);
 //ft_convert_map.c
 void	ft_convert_map(t_game *game, t_map *map, int i);
 
+//player.c
+void init_player(t_player *player, t_map *map);
+int key_release(int keycode, t_player *player);
+int key_press(int keycode, t_game *game);
+void move_player(t_player *player, t_map *map);
+
+//ft_convert_map.c
+void	ft_convert_map(t_game *game, t_map *map, int i);
+
 //freeing_stuff.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
@@ -39,6 +48,8 @@ bool			ft_check_args(t_game *game);
 int				ft_read_map(int fd, t_game *game, int bytes);
 int				ft_is_whitespace(char c);
 
+//init.c
+void			init(t_game *game);
 //init.c
 void			init(t_game *game);
 

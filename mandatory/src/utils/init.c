@@ -12,37 +12,50 @@
 
 #include "../includes/cub3D.h"
 
-//might be leaking idk if i missed a case
-int	ft_read_map(int fd, t_game *game, int bytes)
-{
-	char	*str;
+//everything set to zero or some other value for freeing purposes and stuff
 
-	game->map.content = ft_calloc(1, 1);
-	str = NULL;
-	while (bytes)
-	{
-		str = malloc(sizeof(char) * (40 + 1));
-		if (!str)
-			return (1);
-		bytes = read(fd, str, 40);
-		if (bytes == -1)
-		{
-			free(str);
-			return (1);
-		}
-		str[bytes] = '\0';
-		game->map.content = ft_strjoin_free(game->map.content, str);
-		if (!game->map.content)
-			return (1);
-	}
-	return (0);
+void	init_mlx(t_mlx *mlx)
+{
+	mlx->mlx = NULL;
+	mlx->mlx_window = NULL;
+	mlx->win_height = 1000;
+	mlx->win_width = 2000;
 }
 
-//newline not included because newlines are important for subject
-int	ft_is_whitespace(char c)
+void	init_map(t_map *map)
 {
-	if (c == '\t' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ')
-		return (1);
-	return (0);
+	map->content = NULL;
+	map->coords = NULL;
+	map->coordinates = NULL;
+	map->width = 0;
+	map->length = 0;
+	map->top_l = NULL;
+	map->top_r = NULL;
+	map->bottom_l = NULL;
+	map->bottom_r = NULL;
+	map->point_zero = NULL;
+	map->player_start = NULL;
+}
+void	init_walls(t_wall *walls)
+{
+	walls->north = NULL;
+	walls->south = NULL;
+	walls->east = NULL;
+	walls->west = NULL;
+}
+
+// void	init_player(t_player *player)
+// {
+// 	player->current = NULL;
+// 	player->next = NULL;
+// 	player->current_orientation = '\0';
+// }
+
+void	init(t_game *game)
+{
+	init_mlx(&game->mlx);
+	init_map(&game->map);
+	init_walls(&game->walls);
+//	init_player(&game->player);
+	game->game_end = 0;
 }

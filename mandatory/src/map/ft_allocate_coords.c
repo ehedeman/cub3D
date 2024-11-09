@@ -19,6 +19,7 @@ static void	ft_set_null(t_coordinates **new, t_game *game)
 
 	i = 0;
 	while (i < game->map.length)
+	while (i < game->map.length)
 	{
 		new[i] = NULL;
 		i++;
@@ -53,6 +54,7 @@ t_coordinates	**ft_allocate_coords(t_game *game, int i)
 	if (!new)
 		return (NULL);
 	game->map.length = count + 3;
+	game->map.length = count + 3;
 	ft_set_null(new, game);
 	return (new);
 }
@@ -64,10 +66,13 @@ int	ft_allocate_map_rows(t_game *game)
 	j = 0;
 	game->map.coords[j] = malloc(sizeof(t_coordinates) * \
 		(game->map.width + 2));
+		(game->map.width + 2));
 	j++;
+	while (j < game->map.length - 1)
 	while (j < game->map.length - 1)
 	{
 		game->map.coords[j] = malloc(sizeof(t_coordinates) * \
+			(game->map.width + 3));
 			(game->map.width + 3));
 		if (!game->map.coords[j])
 			return (1);
