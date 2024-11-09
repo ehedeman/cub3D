@@ -14,8 +14,8 @@
 
 bool	ft_check_args(t_game *game)
 {
-	if (!game->walls.north || !game->walls.south || !game->walls.east
-		|| !game->walls.west)
+	if (!game->args.north || !game->args.south || !game->args.east
+		|| !game->args.west)
 		return (true);
 	return (false);
 }

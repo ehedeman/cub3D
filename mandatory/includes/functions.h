@@ -25,8 +25,8 @@ void	ft_convert_map(t_game *game, t_map *map, int i);
 
 //player.c
 void init_player(t_player *player, t_map *map);
-int key_release(int keycode, t_player *player);
-int key_press(int keycode, t_game *game);
+int ft_key_release(int keycode, t_player *player);
+int ft_key_press(int keycode, t_game *game);
 void move_player(t_player *player, t_map *map);
 
 //ft_convert_map.c
@@ -74,5 +74,12 @@ void			print_error(char *str, t_game *game, int mode);
 
 //game_utils.c
 int				print_message(int mode, char *str);
+
+
+void	ft_err_exit(char *str);
+
+void	ft_err_map(char *str, t_game *game);
+
+void	ft_err_game(char *str, t_game *game);
 
 #endif

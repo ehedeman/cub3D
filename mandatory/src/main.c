@@ -86,11 +86,11 @@ void init_game(t_game *game)
 	ft_convert_map(game, &game->map, 0);
 	init_player(&game->player, &game->map);
 //	game->map_array = get_map();
-	game->mlx.mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx.mlx, WIDTH, HEIGHT, "Game");
-	game->img = mlx_new_image(game->mlx.mlx, WIDTH, HEIGHT);
+	game->mlx.init = mlx_init();
+	game->mlx.window = mlx_new_window(game->mlx.init, WIDTH, HEIGHT, "Game");
+	game->img = mlx_new_image(game->mlx.init, WIDTH, HEIGHT);
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
-	mlx_put_image_to_window(game->mlx.mlx, game->win, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
 }
 
 // raycasting functions
@@ -146,19 +146,19 @@ int draw_loop(t_game *game)
 		start_x += fraction;
 		i++;
 	}
-	mlx_put_image_to_window(game->mlx.mlx, game->win, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
 	return 0;
 }
 
-static int	ft_check_extension(const char *argv)
-{
-	char	*ext;
+// static int	ft_check_extension(const char *argv)
+// {
+// 	char	*ext;
 
-	ext = ft_strrchr(argv, '.');
-	if (ext)
-		return (ft_strcmp(ext, ".cub") == 0);
-	return (0);
-}
+// 	ext = ft_strrchr(argv, '.');
+// 	if (ext)
+// 		return (ft_strcmp(ext, ".cub") == 0);
+// 	return (0);
+// }
 
 void ft_print_map(t_map *map)
 {
@@ -179,29 +179,29 @@ void ft_print_map(t_map *map)
 	printf("%p\n", map->coordinates[i]);
 }
 
-int main(int argc, char **argv)
-{
-	t_game game;
-	// init
-	init(&game);
-	if (argc != 2)
-		print_error("Error\nWrong number of arguments!\n", &game, 1);
-	if (!(ft_check_extension(argv[1])))
-	{
-		printf("Wrong file extension!\n");
-		exit(1);
-	}
-	game.map.content = argv[1];
-	init_game(&game);
-	ft_print_map(&game.map);
-	// hooks
-	mlx_hook(game.win, 2, 1L<<0, key_press, &game);
-	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
-	mlx_hook(game.win, 17, 1L<<0, close_window, &game);
-	// draw loop
-	mlx_loop_hook(game.mlx.mlx, draw_loop, &game);
-	mlx_loop(game.mlx.mlx);
-	ft_free_map(&game, 0);
-	ft_free_game(&game);
-	return 0;
-}
+// int main(int argc, char **argv)
+// {
+// 	t_game game;
+// 	// init
+// 	init(&game);
+// 	if (argc != 2)
+// 		print_error("Error\nWrong number of arguments!\n", &game, 1);
+// 	if (!(ft_check_extension(argv[1])))
+// 	{
+// 		printf("Wrong file extension!\n");
+// 		exit(1);
+// 	}
+// 	game.map.content = argv[1];
+// 	init_game(&game);
+// 	ft_print_map(&game.map);
+// 	// hooks
+// 	mlx_hook(game.mlx.window, EVENT_KEY_PRESS, MASK_KEY_PRESS, key_press, &game);
+// 	mlx_hook(game.mlx.window, EVENT_KEY_RELEASE, MASK_KEY_RELEASE, key_release, &game.player);
+// 	mlx_hook(game.mlx.window, EVENT_DESTROY, MASK_KEY_PRESS, close_window, &game);
+// 	// draw loop
+// 	mlx_loop_hook(game.mlx.init, draw_loop, &game);
+// 	mlx_loop(game.mlx.init);
+// 	ft_free_map(&game, 0);
+// 	ft_free_game(&game);
+// 	return 0;
+// }

@@ -12,50 +12,25 @@
 
 #include "../includes/cub3D.h"
 
-//everything set to zero or some other value for freeing purposes and stuff
+static int	ft_check_extension(const char *argv);
+void    ft_game(char *map_path);
 
-void	init_mlx(t_mlx *mlx)
+int main(int argc, char **argv)
 {
-	mlx->mlx = NULL;
-	mlx->mlx_window = NULL;
-	mlx->win_height = 1000;
-	mlx->win_width = 2000;
+    if (argc != 2)
+        ft_err_exit("Wrong number of arguments!\n");
+    if (!ft_check_extension(argv[1]))
+        ft_err_exit("Wrong file extension!\n");
+    ft_game(argv[1]);
+    return (0);
 }
 
-void	init_map(t_map *map)
+static int	ft_check_extension(const char *argv)
 {
-	map->content = NULL;
-	map->coords = NULL;
-	map->coordinates = NULL;
-	map->width = 0;
-	map->length = 0;
-	map->top_l = NULL;
-	map->top_r = NULL;
-	map->bottom_l = NULL;
-	map->bottom_r = NULL;
-	map->point_zero = NULL;
-	map->player_start = NULL;
-}
-void	init_walls(t_wall *walls)
-{
-	walls->north = NULL;
-	walls->south = NULL;
-	walls->east = NULL;
-	walls->west = NULL;
-}
+	char	*ext;
 
-// void	init_player(t_player *player)
-// {
-// 	player->current = NULL;
-// 	player->next = NULL;
-// 	player->current_orientation = '\0';
-// }
-
-void	init(t_game *game)
-{
-	init_mlx(&game->mlx);
-	init_map(&game->map);
-	init_walls(&game->walls);
-//	init_player(&game->player);
-	game->game_end = 0;
+	ext = ft_strrchr(argv, '.');
+	if (ext)
+		return (ft_strcmp(ext, ".cub") == 0);
+	return (0);
 }

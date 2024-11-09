@@ -81,7 +81,7 @@ typedef struct s_rgb
 }				t_rgb;
 
 // north = path to north wall texture etc
-typedef struct s_wall
+typedef struct s_args
 {
 	char	*north;
 	char	*south;
@@ -89,7 +89,7 @@ typedef struct s_wall
 	char	*west;
 	t_rgb	floor;
 	t_rgb	ceiling;
-}				t_wall;
+}				t_args;
 
 // content = contents of the map file
 // length = amount of rows in the coords array
@@ -118,27 +118,46 @@ typedef struct s_map
 // win_height set to 2000
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*mlx_window;
-	int			win_width;
-	int			win_height;
+	void		*init;
+	void		*window;
 }				t_mlx;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		endian;
+}			t_img;
+
+typedef struct s_tex
+{
+	t_img	*background;
+	t_img	*north;
+	t_img	*south;
+	t_img	*east;
+	t_img	*west;
+}			t_tex;
 
 typedef struct s_game
 {
-	t_map		map;
-	t_wall		walls;
 	t_mlx		mlx;
+	t_args		args;
+	t_map		map;
+	t_tex		walls;
 	t_player	player;
-	int			game_end;
-	void *win;
 	void *img;
 
 	char *data;
 	int bpp;
 	int size_line;
 	int endian;
-	char	**map_array;
+	t_img	*background;
+	t_img	*north;
+	t_img	*south;
+	t_img	*east;
+	t_img	*west;
 }				t_game;
 
 #endif

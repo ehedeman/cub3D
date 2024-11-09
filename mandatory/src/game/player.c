@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3D.h"
+#include "../includes/cub3D.h"
 
 void	ft_set_player_location(t_map *map, t_player *player)
 {
@@ -56,38 +56,38 @@ void init_player(t_player *player, t_map *map)
 	player->right_rotate = false;
 }
 
-int key_press(int keycode, t_game *game)
+int ft_key_press(int keycode, t_game *game)
 {
-	if(keycode == W)
+	if(keycode == KEY_W)
 		game->player.key_up = true;
-	if(keycode == S)
+	if(keycode == KEY_S)
 		game->player.key_down = true;
-	if(keycode == A)
+	if(keycode == KEY_A)
 		game->player.key_left = true;
-	if(keycode == D)
+	if(keycode == KEY_D)
 		game->player.key_right = true;
-	if(keycode == LEFT)
+	if(keycode == KEY_LEFT)
 		game->player.left_rotate = true;
-	if(keycode == RIGHT)
+	if(keycode == KEY_RIGHT)
 		game->player.right_rotate = true;
-	if (keycode == XK_ESCAPE)
+	if (keycode == KEY_ESC)
 		print_error("ESC pressed\nThanks for playing\n", game, 0);
 	return 0;
 }
 
-int key_release(int keycode, t_player *player)
+int ft_key_release(int keycode, t_player *player)
 {
-	if(keycode == W)
+	if(keycode == KEY_W)
 		player->key_up = false;
-	if(keycode == S)
+	if(keycode == KEY_S)
 		player->key_down = false;
-	if(keycode == A)
+	if(keycode == KEY_A)
 		player->key_left = false;
-	if(keycode == D)
+	if(keycode == KEY_D)
 		player->key_right = false;
-	if(keycode == LEFT)
+	if(keycode == KEY_LEFT)
 		player->left_rotate = false;
-	if(keycode == RIGHT)
+	if(keycode == KEY_RIGHT)
 		player->right_rotate = false;
 	return 0;
 }

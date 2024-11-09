@@ -74,13 +74,13 @@ static void	ft_assign_param(t_game *game, int *i, int flag)
 static void	ft_assign_texture(t_game *game, const char *param, const char *i)
 {
 	if (ft_strncmp(i, "NO ", 3) == 0)
-		game->walls.north = ft_strndup(param, strlen(param));
+		game->args.north = ft_strndup(param, strlen(param));
 	else if (ft_strncmp(i, "SO ", 3) == 0)
-		game->walls.south = ft_strndup(param, strlen(param));
+		game->args.south = ft_strndup(param, strlen(param));
 	else if (ft_strncmp(i, "WE ", 3) == 0)
-		game->walls.west = ft_strndup(param, strlen(param));
+		game->args.west = ft_strndup(param, strlen(param));
 	else if (ft_strncmp(i, "EA ", 3) == 0)
-		game->walls.east = ft_strndup(param, strlen(param));
+		game->args.east = ft_strndup(param, strlen(param));
 }
 
 static void	ft_assign_color(t_game *game, const char *param, const char *i)
@@ -95,15 +95,15 @@ static void	ft_assign_color(t_game *game, const char *param, const char *i)
 	ft_parse_rgb(param, &r, &g, &b);
 	if (ft_strncmp(i, "F ", 2) == 0)
 	{
-		game->walls.floor.r = r;
-		game->walls.floor.g = g;
-		game->walls.floor.b = b;
+		game->args.floor.r = r;
+		game->args.floor.g = g;
+		game->args.floor.b = b;
 	}
 	else if (ft_strncmp(i, "C ", 2) == 0)
 	{
-		game->walls.ceiling.r = r;
-		game->walls.ceiling.g = g;
-		game->walls.ceiling.b = b;
+		game->args.ceiling.r = r;
+		game->args.ceiling.g = g;
+		game->args.ceiling.b = b;
 	}
 }
 

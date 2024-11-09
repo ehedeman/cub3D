@@ -38,13 +38,13 @@ int	ft_free_map(t_game *game, int mode)
 
 int	ft_free_game(t_game *game)
 {
-	free(game->walls.north);
-	free(game->walls.south);
-	free(game->walls.east);
-	free(game->walls.west);
-	if (game->mlx.mlx_window)
-		mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_window);
-	if (game->mlx.mlx)
-		free(game->mlx.mlx);
+	free(game->args.north);
+	free(game->args.south);
+	free(game->args.east);
+	free(game->args.west);
+	if (game->mlx.window)
+		mlx_destroy_window(game->mlx.init, game->mlx.window);
+	if (game->mlx.init)
+		free(game->mlx.init);
 	return (0);
 }
