@@ -18,7 +18,15 @@ int	ft_map_parsing(char *file_name, t_game *game)
 {
 	int	fd;
 
-	fd = open(file_name, O_RDONLY);
+	// fd = open(file_name, O_RDONLY);
+	if (ft_strnstr(file_name, "maps/", 5))
+		fd = open(file_name, O_RDONLY);
+	else
+	{
+		file_name = ft_strjoin("maps/", file_name);
+		fd = open(file_name, O_RDONLY);
+		free(file_name);
+	}
 	if (fd == -1)
 		print_error("Error\nFailed to open file\n", game, 1);
 	else if (fd)

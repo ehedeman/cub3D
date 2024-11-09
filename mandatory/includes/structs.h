@@ -54,26 +54,11 @@ typedef struct s_coordinates
 	float	x;
 	float	y;
 	int		type;
-	float	x;
-	float	y;
-	int		type;
 }			t_coordinates;
 
 // start->orientation = N, S, W, E, might not need it
 typedef struct s_player
 {
-	float			x;
-	float			y;
-	float 			angle;
-
-	t_coordinates	start;
-	bool key_up;
-	bool key_down;
-	bool key_left;
-	bool key_right;
-
-	bool left_rotate;
-	bool right_rotate;
 	float			x;
 	float			y;
 	float 			angle;
@@ -121,10 +106,6 @@ typedef struct s_map
 	char	**coordinates;	//for actual game
 	int				length;
 	int				width;
-	t_coordinates	**coords;		//for checking of map
-	char	**coordinates;	//for actual game
-	int				length;
-	int				width;
 	t_coordinates	*top_l;
 	t_coordinates	*top_r;
 	t_coordinates	*bottom_l;
@@ -150,14 +131,6 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_player	player;
 	int			game_end;
-	void *win;
-	void *img;
-
-	char *data;
-	int bpp;
-	int size_line;
-	int endian;
-	char	**map_array;
 	void *win;
 	void *img;
 
