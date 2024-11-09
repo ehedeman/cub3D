@@ -7,3 +7,4 @@ cub3D
 */*.o
 mlx
 mlx_linux/
+reference/
