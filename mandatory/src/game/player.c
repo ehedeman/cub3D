@@ -26,6 +26,7 @@ void	ft_set_player_location(t_map *map, t_player *player)
 					|| map->coordinates[i][j] == 'W' \
 						|| map->coordinates[i][j] == 'E')
 			{
+				player->orientation = map->coordinates[i][j];
 				player->start.x = j;
 				player->start.y = i;
 				player->start.type = map->coordinates[i][j];
@@ -45,7 +46,14 @@ void init_player(t_player *player, t_map *map)
 	player->x = (WIDTH / map->width) * player->start.x;
 	player->y = (HEIGHT / map->length) * player->start.y;// is ok
 	printf("Current player Coordinates in float (y | x): %f | %f\n", player->y, player->x);
-	player->angle = PI / 2;
+	if (player->orientation == 'N')
+		player->angle = 3 * PI / 2;
+	else if (player->orientation == 'S')
+		player->angle = PI / 2;
+	else if (player->orientation == 'W')
+		player->angle = PI;
+	else if (player->orientation == 'E')
+		player->angle = 0;
 
 	player->key_up = false;
 	player->key_down = false;

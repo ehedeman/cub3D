@@ -106,11 +106,6 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		}
 	}
 }
-int	close_window(t_game *game)
-{
-	print_error("Window closed\n", game, 0);
-	return (0);
-}
 
 int draw_loop(t_game *game)
 {

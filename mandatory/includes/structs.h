@@ -13,22 +13,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef enum e_direction
-{
-	LEFT = 0,
-	RIGHT = 1,
-	FOREWARD = 2,
-	BACKWARD = 3,
-}			t_direction;
-
-typedef enum e_orientation
-{
-	NO = 0,
-	EA = 1,
-	SO = 2,
-	WE = 3,
-}			t_orientation;
-
 /*
 
 01234567
@@ -63,6 +47,7 @@ typedef struct s_player
 	float			y;
 	float 			angle;
 
+	char	orientation;
 	t_coordinates	start;
 	bool key_up;
 	bool key_down;
