@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <X11/X.h>
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
@@ -31,18 +32,10 @@
 # define HEIGHT 720
 # define BLOCK    64
 
-
 # define TEXTURE_NORTH	"../textures/north.xpm"
 # define TEXTURE_SOUTH	"../textures/south.xpm"
 # define TEXTURE_WEST	"../textures/west.xpm"
 # define TEXTURE_EAST	"../textures/east.xpm"
-
-# define EVENT_KEY_PRESS 2
-# define EVENT_KEY_RELEASE 3
-# define EVENT_DESTROY 17
-
-# define MASK_KEY_PRESS (1L<<0)
-# define MASK_KEY_RELEASE (1L<<1)
 
 # define PI 3.14159265359
 
@@ -54,11 +47,15 @@
 # define KEY_S 115
 # define KEY_D 100
 
-# define TEST_XPM "../textures/test.xpm"
+# define TEST_XPM "../assets/test.xpm"
 # define TEST_HEIGHT 138
 # define TEST_WIDTH 152
-# define WALL_XPM "../textures/wall.xpm"
+# define WALL_XPM "../assets/wall.xpm"
 # define WALL_HEIGHT 512
 # define WALL_WIDTH 512
+
+# ifndef BONUS
+#  define IS_BONUS 1
+# endif
 
 #endif
