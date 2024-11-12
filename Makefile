@@ -40,4 +40,7 @@ vs: bonus
 
 re: fclean all
 
+c:
+	clear
+
 .PHONY: all clean fclean re bonus v vs

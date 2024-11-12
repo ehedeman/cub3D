@@ -13,6 +13,15 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+enum e_side
+{
+	_s_null,
+	_s_north,
+	_s_south,
+	_s_west,
+	_s_east
+};
+
 /*
 
 01234567
@@ -138,6 +147,7 @@ typedef struct s_game
 	int bpp;
 	int size_line;
 	int endian;
+	int side;
 	t_img	*background;
 	t_img	*north;
 	t_img	*south;

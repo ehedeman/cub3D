@@ -78,6 +78,53 @@ bool touch(float px, float py, char **map)
 	return false;
 }
 
+// int	get_pixel_color(int x, int y, t_game *game)
+// {
+
+// 	char *pixel;
+
+// 	if (game->side == NORTH)
+// 		t = game->walls.north;
+// 	else if (game->side == SOUTH)
+// 		t = game->walls.south;
+// 	else if (game->side == EAST)
+// 		t = game->walls.east;
+// 	else if (game->side == WEST)
+// 		t = game->walls.west;
+// 	else
+// 		return (0);
+
+// }
+
+
+int calc_side(float x, float y, float angle, int dir, t_game *game)
+{
+	int	sx;
+	int	sy;
+
+	sx = -1;
+	sy = -1;
+	if (cos(angle) > 0)
+		sx = 1;
+	if (sin(angle) > 0)
+		sy = 1;
+	if (touch(x - sx, y, game->map.coordinates) || touch(x - sx, y - sy, game->map.coordinates))
+	{
+		dir = _s_north;
+		if (sy == 1)
+			dir = _s_south;
+	}
+	else if (touch(x, y - sy, game->map.coordinates) || touch(x, y, game->map.coordinates))
+	{
+		dir = _s_west;
+		if (sx == 1)
+			dir = _s_east;
+	}
+	if (dir != 0)
+		printf("dir: %d\n", dir);
+	return (dir);
+}
+
 // raycasting functions
 void draw_line(t_player *player, t_game *game, float start_x, int i)
 {
@@ -85,7 +132,9 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float sin_angle = sin(start_x);
 	float ray_x = player->x;
 	float ray_y = player->y;
+	// int color;
 
+	// color = 0;
 	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
 		if(DEBUG)
@@ -93,6 +142,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+	game->side = calc_side(ray_x, ray_y, player->angle, _s_null, game);
 	if(!DEBUG)
 	{
 		float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
@@ -101,6 +151,8 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		int end = start_y + height;
 		while(start_y < end)
 		{
+			// color = get_pixel_color(ray_x, ray_y, game);
+			// put_pixel(i, start_y, color, game);
 			put_pixel(i, start_y, 255, game);
 			start_y++;
 		}
