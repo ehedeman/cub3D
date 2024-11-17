@@ -22,26 +22,6 @@ enum e_side
 	_s_east
 };
 
-/*
-
-01234567
-1
-2
-3
--> in array
-
-3
-2
-1
-01234567
--> in a coordinate system
-
-which is why i have two seperate variables cuz i was tired of calculating shit
-*/
-
-// x/y -> just for printing
-// x_array/y_array for changing locations etc
-// t_coordinates dont need to be freed anywhere but in map.coords
 typedef struct s_coordinates
 {
 	float	x;
@@ -49,15 +29,15 @@ typedef struct s_coordinates
 	int		type;
 }			t_coordinates;
 
-// start->orientation = N, S, W, E, might not need it
 typedef struct s_player
 {
+	t_coordinates	start;
+	char	orientation;
+
 	float			x;
 	float			y;
 	float 			angle;
 
-	char	orientation;
-	t_coordinates	start;
 	bool key_up;
 	bool key_down;
 	bool key_left;
@@ -74,7 +54,6 @@ typedef struct s_rgb
 	int	b;
 }				t_rgb;
 
-// north = path to north wall texture etc
 typedef struct s_args
 {
 	char	*north;
@@ -108,8 +87,6 @@ typedef struct s_map
 	t_coordinates	*player_start;
 }			t_map;
 
-// win_width set to 3000 by default at the moment
-// win_height set to 2000
 typedef struct s_mlx
 {
 	void		*init;
@@ -123,6 +100,9 @@ typedef struct s_img
 	int		bpp;
 	int		ll;
 	int		endian;
+
+	int width;
+	int height;
 }			t_img;
 
 typedef struct s_tex
@@ -148,11 +128,6 @@ typedef struct s_game
 	int size_line;
 	int endian;
 	int side;
-	t_img	*background;
-	t_img	*north;
-	t_img	*south;
-	t_img	*east;
-	t_img	*west;
 }				t_game;
 
 #endif
