@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:37 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 15:25:45 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:52:22 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void init_player(t_player *player, t_map *map);
 int key_release(int keycode, t_player *player);
 int key_press(int keycode, t_game *game);
 void move_player(t_player *player, t_map *map);
+void put_pixel(int x, int y, int color, t_game *game);
 
 //ft_convert_map.c
 void	ft_convert_map(t_game *game, t_map *map, int i);
@@ -64,4 +65,6 @@ void			print_error(char *str, t_game *game, int mode);
 //game_utils.c
 int				print_message(int mode, char *str);
 
+//minimap.c
+void	mini_map(t_game *game, int mode);
 #endif

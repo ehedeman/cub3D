@@ -29,12 +29,6 @@ void	init_map(t_map *map)
 	map->coordinates = NULL;
 	map->width = 0;
 	map->length = 0;
-	map->top_l = NULL;
-	map->top_r = NULL;
-	map->bottom_l = NULL;
-	map->bottom_r = NULL;
-	map->point_zero = NULL;
-	map->player_start = NULL;
 }
 void	init_walls(t_wall *walls)
 {

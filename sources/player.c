@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:07:47 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 15:20:56 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:47:16 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_set_player_location(t_map *map, t_player *player)
 			{
 				player->start.x = j;
 				player->start.y = i;
+				printf("%i|%i\n", i, j);
 				player->start.type = map->coordinates[i][j];
 				return ;
 			}
@@ -39,9 +40,7 @@ void	ft_set_player_location(t_map *map, t_player *player)
 
 void init_player(t_player *player, t_map *map)
 {
-	ft_set_player_location(map, player);
-	// player->start.x = 1;
-	// player->start.y = 1;
+	ft_set_player_location(map, player); //accurat
 	player->x = (WIDTH / map->width) * player->start.x;
 	player->y = (HEIGHT / map->length) * player->start.y;// is ok
 	printf("Current player Coordinates in float (y | x): %f | %f\n", player->y, player->x);

@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:08:05 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 15:23:57 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:52:11 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int draw_loop(t_game *game)
 		start_x += fraction;
 		i++;
 	}
+	mini_map(game, 0);
 	mlx_put_image_to_window(game->mlx.mlx, game->win, game->img, 0, 0);
 	return 0;
 }
@@ -195,6 +196,7 @@ int main(int argc, char **argv)
 	game.map.content = argv[1];
 	init_game(&game);
 	ft_print_map(&game.map);
+	mini_map(&game, 1);
 	// hooks
 	mlx_hook(game.win, 2, 1L<<0, key_press, &game);
 	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);

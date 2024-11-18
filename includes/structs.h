@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:32:40 by ehedeman          #+#    #+#             */
-/*   Updated: 2024/11/06 13:37:21 by ehedeman         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:32:49 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,9 @@ typedef struct s_map
 {
 	char			*content;
 	t_coordinates	**coords;		//for checking of map
-	char	**coordinates;	//for actual game
+	char			**coordinates;	//for actual game
 	int				length;
 	int				width;
-	t_coordinates	*top_l;
-	t_coordinates	*top_r;
-	t_coordinates	*bottom_l;
-	t_coordinates	*bottom_r;
-	t_coordinates	*point_zero;
-	t_coordinates	*player_start;
 }			t_map;
 
 // win_width set to 3000 by default at the moment

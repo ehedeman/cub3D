@@ -6,7 +6,7 @@
 #    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/11/06 15:24:43 by ehedeman         ###   ########.fr        #
+#    Updated: 2024/11/18 12:29:37 by ehedeman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC				=	main.c					\
 					errors.c				\
 					game_utils.c			\
 					ft_convert_map.c		\
-					player.c
+					player.c				\
+					minimap.c
 SRC_PATH		=	./sources/
 SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
 
