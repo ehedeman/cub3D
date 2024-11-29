@@ -77,9 +77,9 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 		x = (int)*ray_x;
 	if (game->side == _s_east || game->side == _s_west)
 		x = (int)*ray_y;
-	y = z;
-	while (y < 0)
-		y += t->height;
+	y = z + t->height / 2;
+	// while (y < 0)
+	// 	y += t->height / 2;
 	y %= t->height;
 	x %= t->width;
 	if (x >= 0 && x < t->width && y >= 0 && y < t->height)
@@ -90,16 +90,19 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 	return (0);
 }
 
-int calc_side(float x, float y, float angle, int dir, t_game *game)
+int calc_side(float x, float y, float cos_angle, float sin_angle, t_game *game)
 {
+	int dir = 0;
 	int	sx;
 	int	sy;
 
 	sx = -1;
 	sy = -1;
-	if (cos(angle) > 0)
+
+	// printf("%f\n", sin_angle);
+	if (cos_angle > 0)
 		sx = 1;
-	if (sin(angle) > 0)
+	if (sin_angle > 0)
 		sy = 1;
 	if (touch(x - sx, y, game->map.coordinates) || touch(x - sx, y - sy, game->map.coordinates))
 	{
@@ -126,20 +129,39 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float ray_x = player->x;
 	float ray_y = player->y;
 	int color = 0;
+	(void)i;
 	int j = 0;
 
 	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
+		// put_pixel(ray_x, ray_y, 90, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+
+		// int num = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
+		// if(num == _s_north)
+		// 	put_pixel(ray_x, ray_y, 0xFF2A00, game); // red
+		// if(num == _s_south)
+		// 	put_pixel(ray_x, ray_y, 0x403DFF, game); // blue
+		// if(num == _s_west)
+		// 	put_pixel(ray_x, ray_y, 0xFFA600, game);
+		// if(num == _s_east)
+		// 	put_pixel(ray_x, ray_y, 0x00FF00, game); // green
+
+
+
 	// printf("%f %f\n", ray_x, ray_y);
-	game->side = calc_side(ray_x, ray_y, player->angle, _s_null, game);
+	game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
 	float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
 	// printf("%f\n", dist);
 	float height = (BLOCK / dist) * (WIDTH / 2);
 	int start_y = (HEIGHT - height) / 2;
+	if(start_y < 0) start_y = 0;
 	int end = start_y + height;
+	if(end > 720)
+		end = 720;
+
 	while (j < HEIGHT)
 	{
 		if (j < start_y)
@@ -151,12 +173,14 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 			
 			while(start_y < end)
 			{
-				int from_mid = -HEIGHT / 2 + j;
-				color = get_pixel_color(&ray_x, &ray_y, from_mid / (float) HEIGHT * dist, game);
+				int from_mid = -360 + start_y;
+				// from_mid += 64;
+				int pos_y = from_mid / (float) HEIGHT * dist;
+				color = get_pixel_color(&ray_x, &ray_y, pos_y, game);
 				put_pixel(i, start_y, color, game);
 				start_y++;
-				j++;
 			}
+			j = start_y;
 		}
 		put_pixel(i, j, color, game);
 		j++;
