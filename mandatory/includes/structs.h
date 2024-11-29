@@ -103,6 +103,8 @@ typedef struct s_img
 
 	int width;
 	int height;
+	t_coordinates	t_step;
+	t_coordinates	pos;
 }			t_img;
 
 typedef struct s_tex

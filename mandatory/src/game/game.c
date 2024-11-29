@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 static int	ft_close_window(t_game *game);
 
@@ -32,6 +32,7 @@ void    ft_game(char *map_path)
     mlx_hook(game->mlx.window, KeyRelease, KeyReleaseMask, ft_key_release, &game->player);
     mlx_loop_hook(game->mlx.init, draw_loop, game);
     mlx_hook(game->mlx.window, DestroyNotify, 0, ft_close_window, game);
+    mini_map(game);
     mlx_loop(game->mlx.init);
 }
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 //might be leaking idk if i missed a case
 int	ft_read_map(int fd, t_game *game, int bytes)

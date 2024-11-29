@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 // this was just taken outof ft_skip_til_map because of norm
 // first skip whitespace, then skip until newline

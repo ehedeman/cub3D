@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 void put_pixel(int x, int y, int color, t_game *game)
 {
@@ -20,7 +20,7 @@ void put_pixel(int x, int y, int color, t_game *game)
 	int index = y * game->size_line + x * game->bpp / 8;
 	game->data[index] = color & 0xFF;
 	game->data[index + 1] = (color >> 8) & 0xFF;
-	game->data[index + 2] = (color >> 16) & 0xFF;
+	game->data[index + 2] = (color >> 16) & 0xFF;	//color developement (hat nix mit pixel zu tun)
 }
 
 // our own clear_image
@@ -29,29 +29,6 @@ void clear_image(t_game *game)
 	for(int y = 0; y < HEIGHT; y++)
 		for(int x = 0; x < WIDTH; x++)
 			put_pixel(x, y, 0, game);
-}
-
-// utils functions
-void draw_square(int x, int y, int size, int color, t_game *game)
-{
-	for(int i = 0; i < size; i++)
-		put_pixel(x + i, y, color, game);
-	for(int i = 0; i < size; i++)
-		put_pixel(x, y + i, color, game);
-	for(int i = 0; i < size; i++)
-		put_pixel(x + size, y + i, color, game);
-	for(int i = 0; i < size; i++)
-		put_pixel(x + i, y + size, color, game);
-}
-
-void draw_map(t_game *game)
-{
-	char **map = game->map.coordinates;
-	int color = 0x0000FF;
-	for(int y = 0; map[y]; y++)
-		for(int x = 0; x < game->map.width; x++)
-			if(map[y][x] == '1')
-				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
 }
 
 // distance calculation functions
@@ -78,11 +55,14 @@ bool touch(float px, float py, char **map)
 	return false;
 }
 
-int	get_pixel_color(int x, int y, t_game *game)
+int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 {
 	t_img *t;
 	char *pixel;
+	int	x;
+	int	y;
 
+	x = 0, y = 0;
 	if (game->side == _s_north)
 		t = game->walls.north;
 	else if (game->side == _s_south)
@@ -93,11 +73,18 @@ int	get_pixel_color(int x, int y, t_game *game)
 		t = game->walls.west;
 	else
 		return (0);
-	x = x % t->width;
-	y = y % t->height;
+	if (game->side == _s_north || game->side == _s_south)
+		x = (int)*ray_x;
+	if (game->side == _s_east || game->side == _s_west)
+		x = (int)*ray_y;
+	y = z;
+	while (y < 0)
+		y += t->height;
+	y %= t->height;
+	x %= t->width;
 	if (x >= 0 && x < t->width && y >= 0 && y < t->height)
 	{
-		pixel = t->addr + (y * t->ll + x * (t->bpp / 8));
+		pixel = t->addr + (y * t->ll + (x * (t->bpp / 8)));
 		return (*(int *)pixel);
 	}
 	return (0);
@@ -139,29 +126,40 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float ray_x = player->x;
 	float ray_y = player->y;
 	int color = 0;
+	int j = 0;
 
 	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
-		if(DEBUG)
-			put_pixel(ray_x, ray_y, 0xFF0000, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+	// printf("%f %f\n", ray_x, ray_y);
 	game->side = calc_side(ray_x, ray_y, player->angle, _s_null, game);
-	if(!DEBUG)
+	float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
+	// printf("%f\n", dist);
+	float height = (BLOCK / dist) * (WIDTH / 2);
+	int start_y = (HEIGHT - height) / 2;
+	int end = start_y + height;
+	while (j < HEIGHT)
 	{
-		float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-		float height = (BLOCK / dist) * (WIDTH / 2);
-		int start_y = (HEIGHT - height) / 2;
-		int end = start_y + height;
-		while(start_y < end)
+		if (j < start_y)
+			color = 0xFFF00;	//ceiling
+		else if (j > end)
+			color = 0xFFFF32;	//floor
+		else
 		{
-			color = get_pixel_color(ray_x, ray_y, game);
-			// printf("color: %d\n", color);
-			put_pixel(i, start_y, color, game);
-			// put_pixel(i, start_y, 255, game);
-			start_y++;
+			
+			while(start_y < end)
+			{
+				int from_mid = -HEIGHT / 2 + j;
+				color = get_pixel_color(&ray_x, &ray_y, from_mid / (float) HEIGHT * dist, game);
+				put_pixel(i, start_y, color, game);
+				start_y++;
+				j++;
+			}
 		}
+		put_pixel(i, j, color, game);
+		j++;
 	}
 }
 
@@ -170,11 +168,6 @@ int draw_loop(t_game *game)
 	t_player *player = &game->player;
 	move_player(player, &game->map);
 	clear_image(game);
-	if(DEBUG)
-	{
-		draw_square(player->x, player->y, 10, 0x00FF00, game);
-		draw_map(game);
-	}
 	float fraction = PI / 3 / WIDTH;
 	float start_x = player->angle - PI / 6;
 	int i = 0;
@@ -185,5 +178,6 @@ int draw_loop(t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
+	mini_map(game);
 	return 0;
 }

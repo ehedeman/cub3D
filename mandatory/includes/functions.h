@@ -14,6 +14,9 @@
 # define FUNCTIONS_H
 # include "structs.h"
 
+void	mini_map(t_game *game);
+void put_pixel(int x, int y, int color, t_game *game);
+
 //player.c
 void init_player(t_player *player, t_map *map);
 int key_release(int keycode, t_player *player);

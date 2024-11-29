@@ -1,7 +1,7 @@
-NO ./assets/banana.xpm
-SO ./assets/leaves.xpm
+NO ./assets/leaves.xpm
+SO ./assets/test.xpm
 WE ./assets/flowers.xpm
-EA ./assets/frost.xpm
+EA ./assets/tile.xpm
 
 F 220,100,0
 C 225,30,0
