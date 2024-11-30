@@ -31,7 +31,7 @@ void    ft_game(char *map_path)
     mlx_hook(game->mlx.window, KeyPress, KeyPressMask, ft_key_press, game);
     mlx_hook(game->mlx.window, KeyRelease, KeyReleaseMask, ft_key_release, &game->player);
     mlx_loop_hook(game->mlx.init, draw_loop, game);
-    mlx_hook(game->mlx.window, DestroyNotify, 0, ft_close_window, game);
+    mlx_hook(game->mlx.window, DestroyNotify, 0, close_window, game);
     mini_map(game);
     mlx_loop(game->mlx.init);
 }

@@ -69,7 +69,7 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 		t = game->walls.south;
 	else if (game->side == _s_west)
 		t = game->walls.west;
-	else if (game->side == _s_east)zz
+	else if (game->side == _s_east)
 		t = game->walls.east;
 	else
 		return (0);
