@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 static void	ft_assign_param(t_game *game, int *i, int flag);
 static void	ft_assign_texture(t_game *game, const char *param, const char *i);

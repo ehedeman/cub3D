@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 // new[i] = NULL is important for freeing in case of error
 static void	ft_set_null(t_coordinates **new, t_game *game)

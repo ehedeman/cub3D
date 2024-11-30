@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 static void	ft_init_mlx(t_game *game);
 // static void	ft_init_bg(t_game *game);
@@ -63,6 +63,9 @@ static void	init_tex(t_game *game, t_img **texture, char *path_texture)
 		ft_err_game("Failed to get texture address", game);
 	(*texture)->width = w;
 	(*texture)->height = h;
+	//experiemtnal
+	(*texture)->t_step.y = 0;
+	(*texture)->pos.y = 0;
 }
 
 // static void	ft_init_bg(t_game *game)
