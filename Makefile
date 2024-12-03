@@ -1,94 +1,46 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/11 12:32:52 by ehedeman          #+#    #+#              #
-#    Updated: 2024/11/04 16:16:39 by ehedeman         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = cub3d
+NAME_BONUS = cub3d_bonus
 
-NAME			=	cub3D
+all: mlx
+	make -j$(nproc) -C mandatory
 
-CC				=	cc 
-CFLAGS			=	-Werror -Wall -Wextra -g -fsanitize=address -fno-omit-frame-pointer
+mlx:
+	make mlx -C mandatory
+# 	make mlx -C bonus
 
-INC 			= 	-I ./includes			\
-					-I ./libft				\
-					-I ./mlx_linux
-#sources stuff
-SRC				=	main.c					\
-					init.c					\
-					freeing_stuff.c			\
-					map_parsing.c			\
-					map_parsing_utils.c		\
-					ft_save_args.c			\
-					ft_save_args_utils.c	\
-					ft_save_map_utils.c		\
-					ft_save_map.c			\
-					ft_allocate_coords.c	\
-					map_check.c				\
-					errors.c				\
-					key_handling.c			\
-					ft_init_game.c			\
-					movement.c				\
-					check_directions.c		\
-					game_utils.c			\
-					ft_convert_map.c		\
-					player.c
-SRC_PATH		=	./sources/
-SRCS			=	$(addprefix $(SRC_PATH), $(SRC))
+run: all
+	./$(NAME) map.cub
 
-#objects stuff
-OBJ				=	$(SRC:.c=.o)
-OBJ_PATH		=	./objs/
-OBJS			=	$(addprefix $(OBJ_PATH), $(OBJ))
+map: mlx
+	make map -C bonus
 
-#libft stuff
-LIBFT_NAME		=	libft.a
-LIBFT_PATH		=	./libft/
-LIBFT			=	$(LIBFT_PATH)$(LIBFT_NAME)
+runb: bonus
+	./$(NAME_BONUS) map.cub
 
-
-#minilib_x stuff
-MLX_PATH		=	./mlx_linux/
-MLX_NAME		=	libmlx.a
-MLX 			=	$(MLX_PATH)$(MLX_NAME)
-
-all: $(LIBFT) $(MLX) $(NAME) #norm 
-	
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-	
-$(LIBFT):
-	@(cd $(LIBFT_PATH) && make all)
-	
-$(MLX):
-	@(cd $(MLX_PATH) && make all)
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INC) $(LIBFT) $(MLX) -lXext -lX11 -lm
+bonus: mlx
+	make -j$(nproc) -C bonus
 
 clean:
-	@rm -rf $(OBJ_PATH)
-	@(cd $(LIBFT_PATH) && make clean)
-	@(cd $(MLX_PATH) && make clean)
+	@make -C mandatory clean > /dev/null
+	@make -C bonus clean > /dev/null
+	@echo "Cleaning up..."
 
-fclean: clean
-	@(cd $(LIBFT_PATH) && make fclean)
-	@rm -f $(NAME)
+fclean:
+	@make -C mandatory fclean > /dev/null
+# 	@make -C bonus fclean > /dev/null
+	rm -rf ./bonus/includes/mlx
+	rm -rf ./mandatory/includes/mlx
+	@echo "FCleaning up..."
+
+v: bonus
+	valgrind --leak-check=full ./$(NAME_BONUS) map.cub
+
+vs: bonus
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) map.cub
 
 re: fclean all
 
-leaks: re
-	valgrind --leak-check=full \
-         --show-leak-kinds=all \
-         --track-origins=yes ./$(NAME) _valid_maps/map.cub
+c:
+	clear
 
-norm:
-	@norminette $(SRCS) ./includes/
-
-.PHONY: all clean re fclean leaks norm
+.PHONY: all clean fclean re bonus v vs
