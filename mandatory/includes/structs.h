@@ -109,11 +109,12 @@ typedef struct s_img
 
 typedef struct s_tex
 {
-	t_img	*background;
 	t_img	*north;
 	t_img	*south;
 	t_img	*east;
 	t_img	*west;
+	int		floor;
+	int		ceiling;
 }			t_tex;
 
 typedef struct s_game
@@ -121,7 +122,7 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_args		args;
 	t_map		map;
-	t_tex		walls;
+	t_tex		tex;
 	t_player	player;
 	void *img;
 

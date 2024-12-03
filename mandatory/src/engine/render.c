@@ -64,13 +64,13 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 
 	x = 0, y = 0;
 	if (game->side == _s_north)
-		t = game->walls.north;
+		t = game->tex.north;
 	else if (game->side == _s_south)
-		t = game->walls.south;
+		t = game->tex.south;
 	else if (game->side == _s_west)
-		t = game->walls.west;
+		t = game->tex.west;
 	else if (game->side == _s_east)
-		t = game->walls.east;
+		t = game->tex.east;
 	else
 		return (0);
 	if (game->side == _s_north || game->side == _s_south)
@@ -165,9 +165,9 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	while (j < HEIGHT)
 	{
 		if (j < start_y)
-			color = 0xFFF00;	//ceiling
+			color = game->tex.ceiling;	//ceiling
 		else if (j > end)
-			color = 0xFFFF32;	//floor
+			color = game->tex.floor;	//floor
 		else
 		{
 			

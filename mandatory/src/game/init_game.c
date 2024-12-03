@@ -13,9 +13,9 @@
 #include "../../includes/cub3D.h"
 
 static void	ft_init_mlx(t_game *game);
-// static void	ft_init_bg(t_game *game);
 static void	init_walls(t_game *game);
 static void	init_tex(t_game *game, t_img **texture, char *path_texture);
+static void init_colors(t_game *game);
 
 void	ft_init_game(t_game *game)
 {
@@ -23,8 +23,8 @@ void	ft_init_game(t_game *game)
 	ft_convert_map(game, &game->map, 0);
 	init_player(&game->player, &game->map);
 	ft_init_mlx(game);
-	// ft_init_bg(game);
 	init_walls(game);
+	init_colors(game);
 }
 
 static void	ft_init_mlx(t_game *game)
@@ -42,10 +42,10 @@ static void	ft_init_mlx(t_game *game)
 
 static void	init_walls(t_game *game)
 {
-	init_tex(game, &game->walls.north, game->args.north);
-	init_tex(game, &game->walls.south, game->args.south);
-	init_tex(game, &game->walls.east, game->args.east);
-	init_tex(game, &game->walls.west, game->args.west);
+	init_tex(game, &game->tex.north, game->args.north);
+	init_tex(game, &game->tex.south, game->args.south);
+	init_tex(game, &game->tex.east, game->args.east);
+	init_tex(game, &game->tex.west, game->args.west);
 }
 
 static void	init_tex(t_game *game, t_img **texture, char *path_texture)
@@ -68,17 +68,14 @@ static void	init_tex(t_game *game, t_img **texture, char *path_texture)
 	(*texture)->pos.y = 0;
 }
 
-// static void	ft_init_bg(t_game *game)
-// {
-// 	game->walls.background = malloc(sizeof(t_img));
-// 	if (!game->walls.background)
-// 		ft_err_game("Failed to allocate memory for background", game);
-// 	game->walls.background->img = mlx_new_image(game->mlx.init, WIDTH, HEIGHT);
-// 	if (!game->walls.background->img)
-// 		ft_err_game("Failed to create background image", game);
-// 	game->walls.background->addr = mlx_get_data_addr(game->walls.background->img,
-// 			&game->walls.background->bpp, &game->walls.background->ll,
-// 			&game->walls.background->endian);
-// 	if (!game->walls.background->addr)
-// 		ft_err_game("Failed to get background image address", game);
-// }
+// void get_color(t_game *game, int *colors, t_rgb color);
+
+static void init_colors(t_game *game)
+{
+	// get_color(game, &game->args.floor, game->args.floor);
+	// get_color(game, &game->args.ceiling, game->args.ceiling);
+	game->tex.floor = (game->args.floor.r << 16 | game->args.floor.g << 8 | game->args.floor.b);
+	game->tex.ceiling = (game->args.ceiling.r << 16 | game->args.ceiling.g << 8 | game->args.ceiling.b);
+	// printf("floor: %d\n", game->tex.floor);
+	// printf("ceiling: %d\n", game->tex.ceiling);
+}

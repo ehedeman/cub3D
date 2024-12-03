@@ -19,3 +19,8 @@ bool	ft_check_args(t_game *game)
 		return (true);
 	return (false);
 }
+
+// void get_color(t_game *game, int *colors, t_rgb color)
+// {
+
+// }
