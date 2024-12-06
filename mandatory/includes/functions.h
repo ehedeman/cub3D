@@ -85,4 +85,6 @@ void	ft_err_map(char *str, t_game *game);
 
 void	ft_err_game(char *str, t_game *game);
 
+char	*get_param(const char *s, size_t n);
+
 #endif

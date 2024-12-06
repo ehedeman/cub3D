@@ -20,7 +20,46 @@ bool	ft_check_args(t_game *game)
 	return (false);
 }
 
-// void get_color(t_game *game, int *colors, t_rgb color)
-// {
+static size_t	get_param_len(const char *s, size_t n);
 
-// }
+char	*get_param(const char *s, size_t n)
+{
+    char	*dup;
+    size_t	i;
+    size_t	j;
+    size_t	len;
+
+    len = get_param_len(s, n);
+    dup = (char *)malloc(len + 1);
+    if (!dup)
+        return (NULL);
+    i = 0;
+    j = 0;
+    while (i < n && s[i] != '\n')
+    {
+        if (s[i] != ' ')
+        {
+            dup[j] = s[i];
+            j++;
+        }
+        i++;
+    }
+    dup[j] = '\0';
+    return (dup);
+}
+
+static size_t	get_param_len(const char *s, size_t n)
+{
+    size_t	len;
+    size_t	i;
+
+    len = 0;
+    i = 0;
+    while (i < n && s[i] != '\n')
+    {
+        if (s[i] != ' ')
+            len++;
+        i++;
+    }
+    return (len);
+}

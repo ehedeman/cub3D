@@ -1,10 +1,10 @@
-NO ./assets/leaves.xpm
-SO ./assets/test.xpm
-WE ./assets/flowers.xpm
-EA ./assets/tile.xpm
+NO    ./assets/leaves.xpm     
+SO     ./assets/test.xpm    
+WE     ./assets/flowers.xpm    
+EA     ./assets/coin.xpm    
 
-F 220,100,0
-C 225,30,0
+F   220  ,  100  ,  1 
+C   225  ,  30  ,  2 
 
 1111111111111111111
 1000000000000000N01

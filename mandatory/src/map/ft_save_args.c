@@ -43,6 +43,12 @@ bool	ft_save_args(t_game *game)
 	}
 	if (ft_check_args(game))
 		return (false);
+	printf("\nNO: [%s]\n", game->args.north);
+	printf("SO: [%s]\n", game->args.south);
+	printf("WE: [%s]\n", game->args.west);
+	printf("EA: [%s]\n", game->args.east);
+	printf("F: [%d], [%d], [%d]\n", game->args.floor.r, game->args.floor.g, game->args.floor.b);
+	printf("C: [%d], [%d], [%d]\n\n", game->args.ceiling.r, game->args.ceiling.g, game->args.ceiling.b);
 	return (true);
 }
 
@@ -60,9 +66,9 @@ static void	ft_assign_param(t_game *game, int *i, int flag)
 	while (game->map.content[end] && game->map.content[end] != '\n')
 		end++;
 	if (flag == 1)
-		value = ft_strndup(&game->map.content[start + 3], end - start - 3);
+		value = get_param(&game->map.content[start + 3], end - start - 3);
 	else
-		value = ft_strndup(&game->map.content[start + 2], end - start - 2);
+		value = get_param(&game->map.content[start + 2], end - start - 2);
 	if (flag == 1)
 		ft_assign_texture(game, value, &game->map.content[start]);
 	else if (flag == 2)
@@ -109,14 +115,16 @@ static void	ft_assign_color(t_game *game, const char *param, const char *i)
 
 static void	ft_parse_rgb(const char *str, int *r, int *g, int *b)
 {
-	while (*str && *str != ',')
+	while (*str == ' ')
+		str++;
+	while (*str && *str != ',' && *str != ' ')
 		*r = *r * 10 + (*str++ - '0');
-	if (*str == ',')
+	while (*str == ',' || *str == ' ')
 		str++;
-	while (*str && *str != ',')
+	while (*str && *str != ',' && *str != ' ')
 		*g = *g * 10 + (*str++ - '0');
-	if (*str == ',')
+	while (*str == ',' || *str == ' ')
 		str++;
-	while (*str && *str != '\0' && *str != '\n')
+	while (*str && *str != '\0' && *str != '\n' && *str != ' ')
 		*b = *b * 10 + (*str++ - '0');
 }
