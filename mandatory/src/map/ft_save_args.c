@@ -15,7 +15,17 @@
 static void	ft_assign_param(t_game *game, int *i, int flag);
 static void	ft_assign_texture(t_game *game, const char *param, const char *i);
 static void	ft_assign_color(t_game *game, const char *param, const char *i);
-static void	ft_parse_rgb(const char *str, int *r, int *g, int *b);
+static bool	ft_parse_rgb(const char *str, int *r, int *g, int *b);
+
+void print_arg(t_game *game)
+{
+	printf("\nNO: [%s]\n", game->args.north);
+	printf("SO: [%s]\n", game->args.south);
+	printf("WE: [%s]\n", game->args.west);
+	printf("EA: [%s]\n", game->args.east);
+	printf("F: [%d], [%d], [%d]\n", game->args.floor.r, game->args.floor.g, game->args.floor.b);
+	printf("C: [%d], [%d], [%d]\n\n", game->args.ceiling.r, game->args.ceiling.g, game->args.ceiling.b);
+}
 
 bool	ft_save_args(t_game *game)
 {
@@ -43,12 +53,7 @@ bool	ft_save_args(t_game *game)
 	}
 	if (ft_check_args(game))
 		return (false);
-	printf("\nNO: [%s]\n", game->args.north);
-	printf("SO: [%s]\n", game->args.south);
-	printf("WE: [%s]\n", game->args.west);
-	printf("EA: [%s]\n", game->args.east);
-	printf("F: [%d], [%d], [%d]\n", game->args.floor.r, game->args.floor.g, game->args.floor.b);
-	printf("C: [%d], [%d], [%d]\n\n", game->args.ceiling.r, game->args.ceiling.g, game->args.ceiling.b);
+	print_arg(game);
 	return (true);
 }
 
@@ -98,7 +103,8 @@ static void	ft_assign_color(t_game *game, const char *param, const char *i)
 	r = 0;
 	g = 0;
 	b = 0;
-	ft_parse_rgb(param, &r, &g, &b);
+	if (!ft_parse_rgb(param, &r, &g, &b))
+		ft_err_game("Invalid color format", game);
 	if (ft_strncmp(i, "F ", 2) == 0)
 	{
 		game->args.floor.r = r;
@@ -113,7 +119,7 @@ static void	ft_assign_color(t_game *game, const char *param, const char *i)
 	}
 }
 
-static void	ft_parse_rgb(const char *str, int *r, int *g, int *b)
+static bool	ft_parse_rgb(const char *str, int *r, int *g, int *b)
 {
 	while (*str == ' ')
 		str++;
@@ -121,10 +127,17 @@ static void	ft_parse_rgb(const char *str, int *r, int *g, int *b)
 		*r = *r * 10 + (*str++ - '0');
 	while (*str == ',' || *str == ' ')
 		str++;
+	if (!*str)
+		return (false);
 	while (*str && *str != ',' && *str != ' ')
 		*g = *g * 10 + (*str++ - '0');
 	while (*str == ',' || *str == ' ')
 		str++;
+	if (!*str)
+		return (false);
 	while (*str && *str != '\0' && *str != '\n' && *str != ' ')
 		*b = *b * 10 + (*str++ - '0');
+	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
+		return (false);
+	return (true);
 }
