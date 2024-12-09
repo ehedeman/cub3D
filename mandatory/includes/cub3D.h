@@ -30,7 +30,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-# define BLOCK    64
+# define BLOCK 64
 
 # define TEXTURE_NORTH	"../textures/north.xpm"
 # define TEXTURE_SOUTH	"../textures/south.xpm"
@@ -46,6 +46,9 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+
+# define SPEED 2
+# define ROTATE_SPEED 0.03
 
 # define TEST_XPM "../assets/test.xpm"
 # define TEST_HEIGHT 138
