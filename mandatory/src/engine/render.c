@@ -46,15 +46,13 @@ float fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
 }
 
 // touch function 
-bool touch(float px, float py, t_game *game)
+bool touch(float px, float py, char **map)
 {
 	int x = px / BLOCK;
 	int y = py / BLOCK;
-	if (x < 0 || y < 0 || x >= game->map.width || y >= game->map.length - 1)
-		return (true);
-	if(game->map.coordinates[y][x] == '1')
-		return (true);
-	return (false);
+	if(map[y][x] == '1')
+		return true;
+	return false;
 }
 
 int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
@@ -80,6 +78,8 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 	if (game->side == _s_east || game->side == _s_west)
 		x = (int)*ray_y;
 	y = z + t->height / 2;
+	// while (y < 0)
+	// 	y += t->height / 2;
 	y %= t->height;
 	x %= t->width;
 	if (x >= 0 && x < t->width && y >= 0 && y < t->height)
@@ -99,22 +99,25 @@ int calc_side(float x, float y, float cos_angle, float sin_angle, t_game *game)
 	sx = -1;
 	sy = -1;
 
+	// printf("%f\n", sin_angle);
 	if (cos_angle > 0)
 		sx = 1;
 	if (sin_angle > 0)
 		sy = 1;
-	if (touch(x - sx, y, game) || touch(x - sx, y - sy, game))
+	if (touch(x - sx, y, game->map.coordinates) || touch(x - sx, y - sy, game->map.coordinates))
 	{
 		dir = _s_north;
 		if (sy == 1)
 			dir = _s_south;
 	}
-	else if (touch(x, y - sy, game) || touch(x, y, game))
+	else if (touch(x, y - sy, game->map.coordinates) || touch(x, y, game->map.coordinates))
 	{
 		dir = _s_west;
 		if (sx == 1)
 			dir = _s_east;
 	}
+	// if (dir != 0)
+	// 	printf("dir: %d\n", dir);
 	return (dir);
 }
 
@@ -126,22 +129,39 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float ray_x = player->x;
 	float ray_y = player->y;
 	int color = 0;
+	(void)i;
 	int j = 0;
 
-	while(!touch(ray_x, ray_y, game))
+	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
-		//put_pixel(ray_x, ray_y, 90, game);
+		// put_pixel(ray_x, ray_y, 90, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+
+		// int num = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
+		// if(num == _s_north)
+		// 	put_pixel(ray_x, ray_y, 0xFF2A00, game); // red
+		// if(num == _s_south)
+		// 	put_pixel(ray_x, ray_y, 0x403DFF, game); // blue
+		// if(num == _s_west)
+		// 	put_pixel(ray_x, ray_y, 0xFFA600, game);
+		// if(num == _s_east)
+		// 	put_pixel(ray_x, ray_y, 0x00FF00, game); // green
+
+
+
+	// printf("%f %f\n", ray_x, ray_y);
 	game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
 	float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
+	// printf("%f\n", dist);
 	float height = (BLOCK / dist) * (WIDTH / 2);
 	int start_y = (HEIGHT - height) / 2;
 	if(start_y < 0) start_y = 0;
 	int end = start_y + height;
-	if(end > HEIGHT)
-		end = HEIGHT;
+	if(end > 720)
+		end = 720;
+
 	while (j < HEIGHT)
 	{
 		if (j < start_y)
@@ -150,9 +170,11 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 			color = 0xFFFF32;	//floor
 		else
 		{
+			
 			while(start_y < end)
 			{
-				int from_mid = -HEIGHT / 2 + start_y;
+				int from_mid = -360 + start_y;
+				// from_mid += 64;
 				int pos_y = from_mid / (float) HEIGHT * dist;
 				color = get_pixel_color(&ray_x, &ray_y, pos_y, game);
 				put_pixel(i, start_y, color, game);

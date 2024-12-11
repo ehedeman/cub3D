@@ -38,15 +38,15 @@ void	ft_set_player_location(t_map *map, t_player *player)
 		i++;
 	}
 }
-
+// (HEIGHT / map->length) * 
+// (WIDTH / map->width) * 
 void init_player(t_player *player, t_map *map)
 {
 	ft_set_player_location(map, player);
-	// player->start.x = (map->length);
-	// player->start.y = 1;
-	player->x = (WIDTH / map->width) * player->start.x;
-	player->y = (HEIGHT / map->length) * player->start.y;// is ok
+	player->x = player->start.x * BLOCK;
+	player->y = player->start.y * BLOCK;// is ok
 	printf("Current player Coordinates in float (y | x): %f | %f\n", player->y, player->x);
+	printf("Current player Coordinates (y | x): %i | %i\n", (int)player->y / BLOCK, (int)player->x / BLOCK);
 	if (player->orientation == 'N')
 		player->angle = 3 * PI / 2;
 	else if (player->orientation == 'S')
@@ -100,6 +100,8 @@ int ft_key_release(int keycode, t_player *player)
 		player->right_rotate = false;
 	return 0;
 }
+
+// printf("%i, %i, %i, %i\n", x/BLOCK, y/BLOCK,(int)player->x / BLOCK,(int)player->y / BLOCK);
 int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
 	int speed;
@@ -129,7 +131,6 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 		x = player->x - sin_angle * speed;
 		y = player->y + cos_angle * speed;
 	}
-	//printf("%i %i %i %i\n", (int)player->x /BLOCK, (int)player->y /BLOCK, map->width, map->length - 1);
 	if (y / BLOCK > map->length - 1 || x / BLOCK > map->width 
 		|| y / BLOCK < 0 || x / BLOCK < 0)
 		return (1);
@@ -144,28 +145,30 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
 	int	speed;
-	int	wall;
 
 	speed = 2;
-	wall = is_wall(player, sin_angle, cos_angle, map);
 	if (player->key_up)
 	{
-		if (!wall)
+		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
 			player->x += cos_angle * speed;
 			player->y += sin_angle * speed;
 		}
-		else if (wall)
+		else if (!touch(player->x, player->y + sin_angle * speed, map->coordinates))
+			player->y += sin_angle * speed;
+		else if (!touch(player->x + cos_angle * speed, player->y, map->coordinates))
 			player->x += cos_angle * speed;
 	}
 	if (player->key_down)
 	{
-		if (!wall)
+		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
 			player->x -= cos_angle * speed;
 			player->y -= sin_angle * speed;
 		}
-		else if (wall)
+		else if (!touch(player->x, player->y - sin_angle * speed, map->coordinates))
+			player->y -= sin_angle * speed;
+		else if (!touch(player->x - cos_angle * speed, player->y, map->coordinates))
 			player->x -= cos_angle * speed;
 	}
 }
@@ -173,29 +176,31 @@ void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_m
 void	move_player_left_right(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
 	int	speed;
-	int	wall;
 
-	speed = 1;
-	wall = is_wall(player, sin_angle, cos_angle, map);
+	speed = 2;
 	if (player->key_left)
 	{
-		if (!wall)
+		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
 			player->x += sin_angle * speed;
 			player->y -= cos_angle * speed;
 		}
-		else if (wall == 1)
-			player->y += cos_angle * speed;
+		else if (!touch(player->x + sin_angle * speed, player->y, map->coordinates))
+			player->x += sin_angle * speed;
+		else if (!touch(player->x, player->y - cos_angle * speed, map->coordinates))
+			player->y -= cos_angle * speed;
 	}
 	if (player->key_right)
 	{
-		if (!wall)
+		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
 			player->x -= sin_angle * speed;
 			player->y += cos_angle * speed;
 		}
-		else if (wall == 1)
-			player->y -= cos_angle * speed;
+		else if (!touch(player->x - sin_angle * speed, player->y, map->coordinates))
+			player->x -= sin_angle * speed;
+		else if (!touch(player->x, player->y + cos_angle * speed, map->coordinates))
+			player->y += cos_angle * speed;
 	}
 }
 
@@ -204,10 +209,7 @@ void move_player(t_player *player, t_map *map)
 	float	angle_speed;
 	float	cos_angle;
 	float	sin_angle;
-	t_coordinates save;
 
-	save.y = player->y;
-	save.x = player->x;
 	angle_speed = 0.03;
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
@@ -221,12 +223,12 @@ void move_player(t_player *player, t_map *map)
 		player->angle = 2 * PI;
 	move_player_up_down(player, sin_angle, cos_angle, map);
 	move_player_left_right(player, sin_angle, cos_angle, map);
-	if (player->x / BLOCK < 0)
-		player->x = 0;
-	if (player->x / BLOCK > map->width)
-		player->x = map->width * BLOCK;
-	if (player->y / BLOCK < 0)
-		player->y = 0;
-	if (player->y / BLOCK > map->length - 1)
-		player->y = (map->length - 1) * BLOCK;
+	if (player->x / BLOCK <= 0)
+		player->x = 1 * BLOCK;
+	if (player->y / BLOCK <= 0)
+		player->y = 1 * BLOCK;
+	if (player->x / BLOCK >= map->width - 1)
+		player->x = map->width - 2 * BLOCK;
+	if (player->y / BLOCK >= map->length - 1)
+		player->y = map->length - 2 * BLOCK;
 }

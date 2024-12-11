@@ -16,6 +16,7 @@
 
 void	mini_map(t_game *game);
 void put_pixel(int x, int y, int color, t_game *game);
+bool touch(float px, float py, char **map);
 
 //player.c
 void init_player(t_player *player, t_map *map);
