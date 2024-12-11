@@ -31,7 +31,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define BLOCK    64
-
+# define SPEED 2
 # define TEXTURE_NORTH	"../textures/north.xpm"
 # define TEXTURE_SOUTH	"../textures/south.xpm"
 # define TEXTURE_WEST	"../textures/west.xpm"

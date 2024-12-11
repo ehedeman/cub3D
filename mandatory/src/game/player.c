@@ -104,32 +104,30 @@ int ft_key_release(int keycode, t_player *player)
 // printf("%i, %i, %i, %i\n", x/BLOCK, y/BLOCK,(int)player->x / BLOCK,(int)player->y / BLOCK);
 int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
-	int speed;
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	speed = 2;
 	if (player->key_up)
 	{
-		x = player->x + cos_angle * speed;
-		y = player->y + sin_angle * speed;
+		x = player->x + cos_angle * SPEED;
+		y = player->y + sin_angle * SPEED;
 	}
 	if (player->key_down)
 	{
-		x = player->x - cos_angle * speed;
-		y = player->y - sin_angle * speed;
+		x = player->x - cos_angle * SPEED;
+		y = player->y - sin_angle * SPEED;
 	}
 	if (player->key_left)
 	{
-		x = player->x + sin_angle * speed;
-		y = player->y - cos_angle * speed;
+		x = player->x + sin_angle * SPEED;
+		y = player->y - cos_angle * SPEED;
 	}
 	if (player->key_right)
 	{
-		x = player->x - sin_angle * speed;
-		y = player->y + cos_angle * speed;
+		x = player->x - sin_angle * SPEED;
+		y = player->y + cos_angle * SPEED;
 	}
 	if (y / BLOCK > map->length - 1 || x / BLOCK > map->width 
 		|| y / BLOCK < 0 || x / BLOCK < 0)
@@ -144,63 +142,57 @@ int	is_wall(t_player *player, float sin_angle, float cos_angle, t_map *map)
 
 void	move_player_up_down(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
-	int	speed;
-
-	speed = 2;
 	if (player->key_up)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
-			player->x += cos_angle * speed;
-			player->y += sin_angle * speed;
+			player->x += cos_angle * SPEED;
+			player->y += sin_angle * SPEED;
 		}
-		else if (!touch(player->x, player->y + sin_angle * speed, map->coordinates))
-			player->y += sin_angle * speed;
-		else if (!touch(player->x + cos_angle * speed, player->y, map->coordinates))
-			player->x += cos_angle * speed;
+		else if (!touch(player->x, player->y + sin_angle * SPEED, map->coordinates))
+			player->y += sin_angle * SPEED;
+		else if (!touch(player->x + cos_angle * SPEED, player->y, map->coordinates))
+			player->x += cos_angle * SPEED;
 	}
 	if (player->key_down)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
-			player->x -= cos_angle * speed;
-			player->y -= sin_angle * speed;
+			player->x -= cos_angle * SPEED;
+			player->y -= sin_angle * SPEED;
 		}
-		else if (!touch(player->x, player->y - sin_angle * speed, map->coordinates))
-			player->y -= sin_angle * speed;
-		else if (!touch(player->x - cos_angle * speed, player->y, map->coordinates))
-			player->x -= cos_angle * speed;
+		else if (!touch(player->x, player->y - sin_angle * SPEED, map->coordinates))
+			player->y -= sin_angle * SPEED;
+		else if (!touch(player->x - cos_angle * SPEED, player->y, map->coordinates))
+			player->x -= cos_angle * SPEED;
 	}
 }
 
 void	move_player_left_right(t_player *player, float sin_angle, float cos_angle, t_map *map)
 {
-	int	speed;
-
-	speed = 2;
 	if (player->key_left)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
-			player->x += sin_angle * speed;
-			player->y -= cos_angle * speed;
+			player->x += sin_angle * SPEED;
+			player->y -= cos_angle * SPEED;
 		}
-		else if (!touch(player->x + sin_angle * speed, player->y, map->coordinates))
-			player->x += sin_angle * speed;
-		else if (!touch(player->x, player->y - cos_angle * speed, map->coordinates))
-			player->y -= cos_angle * speed;
+		else if (!touch(player->x + sin_angle * SPEED, player->y, map->coordinates))
+			player->x += sin_angle * SPEED;
+		else if (!touch(player->x, player->y - cos_angle * SPEED, map->coordinates))
+			player->y -= cos_angle * SPEED;
 	}
 	if (player->key_right)
 	{
 		if (!is_wall(player, sin_angle, cos_angle, map))
 		{
-			player->x -= sin_angle * speed;
-			player->y += cos_angle * speed;
+			player->x -= sin_angle * SPEED;
+			player->y += cos_angle * SPEED;
 		}
-		else if (!touch(player->x - sin_angle * speed, player->y, map->coordinates))
-			player->x -= sin_angle * speed;
-		else if (!touch(player->x, player->y + cos_angle * speed, map->coordinates))
-			player->y += cos_angle * speed;
+		else if (!touch(player->x - sin_angle * SPEED, player->y, map->coordinates))
+			player->x -= sin_angle * SPEED;
+		else if (!touch(player->x, player->y + cos_angle * SPEED, map->coordinates))
+			player->y += cos_angle * SPEED;
 	}
 }
 
