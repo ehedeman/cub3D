@@ -3,10 +3,11 @@ NAME_BONUS = cub3d_bonus
 
 all: mlx
 	make -j$(nproc) -C mandatory
+	make -j$(nproc) -C bonus
 
 mlx:
 	make mlx -C mandatory
-# 	make mlx -C bonus
+	make mlx -C bonus
 
 run: all
 	./$(NAME) map.cub
@@ -27,8 +28,8 @@ clean:
 
 fclean:
 	@make -C mandatory fclean > /dev/null
-# 	@make -C bonus fclean > /dev/null
-	rm -rf ./bonus/includes/mlx
+ #	@make -C bonus fclean > /dev/null
+#	rm -rf ./bonus/includes/mlx
 	rm -rf ./mandatory/includes/mlx
 	@echo "FCleaning up..."
 

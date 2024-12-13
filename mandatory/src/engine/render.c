@@ -202,6 +202,5 @@ int draw_loop(t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
-	mini_map(game);
 	return 0;
 }

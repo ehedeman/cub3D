@@ -50,7 +50,7 @@ static void	draw_mini_map(t_game *game, t_coordinates *start)
 		start->y = (int)(HEIGHT * 0.9);
 		while (y < game->map.length - 1 && (y < (int)(game->player.y / BLOCK) + 5 && start->y < HEIGHT - 10))
 		{
-			if (game->map.coordinates[y][x] == '1' || game->map.coordinates[y][x] == '-')
+			if (x < game->map.width && (game->map.coordinates[y][x] == '1' || game->map.coordinates[y][x] == '-'))
 				color = 0x2E4D62;
 			else if (y == (int)(game->player.y / BLOCK) && x == (int)(game->player.x / BLOCK))
 				color = 0xFFDA0B;

@@ -14,7 +14,6 @@
 # define FUNCTIONS_H
 # include "structs.h"
 
-void	mini_map(t_game *game);
 void put_pixel(int x, int y, int color, t_game *game);
 bool touch(float px, float py, char **map);
 
