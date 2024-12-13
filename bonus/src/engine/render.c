@@ -80,11 +80,13 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 		t = game->walls.east;
 	else if (game->side == _s_west)
 		t = game->walls.west;
+	else if (game->side == _s_exit)
+		t = game->walls.exit;
 	else
 		return (0);
 	if (game->side == _s_north || game->side == _s_south)
 		x = (int)*ray_x;
-	if (game->side == _s_east || game->side == _s_west)
+	if (game->side == _s_east || game->side == _s_west || game->side == _s_exit)
 		x = (int)*ray_y;
 	y = z + t->height / 2;
 	// while (y < 0)
@@ -144,7 +146,6 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 
 	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
-		// put_pixel(ray_x, ray_y, 90, game);
 		if (t_exit(ray_x, ray_y, game->map.coordinates))
 		{
 			exit_found = 1;
@@ -153,18 +154,16 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
+	game->side = _s_exit;
 	if (!exit_found)
 		game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
-	game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
 	float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-	// printf("%f\n", dist);
 	float height = (BLOCK / dist) * (WIDTH / 2);
 	int start_y = (HEIGHT - height) / 2;
 	if(start_y < 0) start_y = 0;
 	int end = start_y + height;
-	if(end > 720)
-		end = 720;
-
+	if(end > HEIGHT)
+		end = HEIGHT;
 	while (j < HEIGHT)
 	{
 		if (j < start_y)
@@ -173,11 +172,9 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 			color = 0xFFFF32;	//floor
 		else
 		{
-			
 			while(start_y < end)
 			{
-				int from_mid = -360 + start_y;
-				// from_mid += 64;
+				int from_mid = -(HEIGHT / 2) + start_y;
 				int pos_y = from_mid / (float) HEIGHT * dist;
 				color = get_pixel_color(&ray_x, &ray_y, pos_y, game);
 				put_pixel(i, start_y, color, game);

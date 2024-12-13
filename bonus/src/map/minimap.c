@@ -54,6 +54,8 @@ static void	draw_mini_map(t_game *game, t_coordinates *start)
 				color = 0x2E4D62;
 			else if (y == (int)(game->player.y / BLOCK) && x == (int)(game->player.x / BLOCK))
 				color = 0xFFDA0B;
+			else if (x < game->map.width && game->map.coordinates[y][x] == 'F')
+				color = 0xFF000;
 			else
 				color = 0x8DA8AF;
 			draw_mini(game, start, color);
