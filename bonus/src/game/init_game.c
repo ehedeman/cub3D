@@ -41,10 +41,14 @@ static void	ft_init_mlx(t_game *game)
 
 static void	init_walls(t_game *game)
 {
+	game->args.exit = ft_strndup(TEX_EXIT, ft_strlen(TEX_EXIT));
+	if (!game->args.exit)
+		ft_err_game("Failed to allocate memory for texture", game);
 	init_tex(game, &game->walls.north, game->args.north);
 	init_tex(game, &game->walls.south, game->args.south);
 	init_tex(game, &game->walls.east, game->args.east);
 	init_tex(game, &game->walls.west, game->args.west);
+	init_tex(game, &game->walls.exit, game->args.exit);
 }
 
 static void	init_tex(t_game *game, t_img **texture, char *path_texture)

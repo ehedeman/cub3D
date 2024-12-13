@@ -19,7 +19,8 @@ enum e_side
 	_s_north,
 	_s_south,
 	_s_west,
-	_s_east
+	_s_east,
+	_s_exit
 };
 
 typedef struct s_coordinates
@@ -60,6 +61,7 @@ typedef struct s_args
 	char	*south;
 	char	*east;
 	char	*west;
+	char	*exit;
 	t_rgb	floor;
 	t_rgb	ceiling;
 }				t_args;
@@ -114,6 +116,7 @@ typedef struct s_tex
 	t_img	*south;
 	t_img	*east;
 	t_img	*west;
+	t_img	*exit;
 }			t_tex;
 
 typedef struct s_game

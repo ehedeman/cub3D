@@ -42,6 +42,7 @@ int	ft_free_game(t_game *game)
 	free(game->args.south);
 	free(game->args.east);
 	free(game->args.west);
+	free(game->args.exit);
 	if (game->mlx.window)
 		mlx_destroy_window(game->mlx.init, game->mlx.window);
 	if (game->mlx.init)

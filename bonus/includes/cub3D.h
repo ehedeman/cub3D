@@ -36,6 +36,7 @@
 # define TEXTURE_SOUTH	"../textures/south.xpm"
 # define TEXTURE_WEST	"../textures/west.xpm"
 # define TEXTURE_EAST	"../textures/east.xpm"
+# define TEX_EXIT       "./assets/exit.xpm"
 
 # define PI 3.14159265359
 

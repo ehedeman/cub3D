@@ -28,8 +28,8 @@ clean:
 
 fclean:
 	@make -C mandatory fclean > /dev/null
- #	@make -C bonus fclean > /dev/null
-#	rm -rf ./bonus/includes/mlx
+	@make -C bonus fclean > /dev/null
+	rm -rf ./bonus/includes/mlx
 	rm -rf ./mandatory/includes/mlx
 	@echo "FCleaning up..."
 
