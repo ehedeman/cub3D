@@ -14,7 +14,7 @@
 
 int	ft_is_map_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F')
 		return (0);
 	return (1);
 }

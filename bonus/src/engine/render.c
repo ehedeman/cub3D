@@ -55,6 +55,15 @@ bool touch(float px, float py, char **map)
 	return false;
 }
 
+bool t_exit(float px, float py, char **map)
+{
+	int x = px / BLOCK;
+	int y = py / BLOCK;
+	if(map[y][x] == 'F')
+		return true;
+	return false;
+}
+
 int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 {
 	t_img *t;
@@ -128,6 +137,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	float sin_angle = sin(start_x);
 	float ray_x = player->x;
 	float ray_y = player->y;
+	int exit_found = 0;
 	int color = 0;
 	(void)i;
 	int j = 0;
@@ -135,23 +145,16 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	while(!touch(ray_x, ray_y, game->map.coordinates))
 	{
 		// put_pixel(ray_x, ray_y, 90, game);
+		if (t_exit(ray_x, ray_y, game->map.coordinates))
+		{
+			exit_found = 1;
+			break ;	
+		}
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
-
-		// int num = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
-		// if(num == _s_north)
-		// 	put_pixel(ray_x, ray_y, 0xFF2A00, game); // red
-		// if(num == _s_south)
-		// 	put_pixel(ray_x, ray_y, 0x403DFF, game); // blue
-		// if(num == _s_west)
-		// 	put_pixel(ray_x, ray_y, 0xFFA600, game);
-		// if(num == _s_east)
-		// 	put_pixel(ray_x, ray_y, 0x00FF00, game); // green
-
-
-
-	// printf("%f %f\n", ray_x, ray_y);
+	if (!exit_found)
+		game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
 	game->side = calc_side(ray_x, ray_y, cos_angle, sin_angle, game);
 	float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
 	// printf("%f\n", dist);
