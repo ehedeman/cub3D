@@ -12,19 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-static int	ft_check_extension(const char *argv);
-void    ft_game(char *map_path);
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        ft_err_exit("Wrong number of arguments!\n");
-    if (!ft_check_extension(argv[1]))
-        ft_err_exit("Wrong file extension!\n");
-    ft_game(argv[1]);
-    return (0);
-}
-
 static int	ft_check_extension(const char *argv)
 {
 	char	*ext;
@@ -32,5 +19,15 @@ static int	ft_check_extension(const char *argv)
 	ext = ft_strrchr(argv, '.');
 	if (ext)
 		return (ft_strcmp(ext, ".cub") == 0);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc != 2)
+		ft_err_exit("Wrong number of arguments!\n");
+	if (!ft_check_extension(argv[1]))
+		ft_err_exit("Wrong file extension!\n");
+	ft_game(argv[1]);
 	return (0);
 }

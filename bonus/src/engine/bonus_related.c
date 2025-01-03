@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ****.c		                                        :+:      :+:    :+:   */
+/*   bonus_related.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ****** <******@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 12:33:17 by ******           #+#    #+#              */
-/*   Updated: 2024/10/11 13:09:41 by ******           ###   ########.fr       */
+/*   Created: 2025/01/03 14:19:06 by ehedeman          #+#    #+#             */
+/*   Updated: 2025/01/03 15:02:47 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_print_map(t_map *map)
+bool	t_exit(float px, float py, char **map)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	j = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			printf("%c", map->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("%p\n", map->map[i]);
+	y = py / BLOCK;
+	x = px / BLOCK;
+	if (map[y][x] == 'F')
+		return (true);
+	return (false);
 }

@@ -12,31 +12,26 @@
 
 #include "../../includes/cub3D.h"
 
-static void	ft_init_mlx(t_game *game);
-// static void	ft_init_bg(t_game *game);
-static void	init_walls(t_game *game);
-static void	init_tex(t_game *game, t_img **texture, char *path_texture);
-
-void	ft_init_game(t_game *game)
+static void	init_tex(t_game *game, t_img **texture, char *path_texture)
 {
-	ft_map_parsing(game->map.content, game);
-	ft_convert_map(game, &game->map, 0);
-	init_player(&game->player, &game->map);
-	ft_init_mlx(game);
-	init_walls(game);
-}
+	int	w;
+	int	h;
 
-static void	ft_init_mlx(t_game *game)
-{
-	game->mlx.init = mlx_init();
-	if (!game->mlx.init)
-		ft_err_game("Failed to initialize mlx\n", game);
-	game->mlx.window = mlx_new_window(game->mlx.init, WIDTH, HEIGHT, "cub3D");
-	if (!game->mlx.window)
-		ft_err_game("Failed to create mlx window\n", game);
-	game->img = mlx_new_image(game->mlx.init, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
-	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
+	*texture = malloc(sizeof(t_img));
+	if (!*texture)
+		ft_err_game("Failed to allocate memory for texture", game);
+	(*texture)->img = mlx_xpm_file_to_image(game->mlx.init, \
+		path_texture, &w, &h);
+	if (!(*texture)->img)
+		ft_err_game("Failed to load texture", game);
+	(*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp, \
+		&(*texture)->ll, &(*texture)->endian);
+	if (!(*texture)->addr)
+		ft_err_game("Failed to get texture address", game);
+	(*texture)->width = w;
+	(*texture)->height = h;
+	(*texture)->t_step.y = 0;
+	(*texture)->pos.y = 0;
 }
 
 static void	init_walls(t_game *game)
@@ -51,22 +46,25 @@ static void	init_walls(t_game *game)
 	init_tex(game, &game->walls.exit, game->args.exit);
 }
 
-static void	init_tex(t_game *game, t_img **texture, char *path_texture)
+static void	ft_init_mlx(t_game *game)
 {
-	int w;
-	int h;
-	*texture = malloc(sizeof(t_img));
-	if (!*texture)
-		ft_err_game("Failed to allocate memory for texture", game);
-	(*texture)->img = mlx_xpm_file_to_image(game->mlx.init, path_texture, &w, &h);
-	if (!(*texture)->img)
-		ft_err_game("Failed to load texture", game);
-	(*texture)->addr = mlx_get_data_addr((*texture)->img, &(*texture)->bpp, &(*texture)->ll, &(*texture)->endian);
-	if (!(*texture)->addr)
-		ft_err_game("Failed to get texture address", game);
-	(*texture)->width = w;
-	(*texture)->height = h;
-	//experiemtnal
-	(*texture)->t_step.y = 0;
-	(*texture)->pos.y = 0;
+	game->mlx.init = mlx_init();
+	if (!game->mlx.init)
+		ft_err_game("Failed to initialize mlx\n", game);
+	game->mlx.window = mlx_new_window(game->mlx.init, WIDTH, HEIGHT, "cub3D");
+	if (!game->mlx.window)
+		ft_err_game("Failed to create mlx window\n", game);
+	game->img = mlx_new_image(game->mlx.init, WIDTH, HEIGHT);
+	game->data = mlx_get_data_addr(game->img, &game->bpp, \
+		&game->size_line, &game->endian);
+	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
+}
+
+void	ft_init_game(t_game *game)
+{
+	ft_map_parsing(game->map.content, game);
+	ft_convert_map(game, &game->map, 0);
+	init_player(&game->player, &game->map);
+	ft_init_mlx(game);
+	init_walls(game);
 }

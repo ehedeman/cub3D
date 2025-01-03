@@ -12,6 +12,7 @@
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+# include "cub3D.h"
 
 enum e_side
 {

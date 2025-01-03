@@ -12,9 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-// this was just taken outof ft_skip_til_map because of norm
-// first skip whitespace, then skip until newline
-// (map is never first as far as i'm concernerd)
 static int	ft_skip_til_map_start(t_game *game, int *i)
 {
 	while (game->map.content[*i] && ft_is_whitespace(game->map.content[*i]))
@@ -31,9 +28,6 @@ static int	ft_skip_til_map_start(t_game *game, int *i)
 	return (1);
 }
 
-// first i++ is to skip newline
-// then skip possible whitespace
-// if the first symbol after newline is 1 then it should be the map
 static int	ft_skip_til_map(t_game *game)
 {
 	int	i;
@@ -87,9 +81,6 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 	}
 }
 
-// dont touch, this took forever
-// 1|1 because 0|0 is the negative space around map
-// point_zero = 0|0 on coordinates, thoght it might be useful to have
 static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 {
 	int	i;
@@ -114,11 +105,6 @@ static void	ft_set_map_values(t_game *game, t_coordinates **coords)
 	}
 }
 
-// ft_allocate_coords allocates the coords array in general
-// ft_allocate_map_rows allocates the rows for coords array
-// ->seperate so its easier to free when allocation failed
-// ft_set_map_barrier allocates top barrier
-// ft_set_map_barriers allocates the rest (ik not confusing at all, nah)
 int	ft_save_map(t_game *game)
 {
 	int	i;

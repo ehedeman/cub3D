@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 12:56:19 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/03 14:56:21 by ehedeman         ###   ########.fr       */
+/*   Created: 2025/01/03 14:16:10 by ehedeman          #+#    #+#             */
+/*   Updated: 2025/01/03 15:05:42 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static t_img	*figure_out_tex(t_game *game)
 {
 	t_img	*t;
 
-	if (game->side == _s_north)
+	if (game->exit_found)
+		t = game->walls.exit;
+	else if (game->side == _s_north)
 		t = game->walls.north;
 	else if (game->side == _s_south)
 		t = game->walls.south;
@@ -43,7 +45,7 @@ int	get_pixel_color(float *ray_x, float *ray_y, int z, t_game *game)
 		return (0);
 	if (game->side == _s_north || game->side == _s_south)
 		x = (int)*ray_x;
-	if (game->side == _s_east || game->side == _s_west)
+	else if (game->side == _s_east || game->side == _s_west)
 		x = (int)*ray_y;
 	y = z + t->height / 2;
 	y %= t->height;

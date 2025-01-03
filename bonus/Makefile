@@ -49,7 +49,7 @@ clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -f $(NAME) 
+	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean
