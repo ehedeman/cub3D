@@ -12,10 +12,35 @@
 
 #include "../../includes/cub3D.h"
 
-int	print_message(int mode, char *str)
+int	ft_read_map(int fd, t_game *game, int bytes)
 {
-	printf("%s\n", str);
-	// while (*str)
-	// 	write(mode, str++, 1);
-	return (mode);
+	char	*str;
+
+	game->map.content = ft_calloc(1, 1);
+	str = NULL;
+	while (bytes)
+	{
+		str = malloc(sizeof(char) * (40 + 1));
+		if (!str)
+			return (1);
+		bytes = read(fd, str, 40);
+		if (bytes == -1)
+		{
+			free(str);
+			return (1);
+		}
+		str[bytes] = '\0';
+		game->map.content = ft_strjoin_free(game->map.content, str);
+		if (!game->map.content)
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_is_whitespace(char c)
+{
+	if (c == '\t' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);
 }

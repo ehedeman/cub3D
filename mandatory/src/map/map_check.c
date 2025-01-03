@@ -37,7 +37,6 @@ static void	ft_check_coords(t_game *game, t_coordinates **coords, int i, int j)
 		print_error("Error\nWall error\n", game, 1);
 }
 
-//check if map is surrounded by walls
 static void	ft_check_map_walls(t_game *game, t_coordinates **coords)
 {
 	int	i;

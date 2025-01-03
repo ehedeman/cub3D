@@ -19,7 +19,6 @@ int	ft_is_map_char(char c)
 	return (1);
 }
 
-//to create a barrier around the whole map for checking if its valid
 void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 {
 	game->map.coords[*y][*x].type = '-';
@@ -28,7 +27,6 @@ void	ft_set_map_side_barrier(t_game *game, int *x, int *y)
 	*x += 1;
 }
 
-//x needs to be two more than the map is wide because of side barrier
 void	ft_set_map_barrier(t_game *game, char *map, int y)
 {
 	int	x;
@@ -51,10 +49,6 @@ void	ft_set_map_barrier(t_game *game, char *map, int y)
 	game->map.coords[y][x + 1].y = (game->map.length - 3) - y + 1;
 }
 
-// count < j condition at end in case the last line is the longest of the map.
-// no plus one for newlie at count = j in the middle because newline is at
-// end anyways.
-// count plus two at end because side barriers need to be included.
 void	ft_find_longest_row(t_game *game, char *map)
 {
 	int	i;
@@ -82,8 +76,6 @@ void	ft_find_longest_row(t_game *game, char *map)
 	game->map.width = count + 2;
 }
 
-// coords[i][j] -> i == y and j == x cuz i keep forgetting that
-// if whitespace then save as "-" -> also has x and y set
 void	ft_set_map_coords(t_game *game, int *i, int *x, int *y)
 {
 	while (game->map.content[*i] && game->map.content[*i] != '\n')

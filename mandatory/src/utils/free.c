@@ -17,24 +17,22 @@ int	ft_free_map(t_game *game, int mode)
 	int	i;
 
 	i = 0;
-	if (game->map.coordinates)
+	if (game->map.map)
 	{
-		while (game->map.coordinates[i])
+		while (game->map.map[i])
 		{
-			if (game->map.coordinates[i])
-				free(game->map.coordinates[i]);
+			if (game->map.map[i])
+				free(game->map.map[i]);
 			i++;
 		}
 	}
-	if (game->map.coordinates)
-		free(game->map.coordinates);
+	if (game->map.map)
+		free(game->map.map);
 	free(game->map.content);
 	game->map.content = NULL;
-	game->map.coordinates = NULL;
+	game->map.map = NULL;
 	return (mode);
 }
-// mode = 1 for the error_return, 0 for normal free so
-// function can be used elsewhere
 
 int	ft_free_game(t_game *game)
 {

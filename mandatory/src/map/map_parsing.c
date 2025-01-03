@@ -12,13 +12,10 @@
 
 #include "../../includes/cub3D.h"
 
-	// if (ft_check_map_format())
-	// 	printf("something\n");
 int	ft_map_parsing(char *file_name, t_game *game)
 {
 	int	fd;
 
-	// fd = open(file_name, O_RDONLY);
 	if (ft_strnstr(file_name, "maps/", 5))
 		fd = open(file_name, O_RDONLY);
 	else

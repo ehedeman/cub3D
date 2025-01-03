@@ -34,7 +34,7 @@ OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): mlx $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS)$(OBJ) -o $(NAME) $(LDLIBS) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT)
@@ -46,10 +46,11 @@ $(LIBFT):
 	
 clean:
 	rm -rf $(OBJ_DIR)
+	rm -rf includes/mlx
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -f $(NAME) 
+	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean

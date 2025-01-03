@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ****.c		                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ****** <******@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 12:33:17 by ******           #+#    #+#              */
-/*   Updated: 2024/10/11 13:09:41 by ******           ###   ########.fr       */
+/*   Created: 2025/01/03 13:36:23 by ehedeman          #+#    #+#             */
+/*   Updated: 2025/01/03 13:36:47 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_print_map(t_map *map)
+int	print_message(int mode, char *str)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			printf("%c", map->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("%p\n", map->map[i]);
+	printf("%s\n", str);
+	return (mode);
 }
