@@ -22,13 +22,13 @@ static void	ft_set_vars(t_map *map, int y, int i)
 	while (j++ < map->width - 2)
 	{
 		map->coordinates[y][x] = map->coords[i][j].type;
-		// map->coordinates[y][x].x = x;
-		// map->coordinates[y][x].y = y;
-		// map->coordinates[y][x].type = map->coords[i][j].type;
+		if (map->coordinates[y][x] == 'F')
+		{
+			map->fin.x = x;
+			map->fin.y = y;
+		}
 		x++;
 	}
-	// map->coordinates[y][x].x = x + 1;
-	// map->coordinates[y][x].y = y + 1;
 	map->coordinates[y][x] = '\0';
 }
 
@@ -62,7 +62,7 @@ void	ft_convert_map(t_game *game, t_map *map, int i)
 		map->coordinates[y] = malloc(sizeof(char) * map->width - 1);
 		if (!map->coordinates[y])
 			print_error("Error: Failed to allocate cooordinates array.\n", game, 1);
-		 ft_set_vars(map, y, i);
+		ft_set_vars(map, y, i);
 		y++;
 	}
 	map->coordinates[y] = NULL;

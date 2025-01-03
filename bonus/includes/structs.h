@@ -78,7 +78,7 @@ typedef struct s_map
 {
 	char			*content;
 	t_coordinates	**coords;		//for checking of map
-	char	**coordinates;	//for actual game
+	char			**coordinates;	//for actual game
 	int				length;
 	int				width;
 	t_coordinates	*top_l;
@@ -87,6 +87,7 @@ typedef struct s_map
 	t_coordinates	*bottom_r;
 	t_coordinates	*point_zero;
 	t_coordinates	*player_start;
+	t_coordinates	fin;
 }			t_map;
 
 typedef struct s_mlx
