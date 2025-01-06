@@ -81,30 +81,6 @@ static void	ft_set_map_barriers(t_game *game, int i, int y)
 	}
 }
 
-static void	ft_set_map_values(t_game *game, t_coordinates **coords)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	game->map.top_l = &coords[1][1];
-	game->map.top_r = &coords[1][game->map.width - 2];
-	game->map.bottom_l = &coords[game->map.length - 3][1];
-	game->map.bottom_r = \
-		&coords[game->map.length - 3][game->map.width - 2];
-	game->map.point_zero = game->map.bottom_l;
-	while (i++ < game->map.length - 2)
-	{
-		j = -1;
-		while (j++ < game->map.width)
-		{
-			if (coords[i][j].type == 'N' || coords[i][j].type == 'S'
-				|| coords[i][j].type == 'W' || coords[i][j].type == 'E')
-				game->map.player_start = &coords[i][j];
-		}
-	}
-}
-
 int	ft_save_map(t_game *game)
 {
 	int	i;
@@ -124,7 +100,6 @@ int	ft_save_map(t_game *game)
 	y++;
 	ft_set_map_barriers(game, i, y);
 	game->map.coords[game->map.length - 1] = NULL;
-	ft_set_map_values(game, game->map.coords);
 	return (0);
 }
 

@@ -27,7 +27,6 @@ void	ft_game(char *map_path)
 		ft_err_exit("Failed to allocate memory for game\n");
 	game->map.content = map_path;
 	ft_init_game(game);
-	ft_print_map(&game->map);
 	mlx_hook(game->mlx.window, KeyPress, KeyPressMask, ft_key_press, game);
 	mlx_hook(game->mlx.window, KeyRelease, KeyReleaseMask, \
 		ft_key_release, &game->player);
@@ -35,3 +34,5 @@ void	ft_game(char *map_path)
 	mlx_hook(game->mlx.window, DestroyNotify, 0, ft_close_window, game);
 	mlx_loop(game->mlx.init);
 }
+
+//	ft_print_map(&game->map);

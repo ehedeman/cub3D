@@ -34,10 +34,10 @@ fclean:
 	@echo "FCleaning up..."
 
 vm: all
-	valgrind --leak-check=full ./$(NAME) map.cub
+	valgrind --leak-check=full -s ./$(NAME) map.cub
 
 vms: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map.cub
 
 vb: bonus
 	valgrind --leak-check=full ./$(NAME_BONUS) map.cub

@@ -40,9 +40,17 @@ int	ft_free_game(t_game *game)
 	free(game->args.south);
 	free(game->args.east);
 	free(game->args.west);
-	if (game->mlx.window)
-		mlx_destroy_window(game->mlx.init, game->mlx.window);
-	if (game->mlx.init)
-		free(game->mlx.init);
+	mlx_destroy_image(game->mlx.init, game->walls.north->img);
+	mlx_destroy_image(game->mlx.init, game->walls.east->img);
+	mlx_destroy_image(game->mlx.init, game->walls.west->img);
+	mlx_destroy_image(game->mlx.init, game->walls.south->img);
+	free(game->walls.east);
+	free(game->walls.north);
+	free(game->walls.west);
+	free(game->walls.south);
+	mlx_destroy_image(game->mlx.init, game->img);
+	mlx_destroy_window(game->mlx.init, game->mlx.window);
+	free(game->mlx.init);
+	free(game);
 	return (0);
 }

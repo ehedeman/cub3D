@@ -95,12 +95,6 @@ typedef struct s_map
 	char			**map;
 	int				length;
 	int				width;
-	t_coordinates	*top_l;
-	t_coordinates	*top_r;
-	t_coordinates	*bottom_l;
-	t_coordinates	*bottom_r;
-	t_coordinates	*point_zero;
-	t_coordinates	*player_start;
 	t_coordinates	fin;
 }			t_map;
 
@@ -117,7 +111,6 @@ typedef struct s_img
 	int				bpp;
 	int				ll;
 	int				endian;
-
 	int				width;
 	int				height;
 	t_coordinates	t_step;
@@ -126,7 +119,6 @@ typedef struct s_img
 
 typedef struct s_tex
 {
-	t_img			*background;
 	t_img			*north;
 	t_img			*south;
 	t_img			*east;
@@ -143,7 +135,6 @@ typedef struct s_game
 	t_player		player;
 	t_raycast		ray;
 	void			*img;
-
 	char			*data;
 	int				bpp;
 	int				size_line;
