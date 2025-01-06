@@ -1,5 +1,5 @@
-NAME = cub3d
-NAME_BONUS = cub3d_bonus
+NAME = cub3D
+NAME_BONUS = cub3D_bonus
 
 all: mlx
 	make -j$(nproc) -C mandatory
@@ -33,10 +33,16 @@ fclean:
 	rm -rf ./mandatory/includes/mlx
 	@echo "FCleaning up..."
 
-v: bonus
+vm: all
+	valgrind --leak-check=full ./$(NAME) map.cub
+
+vms: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) map.cub
+
+vb: bonus
 	valgrind --leak-check=full ./$(NAME_BONUS) map.cub
 
-vs: bonus
+vbs: bonus
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) map.cub
 
 re: fclean all
@@ -44,4 +50,4 @@ re: fclean all
 c:
 	clear
 
-.PHONY: all clean fclean re bonus v vs
+.PHONY: all clean fclean re bonus vm vb vms vbs

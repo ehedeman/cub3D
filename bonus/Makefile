@@ -1,4 +1,4 @@
-NAME = ../cub3d_bonus
+NAME = ../cub3D_bonus
 
 SRC_DIR = src
 SRC = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/*/*/*.c)
