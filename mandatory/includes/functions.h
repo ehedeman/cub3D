@@ -35,6 +35,8 @@ bool			touch(float px, float py, char **map);
 void			clear_image(t_game *game);
 float			distance(float x, float y);
 float			fixed_dist(float x2, float y2, t_game *game);
+//crash_avoiding.c
+bool			avoid_crash(t_game *game, float *ray_x, float *ray_y);
 
 /*-------------------------------player folder--------------------------------*/
 

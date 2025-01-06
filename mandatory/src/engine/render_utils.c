@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:50:48 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/03 14:56:26 by ehedeman         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:46:32 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	touch(float px, float py, char **map)
 
 	y = py / BLOCK;
 	x = px / BLOCK;
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == '-')
 		return (true);
 	return (false);
 }

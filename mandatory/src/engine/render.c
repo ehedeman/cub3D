@@ -100,6 +100,8 @@ static void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	{
 		ray_x += player->cos_angle;
 		ray_y += player->sin_angle;
+		if (avoid_crash(game, &ray_x, &ray_y))
+			break ;
 	}
 	game->side = calc_side(ray_x, ray_y, game);
 	draw_line_calcs(ray_x, ray_y, game);

@@ -39,6 +39,7 @@ float			fixed_dist(float x2, float y2, t_game *game);
 bool			t_exit(float px, float py, char **map);
 //crash_avoiding.c
 bool			avoid_crash(t_game *game, float *ray_x, float *ray_y);
+
 /*-------------------------------player folder--------------------------------*/
 
 //player_utils.c
