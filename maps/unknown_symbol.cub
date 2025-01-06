@@ -1,7 +1,10 @@
-sdhs
-sdflhk
-sdf;sl;dfjs
-lkdj;j
+F 220,100,0
+C 225,30,0
+
+NO ./assets/leaves.xpm
+SO ./assets/test.xpm
+WE ./assets/flowers.xpm
+EA ./assets/exit.xpm
 
 
 1111111111

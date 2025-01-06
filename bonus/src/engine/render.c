@@ -101,6 +101,8 @@ static void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	{
 		ray_x += player->cos_angle;
 		ray_y += player->sin_angle;
+		if (avoid_crash(game, &ray_x, &ray_y))
+			break ;
 	}
 	if (t_exit(ray_x, ray_y, game->map.map))
 		game->exit_found = 1;
