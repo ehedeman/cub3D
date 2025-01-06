@@ -1,0 +1,13 @@
+F 220,100,0
+C 225,30,0
+
+NO ./assets/leaves.xpm
+SO ./assets/test.xpm
+WE ./assets/flowers.xpm
+EA ./assets/exit.xpm
+
+
+1111111111
+10010f0001
+1000000N01
+1111111111
