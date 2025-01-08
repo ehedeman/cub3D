@@ -27,7 +27,7 @@ static void	ft_set_vars(t_map *map, int y, int i)
 	map->map[y][x] = '\0';
 }
 
-static	void	ft_free_coords(t_map *map)
+static	void	ft_free_coords_static(t_map *map)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	ft_convert_map(t_game *game, t_map *map, int i)
 		y++;
 	}
 	map->map[y] = NULL;
-	ft_free_coords(map);
+	ft_free_coords_static(map);
 	map->width = map->width - 1;
 	map->length = map->length - 2;
 }

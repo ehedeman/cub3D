@@ -12,6 +12,29 @@
 
 #include "../../includes/cub3D.h"
 
+int	ft_free_coords(t_game *game, int mode)
+{
+	int	i;
+
+	i = 0;
+	if (game->map.coords)
+	{
+		while (game->map.coords[i])
+		{
+			if (game->map.coords[i])
+				free(game->map.coords[i]);
+			i++;
+		}
+	}
+	if (game->map.coords)
+		free(game->map.coords);
+	if (game->map.content)
+		free(game->map.content);
+	game->map.content = NULL;
+	game->map.coords = NULL;
+	return (mode);
+}
+
 int	ft_free_map(t_game *game, int mode)
 {
 	int	i;
@@ -46,26 +69,37 @@ void	free_args(t_game *game)
 		free(game->args.east);
 }
 
-void	free_walls(t_game *game)
+static void free_walls_north_south(t_game *game)
 {
 	if (game->walls.north)
 	{
 		if (game->walls.north->img)
 			mlx_destroy_image(game->mlx.init, game->walls.north->img);
-		if (game->walls.east->img)
-			mlx_destroy_image(game->mlx.init, game->walls.east->img);
-		if (game->walls.west->img)
-			mlx_destroy_image(game->mlx.init, game->walls.west->img);
-		if (game->walls.south->img)
-			mlx_destroy_image(game->mlx.init, game->walls.south->img);
 		free(game->walls.north);
 	}
-	if (game->walls.east)
-		free(game->walls.east);
-	if (game->walls.west)
-		free(game->walls.west);
 	if (game->walls.south)
+	{
+		if (game->walls.south->img)
+			mlx_destroy_image(game->mlx.init, game->walls.south->img);
 		free(game->walls.south);
+	}
+}
+
+void	free_walls(t_game *game)
+{
+	if (game->walls.east)
+	{
+		if (game->walls.east->img)
+			mlx_destroy_image(game->mlx.init, game->walls.east->img);
+		free(game->walls.east);
+	}
+	if (game->walls.west)
+	{
+		if (game->walls.west->img)
+			mlx_destroy_image(game->mlx.init, game->walls.west->img);
+		free(game->walls.west);
+	}
+	free_walls_north_south(game);
 }
 
 int	ft_free_game(t_game *game)

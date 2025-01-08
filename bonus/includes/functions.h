@@ -86,6 +86,7 @@ int				print_message(int mode, char *str);
 //free.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
+int				ft_free_coords(t_game *game, int mode);
 
 //errors.c
 void			print_error(char *str, t_game *game, int mode);

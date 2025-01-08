@@ -26,14 +26,15 @@ void	ft_err_map(char *str, t_game *game)
 
 void	ft_err_game(char *str, t_game *game)
 {
-	ft_free_game(game);
 	ft_free_map(game, 1);
+	ft_free_game(game);
 	ft_err_exit(str);
 }
 
 void	print_error(char *str, t_game *game, int mode)
 {
 	printf("%s\n", str);
+	ft_free_coords(game, 1);
 	ft_free_map(game, 1);
 	ft_free_game(game);
 	exit(mode);
