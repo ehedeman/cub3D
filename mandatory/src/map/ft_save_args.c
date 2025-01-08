@@ -84,13 +84,21 @@ static void	ft_assign_param(t_game *game, int *i, int flag)
 static void	ft_assign_texture(t_game *game, const char *param, const char *i)
 {
 	if (ft_strncmp(i, "NO ", 3) == 0)
-		game->args.north = ft_strndup(param, strlen(param));
+	{
+		if (!game->args.north)
+			game->args.north = ft_strndup(param, strlen(param));
+		else
+			print_error("Error\nDouble Map Arguments.\n", game, 1);
+	}
 	else if (ft_strncmp(i, "SO ", 3) == 0)
-		game->args.south = ft_strndup(param, strlen(param));
-	else if (ft_strncmp(i, "WE ", 3) == 0)
-		game->args.west = ft_strndup(param, strlen(param));
-	else if (ft_strncmp(i, "EA ", 3) == 0)
-		game->args.east = ft_strndup(param, strlen(param));
+	{
+		if (!game->args.south)
+			game->args.south = ft_strndup(param, strlen(param));
+		else
+			print_error("Error\nDouble Map Arguments.\n", game, 1);
+	}
+	else
+		ft_assign_tex_ea_we(game, param, i);
 }
 
 static void	ft_assign_color(t_game *game, const char *param, const char *i)
