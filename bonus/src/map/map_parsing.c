@@ -31,7 +31,7 @@ int	ft_map_parsing(char *file_name, t_game *game)
 		if (ft_read_map(fd, game, 1))
 			print_error("Error\nFailed to read file.\n", game, 1);
 	}
-	if (!ft_save_args(game))
+	if (!ft_save_args(game, 0))
 		print_error("Error\nInvalid map args.\n", game, 1);
 	ft_save_map(game);
 	ft_map_check(game);

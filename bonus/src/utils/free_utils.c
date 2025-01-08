@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_related.c                                    :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 14:19:06 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/08 13:13:07 by ehedeman         ###   ########.fr       */
+/*   Created: 2025/01/08 12:53:04 by ehedeman          #+#    #+#             */
+/*   Updated: 2025/01/08 12:54:24 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-bool	t_exit(float px, float py, t_map *map)
+int	ft_free_coords(t_game *game, int mode)
 {
-	int	x;
-	int	y;
+	int	i;
 
-	y = py / BLOCK;
-	x = px / BLOCK;
-	if (x <= 0 || x >= map->width - 2 || y <= 0 || y >= map->length - 2)
-		return (false);
-	if (map->map[y][x] == 'F')
-		return (true);
-	return (false);
+	i = 0;
+	if (game->map.coords)
+	{
+		while (game->map.coords[i])
+		{
+			if (game->map.coords[i])
+				free(game->map.coords[i]);
+			i++;
+		}
+	}
+	if (game->map.coords)
+		free(game->map.coords);
+	if (game->map.content)
+		free(game->map.content);
+	game->map.content = NULL;
+	game->map.coords = NULL;
+	return (mode);
 }

@@ -17,6 +17,7 @@ static int	ft_close_window(t_game *game)
 	print_error("Window closed\nThanks for playing\n", game, 0);
 	return (0);
 }
+
 void	ft_set_null(t_game *game)
 {
 	game->args.north = NULL;

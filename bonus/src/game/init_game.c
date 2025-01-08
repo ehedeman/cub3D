@@ -60,6 +60,14 @@ static void	ft_init_mlx(t_game *game)
 	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
 }
 
+static void	init_colors(t_game *game)
+{
+	game->walls.floor = (game->args.floor.r << 16 \
+		| game->args.floor.g << 8 | game->args.floor.b);
+	game->walls.ceiling = (game->args.ceiling.r << 16 \
+		| game->args.ceiling.g << 8 | game->args.ceiling.b);
+}
+
 void	ft_init_game(t_game *game)
 {
 	ft_map_parsing(game->map.file_name, game);
@@ -67,4 +75,5 @@ void	ft_init_game(t_game *game)
 	init_player(&game->player, &game->map);
 	ft_init_mlx(game);
 	init_walls(game);
+	init_colors(game);
 }

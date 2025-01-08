@@ -12,29 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-int	ft_free_coords(t_game *game, int mode)
-{
-	int	i;
-
-	i = 0;
-	if (game->map.coords)
-	{
-		while (game->map.coords[i])
-		{
-			if (game->map.coords[i])
-				free(game->map.coords[i]);
-			i++;
-		}
-	}
-	if (game->map.coords)
-		free(game->map.coords);
-	if (game->map.content)
-		free(game->map.content);
-	game->map.content = NULL;
-	game->map.coords = NULL;
-	return (mode);
-}
-
 int	ft_free_map(t_game *game, int mode)
 {
 	int	i;
@@ -57,6 +34,7 @@ int	ft_free_map(t_game *game, int mode)
 	game->map.map = NULL;
 	return (mode);
 }
+
 void	free_args(t_game *game)
 {
 	if (game->args.north)
@@ -71,7 +49,7 @@ void	free_args(t_game *game)
 		free(game->args.exit);
 }
 
-static void free_walls_north_south(t_game *game)
+static void	free_walls_north_south(t_game *game)
 {
 	if (game->walls.north)
 	{

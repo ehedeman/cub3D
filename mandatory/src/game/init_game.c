@@ -55,6 +55,18 @@ static void	ft_init_mlx(t_game *game)
 		&game->size_line, &game->endian);
 	mlx_put_image_to_window(game->mlx.init, game->mlx.window, game->img, 0, 0);
 }
+// get_color(game, &game->args.floor, game->args.floor);
+// get_color(game, &game->args.ceiling, game->args.ceiling);
+// printf("floor: %d\n", game->tex.floor);
+// printf("ceiling: %d\n", game->tex.ceiling);
+
+static void	init_colors(t_game *game)
+{
+	game->walls.floor = (game->args.floor.r << 16 | game->args.floor.g << 8 \
+		| game->args.floor.b);
+	game->walls.ceiling = (game->args.ceiling.r << 16 \
+		| game->args.ceiling.g << 8 | game->args.ceiling.b);
+}
 
 void	ft_init_game(t_game *game)
 {
@@ -63,4 +75,5 @@ void	ft_init_game(t_game *game)
 	init_player(&game->player, &game->map);
 	ft_init_mlx(game);
 	init_walls(game);
+	init_colors(game);
 }

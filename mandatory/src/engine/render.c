@@ -25,14 +25,14 @@ static int	calc_side(float x, float y, t_game *game)
 		sx = 1;
 	if (game->player.sin_angle > 0)
 		sy = 1;
-	if (touch(x - sx, y, game->map.map) || touch(x - sx, y - sy, \
-		game->map.map))
+	if (touch(x - sx, y, &game->map) || touch(x - sx, y - sy, \
+		&game->map))
 	{
 		dir = _s_north;
 		if (sy == 1)
 			dir = _s_south;
 	}
-	else if (touch(x, y - sy, game->map.map) || touch(x, y, game->map.map))
+	else if (touch(x, y - sy, &game->map) || touch(x, y, &game->map))
 	{
 		dir = _s_west;
 		if (sx == 1)
@@ -46,14 +46,14 @@ static void	draw_line_loop(t_game *game, int j, float ray_x, float ray_y)
 	while (j < HEIGHT)
 	{
 		if (j < game->ray.start_y)
-			game->ray.color = 0xFFF00;
+			game->ray.color = game->walls.ceiling;
 		else if (j > game->ray.end)
-			game->ray.color = 0xFFFF32;
+			game->ray.color = game->walls.floor;
 		else
 		{
 			while (game->ray.start_y < game->ray.end)
 			{
-				game->ray.from_mid = -360 + game->ray.start_y;
+				game->ray.from_mid = -HEIGHT / 2 + game->ray.start_y;
 				game->ray.pos_y = game->ray.from_mid / (float) HEIGHT * \
 					game->ray.dist;
 				game->ray.color = get_pixel_color(&ray_x, &ray_y, \
@@ -81,8 +81,8 @@ static void	draw_line_calcs(int ray_x, int ray_y, t_game *game)
 	if (game->ray.start_y < 0)
 		game->ray.start_y = 0;
 	game->ray.end = game->ray. start_y + game->ray.height;
-	if (game->ray.end > 720)
-		game->ray.end = 720;
+	if (game->ray.end > HEIGHT)
+		game->ray.end = HEIGHT;
 	draw_line_loop(game, j, ray_x, ray_y);
 }
 
@@ -96,7 +96,7 @@ static void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	game->ray.i = i;
 	player->cos_angle = cos(start_x);
 	player->sin_angle = sin(start_x);
-	while (!touch(ray_x, ray_y, game->map.map))
+	while (!touch(ray_x, ray_y, &game->map))
 	{
 		ray_x += player->cos_angle;
 		ray_y += player->sin_angle;

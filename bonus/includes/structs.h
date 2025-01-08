@@ -125,6 +125,8 @@ typedef struct s_tex
 	t_img			*east;
 	t_img			*west;
 	t_img			*exit;
+	int				floor;
+	int				ceiling;
 }			t_tex;
 
 typedef struct s_game

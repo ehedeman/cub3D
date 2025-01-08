@@ -31,7 +31,7 @@ int				draw_loop(t_game *game);
 void			ft_print_map(t_map *map);
 //render_utils.c
 void			put_pixel(int x, int y, int color, t_game *game);
-bool			touch(float px, float py, char **map);
+bool			touch(float px, float py, t_map *map);
 void			clear_image(t_game *game);
 float			distance(float x, float y);
 float			fixed_dist(float x2, float y2, t_game *game);
@@ -55,9 +55,11 @@ void			ft_convert_map(t_game *game, t_map *map, int i);
 //map_parsing.c
 int				ft_map_parsing(char *file_name, t_game *game);
 //ft_save_args.c
-bool			ft_save_args(t_game *game);
+bool			ft_save_args(t_game *game, int i);
 //ft_save_args_utils.c
 bool			ft_check_args(t_game *game);
+char			*get_param(const char *s, size_t n);
+bool			ft_parse_rgb(const char *str, int *r, int *g, int *b);
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);
 int				ft_is_whitespace(char c);
@@ -82,6 +84,8 @@ int				print_message(int mode, char *str);
 //free.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
+
+//free_utils.c
 int				ft_free_coords(t_game *game, int mode);
 
 //errors.c

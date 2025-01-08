@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:50:48 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/06 11:42:47 by ehedeman         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:12:52 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ void	put_pixel(int x, int y, int color, t_game *game)
 	game->data[index + 2] = (color >> 16) & 0xFF;
 }
 
-bool	touch(float px, float py, char **map)
+bool	touch(float px, float py, t_map *map)
 {
 	int	x;
 	int	y;
 
 	y = py / BLOCK;
 	x = px / BLOCK;
-	if (map[y][x] == '1' || map[y][x] == 'F' || map[y][x] == '-')
+	if (x <= 0 || x >= map->width - 2 || y <= 0 || y >= map->length - 2)
+		return (true);
+	if (map->map[y][x] == '1' || map->map[y][x] == 'F' \
+		|| map->map[y][x] == '-')
 		return (true);
 	return (false);
 }

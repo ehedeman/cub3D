@@ -31,12 +31,12 @@ int				draw_loop(t_game *game);
 void			ft_print_map(t_map *map);
 //render_utils.c
 void			put_pixel(int x, int y, int color, t_game *game);
-bool			touch(float px, float py, char **map);
+bool			touch(float px, float py, t_map *map);
 void			clear_image(t_game *game);
 float			distance(float x, float y);
 float			fixed_dist(float x2, float y2, t_game *game);
 //bonus_related.c
-bool			t_exit(float px, float py, char **map);
+bool			t_exit(float px, float py, t_map *map);
 //crash_avoiding.c
 bool			avoid_crash(t_game *game, float *ray_x, float *ray_y);
 
@@ -54,28 +54,39 @@ void			move_player(t_player *player, t_map *map);
 
 //ft_convert_map.c
 void			ft_convert_map(t_game *game, t_map *map, int i);
+
 //map_parsing.c
 int				ft_map_parsing(char *file_name, t_game *game);
+
 //ft_save_args.c
-bool			ft_save_args(t_game *game);
+bool			ft_save_args(t_game *game, int i);
+
 //ft_save_args_utils.c
 bool			ft_check_args(t_game *game);
+char			*get_param(const char *s, size_t n);
+bool			ft_parse_rgb(const char *str, int *r, int *g, int *b);
+
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);
 int				ft_is_whitespace(char c);
+
 //ft_save_map_utils.c
 void			ft_set_map_side_barrier(t_game *game, int *x, int *y);
 void			ft_set_map_barrier(t_game *game, char *map, int y);
 void			ft_find_longest_row(t_game *game, char *map);
 int				ft_is_map_char(char c);
 void			ft_set_map_coords(t_game *game, int *i, int *x, int *y);
+
 //ft_save_map.c
 int				ft_save_map(t_game *game);
+
 //ft_allocate_coords.c
 t_coordinates	**ft_allocate_coords(t_game *game, int i);
 int				ft_allocate_map_rows(t_game *game);
+
 //map_check.c
 void			ft_map_check(t_game *game);
+
 //mini_map.c
 void			mini_map(t_game *game);
 
@@ -86,6 +97,8 @@ int				print_message(int mode, char *str);
 //free.c
 int				ft_free_map(t_game *game, int mode);
 int				ft_free_game(t_game *game);
+
+//free_utils.c
 int				ft_free_coords(t_game *game, int mode);
 
 //errors.c
