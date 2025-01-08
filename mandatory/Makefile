@@ -1,7 +1,30 @@
 NAME = ../cub3D
 
 SRC_DIR = src
-SRC = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/*/*/*.c)
+SRC =	$(SRC_DIR)/main.c \
+		$(SRC_DIR)/engine/color.c \
+		$(SRC_DIR)/engine/crash_avoiding.c \
+		$(SRC_DIR)/engine/render_utils.c \
+		$(SRC_DIR)/engine/render.c \
+		$(SRC_DIR)/game/game.c \
+		$(SRC_DIR)/game/init_game.c \
+		$(SRC_DIR)/map/ft_allocate_coords.c \
+		$(SRC_DIR)/map/ft_convert_map.c \
+		$(SRC_DIR)/map/ft_save_args_utils.c \
+		$(SRC_DIR)/map/ft_save_args.c \
+		$(SRC_DIR)/map/ft_save_map_utils.c \
+		$(SRC_DIR)/map/ft_save_map.c \
+		$(SRC_DIR)/map/map_check.c \
+		$(SRC_DIR)/map/map_parsing_utils.c \
+		$(SRC_DIR)/map/map_parsing.c \
+		$(SRC_DIR)/player/move_player.c \
+		$(SRC_DIR)/player/player_utils.c \
+		$(SRC_DIR)/player/player.c \
+		$(SRC_DIR)/utils/errors.c \
+		$(SRC_DIR)/utils/free_utils.c \
+		$(SRC_DIR)/utils/free.c \
+		$(SRC_DIR)/utils/ft_debug.c \
+		$(SRC_DIR)/utils/print.c
 
 INCLUDES_DIR = includes
 
