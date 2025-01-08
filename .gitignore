@@ -1,0 +1,7 @@
+.vscode/
+*.o
+*.a
+mlx
+*.Identifier
+cub3D
+cub3D_bonus
