@@ -86,3 +86,21 @@ bool	ft_parse_rgb(const char *str, int *r, int *g, int *b)
 		return (false);
 	return (true);
 }
+
+void	ft_assign_tex_ea_we(t_game *game, const char *param, const char *i)
+{
+	if (ft_strncmp(i, "WE ", 3) == 0)
+	{
+		if (!game->args.west)
+			game->args.west = ft_strndup(param, strlen(param));
+		else
+			print_error("Error\nDouble Map Arguments.\n", game, 1);
+	}
+	else if (ft_strncmp(i, "EA ", 3) == 0)
+	{
+		if (!game->args.east)
+			game->args.east = ft_strndup(param, strlen(param));
+		else
+			print_error("Error\nDouble Map Arguments.\n", game, 1);
+	}
+}

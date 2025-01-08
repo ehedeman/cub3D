@@ -69,7 +69,7 @@ static void	draw_line_loop(t_game *game, int j, float ray_x, float ray_y)
 	}
 }
 
-static void	draw_line_calcs(int ray_x, int ray_y, t_game *game)
+static void	draw_line_calcs(float ray_x, float ray_y, t_game *game)
 {
 	int	j;
 

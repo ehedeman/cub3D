@@ -65,6 +65,8 @@ bool			ft_save_args(t_game *game, int i);
 bool			ft_check_args(t_game *game);
 char			*get_param(const char *s, size_t n);
 bool			ft_parse_rgb(const char *str, int *r, int *g, int *b);
+void			ft_assign_tex_ea_we(t_game *game, const char *param, \
+	const char *i);
 
 //map_parsing_utils.c
 int				ft_read_map(int fd, t_game *game, int bytes);

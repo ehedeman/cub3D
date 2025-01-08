@@ -97,7 +97,10 @@ int	ft_free_game(t_game *game)
 	if (game->mlx.window)
 		mlx_destroy_window(game->mlx.init, game->mlx.window);
 	if (game->mlx.init)
+	{
+		mlx_destroy_display(game->mlx.init);
 		free(game->mlx.init);
+	}
 	free(game);
 	return (0);
 }
