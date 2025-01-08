@@ -69,7 +69,7 @@ static void	draw_line_loop(t_game *game, int j, float ray_x, float ray_y)
 	}
 }
 
-static void	draw_line_calcs(int ray_x, int ray_y, t_game *game)
+static void	draw_line_calcs(float ray_x, float ray_y, t_game *game)
 {
 	int	j;
 
@@ -80,7 +80,9 @@ static void	draw_line_calcs(int ray_x, int ray_y, t_game *game)
 	game->ray.start_y = (HEIGHT - game->ray.height) / 2;
 	if (game->ray.start_y < 0)
 		game->ray.start_y = 0;
-	game->ray.end = game->ray. start_y + game->ray.height;
+	if (game->ray.start_y > HEIGHT)
+		game->ray.start_y = HEIGHT;
+	game->ray.end = game->ray.start_y + game->ray.height;
 	if (game->ray.end > HEIGHT)
 		game->ray.end = HEIGHT;
 	draw_line_loop(game, j, ray_x, ray_y);

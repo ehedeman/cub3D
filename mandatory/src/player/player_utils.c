@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:34:53 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/03 13:45:51 by ehedeman         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:41:32 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_wall(t_player *player, t_map *map)
 	x = 0;
 	y = 0;
 	change_x_y(player, &x, &y);
-	if (y / BLOCK > map->length - 1 || x / BLOCK > map->width - 1
+	if (y / BLOCK > map->length - 2 || x / BLOCK > map->width - 2
 		|| y / BLOCK < 0 || x / BLOCK < 0)
 		return (1);
 	if (map->map[y / BLOCK][x / BLOCK] != '0')

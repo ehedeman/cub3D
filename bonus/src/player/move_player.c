@@ -6,7 +6,7 @@
 /*   By: ehedeman <ehedeman@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:36:18 by ehedeman          #+#    #+#             */
-/*   Updated: 2025/01/08 13:08:16 by ehedeman         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:40:50 by ehedeman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	move_player_up_down(t_player *player, float sin_angle, \
 			player->x += cos_angle * SPEED;
 			player->y += sin_angle * SPEED;
 		}
-		else if (!touch(player->x, player->y + sin_angle * SPEED, map))
+		if (!touch(player->x, player->y + sin_angle * SPEED, map))
 			player->y += sin_angle * SPEED;
-		else if (!touch(player->x + cos_angle * SPEED, player->y, map))
+		if (!touch(player->x + cos_angle * SPEED, player->y, map))
 			player->x += cos_angle * SPEED;
 	}
 	if (player->key_down)
@@ -34,9 +34,9 @@ static void	move_player_up_down(t_player *player, float sin_angle, \
 			player->x -= cos_angle * SPEED;
 			player->y -= sin_angle * SPEED;
 		}
-		else if (!touch(player->x, player->y - sin_angle * SPEED, map))
+		if (!touch(player->x, player->y - sin_angle * SPEED, map))
 			player->y -= sin_angle * SPEED;
-		else if (!touch(player->x - cos_angle * SPEED, player->y, map))
+		if (!touch(player->x - cos_angle * SPEED, player->y, map))
 			player->x -= cos_angle * SPEED;
 	}
 }
@@ -51,9 +51,9 @@ static void	move_player_left_right(t_player *player, float sin_angle, \
 			player->x += sin_angle * SPEED;
 			player->y -= cos_angle * SPEED;
 		}
-		else if (!touch(player->x + sin_angle * SPEED, player->y, map))
+		if (!touch(player->x + sin_angle * SPEED, player->y, map))
 			player->x += sin_angle * SPEED;
-		else if (!touch(player->x, player->y - cos_angle * SPEED, map))
+		if (!touch(player->x, player->y - cos_angle * SPEED, map))
 			player->y -= cos_angle * SPEED;
 	}
 	if (player->key_right)
@@ -63,9 +63,9 @@ static void	move_player_left_right(t_player *player, float sin_angle, \
 			player->x -= sin_angle * SPEED;
 			player->y += cos_angle * SPEED;
 		}
-		else if (!touch(player->x - sin_angle * SPEED, player->y, map))
+		if (!touch(player->x - sin_angle * SPEED, player->y, map))
 			player->x -= sin_angle * SPEED;
-		else if (!touch(player->x, player->y + cos_angle * SPEED, map))
+		if (!touch(player->x, player->y + cos_angle * SPEED, map))
 			player->y += cos_angle * SPEED;
 	}
 }
