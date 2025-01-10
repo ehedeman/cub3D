@@ -79,6 +79,7 @@ static void	ft_assign_param(t_game *game, int *i, int flag)
 		ft_assign_color(game, value, &game->map.content[start]);
 	free(value);
 	*i = end;
+	game->args.assigned += 1;
 }
 
 static void	ft_assign_texture(t_game *game, const char *param, const char *i)

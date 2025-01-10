@@ -77,6 +77,7 @@ typedef struct s_args
 	char			*exit;
 	t_rgb			floor;
 	t_rgb			ceiling;
+	int				assigned;
 }				t_args;
 
 // content = contents of the map file
