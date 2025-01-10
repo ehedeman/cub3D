@@ -94,13 +94,19 @@ void	ft_assign_tex_ea_we(t_game *game, const char *param, const char *i)
 		if (!game->args.west)
 			game->args.west = ft_strndup(param, strlen(param));
 		else
+		{
+			free((char *)param);
 			print_error("Error\nDouble Map Arguments.\n", game, 1);
+		}
 	}
 	else if (ft_strncmp(i, "EA ", 3) == 0)
 	{
 		if (!game->args.east)
 			game->args.east = ft_strndup(param, strlen(param));
 		else
+		{
+			free((char *)param);
 			print_error("Error\nDouble Map Arguments.\n", game, 1);
+		}
 	}
 }

@@ -88,14 +88,20 @@ static void	ft_assign_texture(t_game *game, const char *param, const char *i)
 		if (!game->args.north)
 			game->args.north = ft_strndup(param, strlen(param));
 		else
+		{
+			free((char *)param);
 			print_error("Error\nDouble Map Arguments.\n", game, 1);
+		}
 	}
 	else if (ft_strncmp(i, "SO ", 3) == 0)
 	{
 		if (!game->args.south)
 			game->args.south = ft_strndup(param, strlen(param));
 		else
+		{
+			free((char *)param);
 			print_error("Error\nDouble Map Arguments.\n", game, 1);
+		}
 	}
 	else
 		ft_assign_tex_ea_we(game, param, i);

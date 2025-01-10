@@ -40,7 +40,7 @@ CFLAGS += -I$(LIBFT_DIR) -I$(INCLUDES_DIR)
 LDFLAGS += -L./$(INCLUDES_DIR)/mlx -lmlx -lXext -lX11 -lm -lz 
 
 DEBUG 		= 0
-FSANITIZE 	= 1
+FSANITIZE 	= 0
 
 ifeq ($(DEBUG), 1)
     CFLAGS += -DDEBUG=1

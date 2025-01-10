@@ -37,13 +37,13 @@ vm: all
 	valgrind --leak-check=full -s ./$(NAME) map.cub
 
 vms: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map_kaputt.cub
 
 vb: bonus
 	valgrind --leak-check=full ./$(NAME_BONUS) map.cub
 
 vbs: bonus
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) map.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) map_kaputt.cub
 
 re: fclean all
 
