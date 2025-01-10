@@ -17,6 +17,8 @@ bool	ft_check_args(t_game *game)
 	if (!game->args.north || !game->args.south || !game->args.east
 		|| !game->args.west)
 		return (true);
+	if (game->args.ceiling.r == -1 || game->args.ceiling.r == -1)
+		return (true);
 	if (game->args.assigned != 6)
 		return (true);
 	return (false);

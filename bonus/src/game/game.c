@@ -36,6 +36,12 @@ void	ft_set_null(t_game *game)
 	game->map.content = NULL;
 	game->map.coords = NULL;
 	game->map.map = NULL;
+	game->args.ceiling.r = -1;
+	game->args.ceiling.g = -1;
+	game->args.ceiling.b = -1;
+	game->args.floor.r = -1;
+	game->args.floor.g = -1;
+	game->args.floor.b = -1;
 }
 
 void	ft_game(char *map_path)
